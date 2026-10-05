@@ -281,3 +281,27 @@ body{font-size:13px}
   .immersive-garden .garden-progress-wrap .game-message{font-size:7.5px}
   .immersive-garden .garden-new{font-size:8px}
 }
+
+/* Prayer mode + seasonal garden system */
+.garden-mode-switch{display:flex;align-items:center;gap:3px;position:relative;z-index:9;align-self:center;margin:-2px auto -2px;padding:3px;background:#17372bd9;border:1px solid #91ad79;border-radius:999px;box-shadow:0 4px 12px #06120d55}
+.mode-btn{border:0;background:transparent;color:#b8cba5;border-radius:999px;padding:5px 12px;font:inherit;font-size:9px;font-weight:800;letter-spacing:.6px;cursor:pointer}
+.mode-btn.active{background:#f3ecd4;color:#18382e;box-shadow:0 2px 5px #06120d44}
+.garden-theme-picker[hidden]{display:none!important}
+#prayerPicker{min-width:180px}
+#prayerPicker select{width:115px}
+.immersive-garden .garden-practice{gap:6px}
+.immersive-garden .garden-mode-switch{font-size:9px}
+.immersive-garden[data-garden="autumn"] .garden-vignette{background:linear-gradient(180deg,#28120418 0%,#28120400 42%,#28120462 100%)}
+.immersive-garden[data-garden="autumn"] .garden-title{border-color:#c4a16b}
+.immersive-garden[data-garden="autumn"] .mode-btn.active{background:#f1e2bc}
+@media(max-width:700px){
+  .garden-mode-switch{margin:-1px auto -1px}
+  .mode-btn{padding:4px 10px;font-size:8px}
+  #prayerPicker{min-width:0}
+  #prayerPicker select{width:105px}
+}
+.prayer-source{font-size:7px;color:#71806a;margin-top:2px;font-style:italic}
+.prayer-source:not([hidden]){display:block}
+.immersive-garden.garden-changing .garden-image{animation:gardenSceneFade .7s ease both}
+@keyframes gardenSceneFade{0%{opacity:.35;transform:scale(1.012)}100%{opacity:1;transform:scale(1)}}
+.reduce-motion .immersive-garden.garden-changing .garden-image{animation:none}

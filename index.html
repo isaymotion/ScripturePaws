@@ -19,7 +19,7 @@
 
 <main>
 <section class="garden-hero immersive-garden" id="gardenHero" aria-label="Scripture Paws garden and Scripture practice">
-  <div class="garden-image" aria-hidden="true"></div>
+  <div class="garden-image" id="gardenImage" aria-hidden="true"></div>
   <div class="garden-vignette" aria-hidden="true"></div>
 
   <div class="garden-hud">
@@ -29,14 +29,18 @@
     </div>
   </div>
 
-  <div class="garden-practice" aria-label="Scripture practice">
+  <div class="garden-practice" aria-label="Scripture and prayer practice">
+    <div class="garden-mode-switch" role="tablist" aria-label="Practice mode">
+      <button id="scriptureModeBtn" class="mode-btn active" type="button" role="tab" aria-selected="true">Scripture</button>
+      <button id="prayerModeBtn" class="mode-btn" type="button" role="tab" aria-selected="false">Prayer</button>
+    </div>
     <div class="garden-passage">
       <div class="passage-top">
-        <span class="passage-theme"><span class="leaf-mark">✦</span><span id="verseTheme">PEACE & STILLNESS</span></span>
+        <span class="passage-theme"><span class="leaf-mark">✦</span><span id="practiceLabel">SCRIPTURE PRACTICE</span> · <span id="verseTheme">PEACE & STILLNESS</span></span>
         <span id="verseRef">John 14:27</span>
       </div>
       <p id="verseText" class="verse-text"></p>
-      <div class="practice-count" id="practiceCount">First practice — make this one yours.</div>
+      <div class="practice-count" id="practiceCount">First practice — make this one yours.</div><div class="prayer-source" id="prayerSource" hidden></div>
     </div>
 
     <div class="garden-typing-row">
@@ -52,10 +56,22 @@
     </div>
 
     <div class="garden-practice-bottom">
-      <div class="garden-theme-picker">
+      <div class="garden-theme-picker" id="themePicker">
         <label for="themeSelect"><span class="leaf-mark">✦</span> THEME</label>
         <select id="themeSelect">
           <option value="all">All themes</option><option>Peace & Stillness</option><option>Comfort & Grief</option><option>Hope</option><option>Trust & Faith</option><option>Strength & Perseverance</option><option>Guidance & Wisdom</option><option>Love & Compassion</option><option>Prayer & Gratitude</option><option>Anxiety & Worry</option><option>Forgiveness & Mercy</option><option>Courage</option><option>Protection & Refuge</option><option>Patience & Waiting</option><option>Humility & Service</option><option>Light & Creation</option>
+        </select>
+      </div>
+      <div class="garden-theme-picker" id="prayerPicker" hidden>
+        <label for="prayerSelect"><span class="leaf-mark">☩</span> PRAYER</label>
+        <select id="prayerSelect">
+          <option value="our-father">The Our Father</option>
+          <option value="hail-mary">Hail Mary</option>
+          <option value="glory-be">Glory Be</option>
+          <option value="fatima">The Fátima Prayer</option>
+          <option value="st-michael">Prayer to St. Michael</option>
+          <option value="hail-holy-queen">Hail, Holy Queen</option>
+          <option value="apostles-creed">The Apostles' Creed</option>
         </select>
       </div>
       <div class="garden-progress-wrap">
@@ -66,7 +82,7 @@
     </div>
   </div>
 
-  <div class="garden-side-note"><span>GARDEN RHYTHM</span><strong>Stay with the words.</strong><small>Accurate typing helps the garden bloom.</small></div>
+  <div class="garden-side-note" id="gardenSideNote"><span>GARDEN RHYTHM</span><strong>Stay with the words.</strong><small>Accurate typing helps the garden bloom.</small></div>
   <div class="garden-library-link"><button id="libraryJump" type="button">♧ Scripture Library <span>›</span></button></div>
   <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
 </section>

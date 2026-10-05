@@ -92,11 +92,88 @@ const passages = [
   {ref:'Psalm 18:2 (19:1)',theme:'Light & Creation',text:'The heavens shew forth the glory of God, and the firmament declareth the work of his hands.'}
 ];
 const themes = [...new Set(passages.map(p => p.theme))];
+const prayers = [
+  {
+    id:'our-father', title:'The Our Father', short:'Our Father', category:'The Lord’s Prayer', source:'EWTN · Basic Catholic Prayers',
+    phrases:[
+      'Our Father, Who art in heaven, hallowed be Thy Name.',
+      'Thy Kingdom come; Thy Will be done, on earth as it is in Heaven.',
+      'Give us this day, our daily bread, and forgive us our trespasses as we forgive those who trespass against us.',
+      'And lead us not into temptation, but deliver us from evil. Amen.'
+    ]
+  },
+  {
+    id:'hail-mary', title:'Hail Mary', short:'Hail Mary', category:'Marian Prayer', source:'EWTN · Basic Catholic Prayers',
+    phrases:[
+      'Hail Mary, full of grace; the Lord is with thee.',
+      'Blessed art thou among women, and blessed is the fruit of thy womb, Jesus.',
+      'Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.'
+    ]
+  },
+  {
+    id:'glory-be', title:'Glory Be', short:'Glory Be', category:'Doxology', source:'EWTN · Basic Catholic Prayers',
+    phrases:[
+      'Glory be to the Father, and to the Son, and to the Holy Spirit.',
+      'As it was in the beginning, is now, and ever shall be, world without end. Amen.'
+    ]
+  },
+  {
+    id:'fatima', title:'The Fátima Prayer', short:'Fátima Prayer', category:'Rosary Prayer', source:'EWTN · Prayers of the Rosary',
+    phrases:[
+      'O my Jesus, forgive us our sins, save us from the fires of hell.',
+      'Lead all souls to heaven, especially those most in need of Thy mercy.'
+    ]
+  },
+  {
+    id:'st-michael', title:'Prayer to St. Michael the Archangel', short:'St. Michael', category:'Prayer for Protection', source:'EWTN · Basic Catholic Prayers',
+    phrases:[
+      'St. Michael the Archangel, defend us in battle.',
+      'Be our defense against the wickedness and snares of the Devil.',
+      'May God rebuke him, we humbly pray, and do thou, O Prince of the heavenly hosts,',
+      'by the power of God, cast into hell Satan and all the evil spirits,',
+      'who prowl about the world seeking the ruin of souls. Amen.'
+    ]
+  },
+  {
+    id:'hail-holy-queen', title:'Hail, Holy Queen', short:'Hail, Holy Queen', category:'Marian Antiphon', source:'EWTN · Salve Regina',
+    phrases:[
+      'Hail, holy Queen, Mother of mercy, our life, our sweetness and our hope.',
+      'To thee do we cry, poor banished children of Eve.',
+      'To thee do we send up our sighs, mourning and weeping in this valley of tears.',
+      'Turn, then, most gracious advocate, thine eyes of mercy towards us,',
+      'and after this our exile, show unto us the blessed fruit of thy womb, Jesus.',
+      'O clement, O loving, O sweet Virgin Mary.'
+    ]
+  },
+  {
+    id:'apostles-creed', title:"The Apostles' Creed", short:"Apostles' Creed", category:'Profession of Faith', source:'EWTN · Prayers of the Rosary',
+    phrases:[
+      'I believe in God, the Father almighty, Creator of heaven and earth;',
+      'and in Jesus Christ, His only Son, our Lord.',
+      'He was conceived by the Holy Spirit, and born of the Virgin Mary.',
+      'He suffered under Pontius Pilate, was crucified, died and was buried.',
+      'He descended into hell. On the third day He rose again from the dead.',
+      'He ascended into heaven, and is seated at the right hand of God the Father Almighty.',
+      'He will come again to judge the living and the dead.',
+      'I believe in the Holy Spirit, the holy Catholic Church, the communion of saints,',
+      'the forgiveness of sins, the resurrection of the body, and life everlasting. Amen.'
+    ]
+  }
+];
+const gardenBackgrounds = [
+  {id:'morning', name:'Morning Garden', file:'./assets/garden/morning-garden.png'},
+  {id:'autumn', name:'Autumn Garden', file:'./assets/garden/autumn-garden.png'},
+  {id:'winter', name:'Winter Garden', file:null},
+  {id:'summer', name:'Summer Garden', file:null},
+  {id:'scottish', name:'Scottish Garden', file:null},
+  {id:'mushroom', name:'Mushroom Garden', file:null}
+];
 const defaultState = {
   bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
   bloom:0,level:1,streak:0,lastPracticeDate:'',
   today:{date:'',passages:0,highAccuracy:false,bestCombo:0},
-  sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[]
+  sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
+  mode:'scripture', prayerPractice:{}, prayerHistory:[], gardenIndex:0
 };
 
 let state = load();
@@ -107,6 +184,9 @@ let finished = false;
 let combo = 0;
 let transitionTimer = null;
 let audioContext = null;
+let prayerCurrent = null;
+let prayerPhraseIndex = 0;
+const prayerDeck = [];
 const decks = new Map();
 const DECK_KEY = () => $('themeSelect')?.value || 'all';
 
@@ -163,7 +243,11 @@ function mergeState(saved){
     today:{...defaultState.today,...(saved.today || {})},
     practice:{...(saved.practice || {})},
     themeCounts:{...(saved.themeCounts || {})},
-    history:Array.isArray(saved.history) ? saved.history : []
+    history:Array.isArray(saved.history) ? saved.history : [],
+    prayerPractice:{...(saved.prayerPractice || {})},
+    prayerHistory:Array.isArray(saved.prayerHistory) ? saved.prayerHistory : [],
+    mode:saved.mode==='prayer'?'prayer':'scripture',
+    gardenIndex:Number.isInteger(saved.gardenIndex) ? saved.gardenIndex : 0
   };
 }
 function save(){localStorage.setItem(STORE, JSON.stringify(state));}
@@ -185,8 +269,114 @@ function updateStreak(){
   state.lastPracticeDate = today;
 }
 
+function setGardenBackground(index, reason=''){
+  const available = gardenBackgrounds.filter(x=>x.file);
+  if(!available.length) return;
+  const currentId = gardenBackgrounds[state.gardenIndex]?.id;
+  let target = gardenBackgrounds[index % gardenBackgrounds.length];
+  if(!target.file){
+    const start = gardenBackgrounds.findIndex(x=>x.id===currentId);
+    for(let i=1;i<=gardenBackgrounds.length;i++){
+      const candidate=gardenBackgrounds[(start+i+gardenBackgrounds.length)%gardenBackgrounds.length];
+      if(candidate.file){target=candidate;break;}
+    }
+  }
+  const actualIndex=gardenBackgrounds.findIndex(x=>x.id===target.id);
+  state.gardenIndex=actualIndex;
+  const image=$('gardenImage');
+  if(image) image.style.backgroundImage=`url('${target.file}')`;
+  $('gardenMood').textContent=target.name;
+  $('gardenHero').dataset.garden=target.id;
+  const hero=$('gardenHero');
+  hero.classList.remove('garden-changing');
+  void hero.offsetWidth;
+  hero.classList.add('garden-changing');
+  save();
+  if(reason) showToast(`✦ ${target.name} · ${reason}`);
+}
+function advanceGarden(reason){
+  const next=(state.gardenIndex+1)%gardenBackgrounds.length;
+  setGardenBackground(next,reason);
+}
+function resetBloomForGarden(){
+  state.bloom=0;
+  renderAll();
+}
+function refillPrayerDeck(){
+  const recent=new Set(state.prayerHistory.slice(0,4).map(x=>x.id));
+  const fresh=prayers.filter(p=>!recent.has(p.id));
+  const warm=prayers.filter(p=>recent.has(p.id));
+  prayerDeck.splice(0,prayerDeck.length,...shuffle(fresh).concat(shuffle(warm)));
+}
+function nextPrayer(){
+  if(!prayerDeck.length) refillPrayerDeck();
+  let p=prayerDeck.shift();
+  if(p && prayerCurrent && p.id===prayerCurrent.id && prayerDeck.length){
+    const alt=prayerDeck.shift(); prayerDeck.push(p); p=alt;
+  }
+  return p || prayers[0];
+}
+function renderModeUI(){
+  const prayerMode=state.mode==='prayer';
+  $('scriptureModeBtn').classList.toggle('active',!prayerMode);
+  $('prayerModeBtn').classList.toggle('active',prayerMode);
+  $('themePicker').hidden=prayerMode;
+  $('prayerPicker').hidden=!prayerMode;
+  $('gardenSideNote').hidden=prayerMode;
+  $('practiceLabel').textContent=prayerMode?'PRAYER PRACTICE':'SCRIPTURE PRACTICE';
+  $('verseTheme').textContent=prayerMode ? (prayerCurrent?.category || 'PRAYER') : (current?.theme || '').toUpperCase();
+  $('verseRef').textContent=prayerMode ? `${prayerPhraseIndex+1} / ${prayerCurrent?.phrases.length || 1}` : (current?.ref || '');
+  $('libraryJump').textContent=prayerMode?'☩ Prayer Library ›':'♧ Scripture Library ›';
+  if($('prayerSource')) $('prayerSource').hidden=!prayerMode;
+  $('typingInput').placeholder=prayerMode?'Type the prayer phrase here…':'Type the words here…';
+}
+function choosePrayer({focus=true}={}){
+  clearTimeout(transitionTimer);
+  state.mode='prayer';
+  prayerCurrent=nextPrayer();
+  prayerPhraseIndex=0;
+  finished=false; combo=0; startedAt=0; stopTimer();
+  $('typingInput').value='';$('typingInput').disabled=false;
+  $('prayerSelect').value=prayerCurrent.id;
+  renderModeUI();renderPrayerPhrase();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  $('practiceCount').textContent=`${prayerCurrent.short} · ${state.prayerPractice[prayerCurrent.id]||0} completed`;
+  if($('prayerSource')) $('prayerSource').textContent=prayerCurrent.source;
+  $('gameMessage').textContent=`Phrase 1 of ${prayerCurrent.phrases.length} — stay with the prayer.`;
+  save();
+  if(focus) $('typingInput').focus({preventScroll:true});
+}
+function selectPrayer(id){
+  const p=prayers.find(x=>x.id===id); if(!p)return;
+  prayerDeck.splice(0,prayerDeck.length,...prayerDeck.filter(x=>x.id!==id));
+  prayerCurrent=p; prayerPhraseIndex=0; state.mode='prayer'; finished=false; combo=0; startedAt=0; stopTimer();
+  $('prayerSelect').value=id;$('typingInput').value='';$('typingInput').disabled=false;
+  renderModeUI();renderPrayerPhrase();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  $('practiceCount').textContent=`${p.short} · ${state.prayerPractice[p.id]||0} completed`;
+  $('gameMessage').textContent=`Phrase 1 of ${p.phrases.length} — stay with the prayer.`;
+  save();$('typingInput').focus({preventScroll:true});
+}
+function renderPrayerPhrase(){
+  if(!prayerCurrent)return;
+  const text=prayerCurrent.phrases[prayerPhraseIndex];
+  const typed=$('typingInput').value; let html='';
+  for(let i=0;i<text.length;i++){
+    const c=text[i]; let cls='';
+    if(i<typed.length) cls=typed[i]===c?'correct':'wrong'; else if(i===typed.length) cls='cursor';
+    html+=`<span class="${cls}">${escapeHtml(c)}</span>`;
+  }
+  $('verseText').innerHTML=html;
+  $('verseRef').textContent=`${prayerPhraseIndex+1} / ${prayerCurrent.phrases.length}`;
+  $('practiceCount').textContent=`${prayerCurrent.short} · ${state.prayerPractice[prayerCurrent.id]||0} completed`;
+  if($('prayerSource')) $('prayerSource').textContent=prayerCurrent.source;
+}
+function enterScriptureMode(){
+  state.mode='scripture'; prayerCurrent=null; prayerPhraseIndex=0; save(); renderModeUI(); choosePrompt();
+}
+
 function choosePrompt({focus=false} = {}){
   prepToday();
+  state.mode='scripture';
+  prayerCurrent=null;
   clearTimeout(transitionTimer);
   current = nextFromDeck() || passages[Math.floor(Math.random()*passages.length)];
   invalidateDeckRef(current.ref);
@@ -281,7 +471,55 @@ function startTimer(){
   },250);
 }
 
+function onPrayerInput(){
+  if(finished || !prayerCurrent)return;
+  const input=$('typingInput');
+  const target=prayerCurrent.phrases[prayerPhraseIndex];
+  if(input.value.length>target.length) input.value=input.value.slice(0,target.length);
+  if(!startedAt && input.value.length){startedAt=Date.now();startTimer();}
+  const typed=input.value;
+  const previousLength=Math.max(0,typed.length-1);
+  const newChar=typed[typed.length-1];
+  const expected=target[previousLength];
+  if(newChar!==undefined){
+    if(newChar===expected){combo++;if(combo===5||combo===10||combo%15===0)playTone('combo');}
+    else{combo=0;playTone('error');}
+  }
+  let correct=0,errors=0;
+  for(let i=0;i<typed.length;i++){if(i<target.length&&typed[i]===target[i])correct++;else errors++;}
+  const ms=startedAt?Math.max(1,Date.now()-startedAt):0;
+  const wpm=ms?Math.round((correct/5)/(ms/60000)):0;
+  const accuracy=typed.length?Math.round(correct/typed.length*100):100;
+  const progress=Math.min(100,Math.round(correct/target.length*100));
+  renderPrayerPhrase();updateStats({wpm,accuracy,seconds:ms/1000,errors,combo,progress});
+  $('gameMessage').textContent=errors===0?`Phrase ${prayerPhraseIndex+1} of ${prayerCurrent.phrases.length} — stay with the prayer.`:'A missed word is only a breath. Correct it and continue.';
+  if(typed===target)completePrayer({wpm,accuracy,errors,ms});
+}
+function completePrayer(s){
+  if(finished)return;
+  finished=true;stopTimer();$('typingInput').disabled=true;
+  const id=prayerCurrent.id;
+  state.prayerPractice[id]=(state.prayerPractice[id]||0)+1;
+  state.prayerHistory.unshift({id,wpm:s.wpm,accuracy:s.accuracy,date:new Date().toISOString()});
+  state.prayerHistory=state.prayerHistory.slice(0,40);
+  state.totalChars+=prayerCurrent.phrases[prayerPhraseIndex].length;
+  state.bestWpm=Math.max(state.bestWpm,s.wpm);state.bestAccuracy=Math.max(state.bestAccuracy,s.accuracy);state.bestCombo=Math.max(state.bestCombo,combo);
+  state.today.bestCombo=Math.max(state.today.bestCombo,combo);
+  save();renderAll();gardenReact(s.accuracy>=95);playTone('complete');
+  if(prayerPhraseIndex<prayerCurrent.phrases.length-1){
+    $('gameMessage').textContent=`Phrase complete · ${prayerPhraseIndex+1} of ${prayerCurrent.phrases.length}.`;
+    transitionTimer=setTimeout(()=>{
+      prayerPhraseIndex++;finished=false;combo=0;startedAt=0;$('typingInput').disabled=false;$('typingInput').value='';stopTimer();renderPrayerPhrase();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});$('gameMessage').textContent=`Phrase ${prayerPhraseIndex+1} of ${prayerCurrent.phrases.length} — continue in order.`;$('typingInput').focus({preventScroll:true});
+    },state.reduceMotion?250:450);
+  }else{
+    advanceGarden('Prayer completed');
+    showToast(`✦ ${prayerCurrent.title} completed · ${gardenBackgrounds[state.gardenIndex].name}`);
+    $('gameMessage').textContent='Prayer complete. The garden changes with you.';
+    transitionTimer=setTimeout(()=>choosePrayer({focus:true}),state.reduceMotion?300:850);
+  }
+}
 function onInput(){
+  if(state.mode==='prayer') return onPrayerInput();
   if(finished || !current) return;
   const input=$('typingInput');
   // Never let pasted/held input run beyond the target passage.
@@ -343,7 +581,12 @@ function complete(s){
   const oldBloom=state.bloom;
   state.bloom += bloomGain;
   const levelUp=state.bloom>=100;
-  if(levelUp){state.level++;state.bloom=state.bloom%100;gardenBloom();}
+  if(levelUp){
+    state.level++;
+    state.bloom=state.bloom%100;
+    gardenBloom();
+    advanceGarden('Bloom 100%');
+  }
 
   state.history.unshift({ref,wpm:s.wpm,accuracy:s.accuracy,combo,date:new Date().toISOString()});
   state.history=state.history.slice(0,60);
@@ -409,6 +652,8 @@ function renderAll(){
   $('goalAccuracy').textContent=(state.today.highAccuracy?'1':'0')+' / 1';
   $('goalCombo').textContent=Math.min(10,state.today.bestCombo)+' / 10';
   $('bloomMessage').textContent=state.bloom>=80?'Almost there — let the garden bloom.':state.bloom>=50?'The garden is beginning to stir.':'Accurate typing fills the Bloom meter.';
+  renderModeUI();
+  setGardenBackground(state.gardenIndex);
   renderLibrary();
 }
 function renderLibrary(){
@@ -452,6 +697,7 @@ $('typingInput').addEventListener('input',onInput);
 // is a space. We still require the exact Scripture text before completion.
 $('typingInput').addEventListener('keydown',e=>{
   if(e.key !== ' ') return;
+  if(state.mode==='prayer') return;
   if(finished || !current) return;
 
   const el=e.currentTarget;
@@ -494,9 +740,13 @@ $('typingInput').addEventListener('keydown',e=>{
     }
   }
 });
+$('scriptureModeBtn').addEventListener('click',()=>enterScriptureMode());
+$('prayerModeBtn').addEventListener('click',()=>choosePrayer({focus:true}));
+$('prayerSelect').addEventListener('change',e=>selectPrayer(e.target.value));
 $('themeSelect').addEventListener('change',()=>{ decks.delete(DECK_KEY()); choosePrompt(); });
 $('newPromptBtn').addEventListener('click',()=>choosePrompt());
 $('libraryJump').addEventListener('click',()=>{
+  if(state.mode==='prayer'){ $('prayerSelect').focus(); showToast('Choose a prayer to practice in order.'); return; }
   const panel=$('libraryPanel');
   panel.hidden=false;
   $('libraryToggle').setAttribute('aria-expanded','true');
@@ -533,6 +783,6 @@ $('soundToggle').checked=state.sound;
 $('motionToggle').checked=state.reduceMotion;
 document.body.classList.toggle('reduce-motion',state.reduceMotion);
 renderAll();
-choosePrompt();
+if(state.mode==='prayer') choosePrayer(); else choosePrompt();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
