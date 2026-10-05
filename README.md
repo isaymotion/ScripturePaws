@@ -2,11 +2,20 @@
 
 Scripture Paws is an offline-first Scripture typing game built around a peaceful pixel-art garden. This version removes the old collectible-object and garden-placement loop. The garden is a persistent visual world; the player's progression comes from Scripture practice, typing performance, Bloom progression, daily goals, personal records, and thematic verse practice.
 
+## Release 2 Pass 3 — Phase 1: Core garden feedback
+
+- Live combo milestones at 5, 10, 20, 30, 50 and later 25-combo intervals.
+- Gentle garden particle bursts and a subtle garden pulse at combo milestones.
+- Flow multiplier from 1.0× up to 2.0× increases Bloom reward at passage completion.
+- Live combo is reflected in the garden HUD while typing.
+- Status messages explain flow and combo resets without interrupting typing.
+- A **What's New** section sits below the main garden/progression area so players can review recent changes.
+
 ## Core gameplay
 
 - Continuous Scripture typing: completing a passage automatically prepares the next one.
 - Verses can be typed repeatedly; practice counts are retained locally.
-- Scripture library organized by spiritual theme, with 55 passages across 15 themes.
+- Scripture library organized by spiritual theme, with 99 passages across 15 themes, including a major Psalm expansion with 44 additional Douay-Rheims passages.
 - Live WPM, accuracy, errors, elapsed time, and typing combo.
 - Bloom meter that advances with practice and triggers subtle garden reactions.
 - Daily goals: passages, high accuracy, combo, and at least one complete prayer.
@@ -22,13 +31,13 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 - 10-prayer collection: Our Father, Hail Mary, Glory Be, Fátima Prayer, St. Michael, Hail Holy Queen, Apostles’ Creed, Angelus, Memorare to Mary, Memorare to St. Joseph, and Morning Offering.
 - Prayer completion changes the garden background when a new garden scene is available.
 - Reaching Bloom 100% in Scripture mode also advances to the next available garden scene.
-- Garden-scene system prepared for Autumn, Winter, Summer, Scottish, Mushroom, and future scenes; unavailable scenes are skipped until their artwork is added.
+- Garden-scene system prepared for Afternoon, Autumn, Winter, Summer, Scottish, Mushroom, and future scenes; unavailable scenes are skipped until their artwork is added. The Afternoon Garden slot is present in this build, but its newly generated image is not bundled yet because the image file was not available in the build workspace.
 
 ## Scripture themes
 
 Peace & Stillness; Comfort & Grief; Hope; Trust & Faith; Strength & Perseverance; Guidance & Wisdom; Love & Compassion; Prayer & Gratitude; Anxiety & Worry; Forgiveness & Mercy; Courage; Protection & Refuge; Patience & Waiting; Humility & Service; Light & Creation.
 
-The Scripture set uses the Douay-Rheims 1899 American Edition (Challoner revision), a public-domain translation. The verse references are kept in the app as typed practice passages; Psalm references include modern-numbering equivalents where useful.
+The Scripture set uses the Douay-Rheims 1899 American Edition (Challoner revision), a public-domain translation. The expanded Psalm selection adds 44 passages, including several longer Psalm challenges. Verse references are kept in the app as typed practice passages; Psalm references include modern-numbering equivalents where useful.
 
 ## Run locally
 
@@ -155,3 +164,32 @@ The nine intention groups are paraphrased from EWTN's *Divine Mercy Novena*. The
 Source: EWTN, *Divine Mercy Novena*: https://www.ewtn.com/catholicism/library/divine-mercy-novena-9119
 
 EWTN states that the Novena begins on Good Friday, has a different group of souls/intention for each of nine days, and is prayed along with the Divine Mercy Chaplet.
+
+
+## Release 2 · Pass 3 · Phase 2
+
+This phase deepens garden progression without adding currencies, lives, ads, or leaderboards. Bloom now advances persistent garden levels and five visual growth stages: Seedling, Growing Garden, Flowering Garden, Flourishing Garden, and Garden Sanctuary. Level-up celebrations include a gentle garden reaction and the background advances through the garden images that are actually bundled.
+
+The Afternoon Garden remains a prepared progression slot but is not bundled unless its generated image is available in the build workspace. This build does not fabricate or substitute a missing asset.
+
+
+## Release 2 · Pass 3 · Phase 4 — Mastery
+- Perfect Passage recognition at 98%+ accuracy with no errors.
+- Accuracy-based Bloom reward includes a Perfect Passage bonus.
+- Persistent perfect-passage count and best WPM.
+- Theme mastery tracks unique verses practiced within each of the 15 Scripture themes.
+- 50% and 100% theme-completion milestones are recorded locally.
+- No new external dependencies or server requirements.
+
+
+## Phase 4 — Garden Moments
+- Added occasional, non-collectible Garden Moments (butterfly, bird, firefly, flower, breeze, sunlight).
+- Moments use a calm opacity transition only; no shaking, zooming, or blur.
+- What's New is now an expandable panel with larger, readable text.
+- Fixed long Apostles' Creed display in Structured Prayer typing mode so it stays contained within the garden practice area.
+- Preserved the subtle garden background fade transition.
+
+
+## Latest Scripture expansion
+
+This build expands the Scripture library from 55 to 99 passages. The 44 new Psalm selections are distributed across the existing 15 spiritual themes so the expanded library strengthens the existing progression and mastery system rather than creating a separate Psalm-only progression. Several longer selections, including Psalm 22 (23), Psalm 26 (27), and Psalm 120 (121), provide more substantial typing challenges.

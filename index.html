@@ -21,6 +21,7 @@
 <section class="garden-hero immersive-garden" id="gardenHero" aria-label="Scripture Paws garden and Scripture practice">
   <div class="garden-image" id="gardenImage" aria-hidden="true"></div>
   <div class="garden-vignette" aria-hidden="true"></div>
+  <div class="garden-growth" aria-hidden="true"><span class="growth-bed bed-a"></span><span class="growth-bed bed-b"></span><span class="growth-bed bed-c"></span><span class="growth-flower flower-a"></span><span class="growth-flower flower-b"></span><span class="growth-flower flower-c"></span></div>
 
   <div class="garden-hud">
     <div class="garden-title"><span>YOUR QUIET GARDEN</span><strong id="gardenMood">Morning Garden</strong></div>
@@ -119,6 +120,7 @@
   <div class="garden-side-note" id="gardenSideNote"><span>GARDEN RHYTHM</span><strong>Stay with the words.</strong><small>Accurate typing helps the garden bloom.</small></div>
   <div class="garden-library-link"><button id="libraryJump" type="button">♧ Scripture Library <span>›</span></button></div>
   <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
+  <div class="garden-moment" id="gardenMoment" aria-live="polite" hidden><span id="gardenMomentIcon" aria-hidden="true">✿</span><span><b id="gardenMomentTitle">Garden Moment</b><small id="gardenMomentText"></small></span></div>
 </section>
 
 <section class="rosary-progress-card" aria-label="Rosary decade and bead progress">
@@ -133,14 +135,35 @@
   <div class="bloom-track"><div id="bloomBar"></div></div><p id="bloomMessage">Type accurately to fill the Bloom meter.</p>
 </section>
 
+<section class="garden-growth-card" aria-live="polite">
+  <div class="garden-growth-copy"><div><p class="eyebrow">GARDEN PROGRESSION</p><h2 id="gardenStageName">Seedling</h2><p id="gardenStageDescription">A quiet beginning. Every accurate word takes root.</p></div><span class="garden-stage-level">LEVEL <b id="gardenStageLevel">1</b></span></div>
+  <div class="garden-stage-track" id="gardenStageTrack" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <p class="garden-stage-next" id="gardenStageNext">Reach Level 2 to help the first beds grow.</p>
+</section>
+
 <section class="goals-grid">
   <article class="info-card"><p class="eyebrow">TODAY'S GOALS</p><h2>Gentle practice</h2><div class="goal"><span>Complete 5 passages</span><b id="goalPassages">0 / 5</b></div><div class="goal"><span>Reach 95% accuracy</span><b id="goalAccuracy">0 / 1</b></div><div class="goal"><span>Reach a 10× combo</span><b id="goalCombo">0 / 10</b></div><div class="goal"><span>Complete 1 prayer</span><b id="goalPrayers">0 / 1</b></div></article>
   <article class="info-card"><p class="eyebrow">PERSONAL RECORDS</p><h2>Your journey</h2><div class="records"><div><small>BEST WPM</small><strong id="recordWpm">0</strong></div><div><small>BEST ACCURACY</small><strong id="recordAccuracy">—</strong></div><div><small>BEST COMBO</small><strong id="recordCombo">0</strong></div><div><small>PASSAGES</small><strong id="recordPassages">0</strong></div></div></article>
 </section>
 
+<section class="mastery-card" id="masteryCard" aria-live="polite">
+  <div class="mastery-head"><div><p class="eyebrow">SCRIPTURE MASTERY</p><h2>Practice every verse in a theme</h2></div><span id="masteryPerfect">0 perfect</span></div>
+  <div id="themeMastery" class="theme-mastery"></div>
+</section>
+
 <section class="library-card" id="scriptureLibrary">
   <button id="libraryToggle" class="library-toggle" type="button" aria-expanded="false"><span><small>SCRIPTURE LIBRARY</small><strong>Your verses by spiritual theme</strong></span><span id="librarySummary">0 themes practiced</span><b>＋</b></button>
   <div id="libraryPanel" class="library-panel" hidden><div id="themeLibrary" class="theme-library"></div><div id="prayerLibrary" class="prayer-library" hidden></div></div>
+</section>
+
+<section class="whats-new-card" id="whatsNew" aria-labelledby="whatsNewTitle">
+  <button id="whatsNewToggle" class="whats-new-toggle" type="button" aria-expanded="false" aria-controls="whatsNewPanel">
+    <span><small class="eyebrow">WHAT'S NEW</small><strong id="whatsNewTitle">The garden keeps growing</strong></span>
+    <span class="whats-new-toggle-meta"><span class="whats-new-version">Release 2 · Pass 3 · Phase 4</span><b id="whatsNewChevron" aria-hidden="true">＋</b></span>
+  </button>
+  <div id="whatsNewPanel" class="whats-new-panel" hidden>
+    <div id="whatsNewList" class="whats-new-list"></div>
+  </div>
 </section>
 
 <section class="settings-panel" id="settingsPanel" hidden>

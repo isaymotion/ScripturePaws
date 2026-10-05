@@ -89,7 +89,53 @@ const passages = [
   // Light & Creation
   {ref:'John 8:12',theme:'Light & Creation',text:'I am the light of the world: he that followeth me, walketh not in darkness, but shall have the light of life.'},
   {ref:'Matthew 5:14',theme:'Light & Creation',text:'You are the light of the world. A city seated on a mountain cannot be hid.'},
-  {ref:'Psalm 18:2 (19:1)',theme:'Light & Creation',text:'The heavens shew forth the glory of God, and the firmament declareth the work of his hands.'}
+  {ref:'Psalm 18:2 (19:1)',theme:'Light & Creation',text:'The heavens shew forth the glory of God, and the firmament declareth the work of his hands.'},
+
+  // Psalms · expanded library (Douay-Rheims 1899 American Edition)
+  {ref:'Psalm 3:6-7',theme:'Peace & Stillness',text:'I have slept and taken my rest: and I have risen up, because the Lord hath protected me. I will not fear thousands of the people, surrounding me: arise, O Lord; save me, O my God.'},
+  {ref:'Psalm 15:8-9 (16:8-9)',theme:'Trust & Faith',text:'I set the Lord always in my sight: for he is at my right hand, that I be not moved. Therefore my heart hath been glad, and my tongue hath rejoiced: moreover my flesh also shall rest in hope.'},
+  {ref:'Psalm 16:5-8 (17:5-8)',theme:'Protection & Refuge',text:'Thou hast proved my heart, and visited it by night: thou hast tried me by fire, and iniquity hath not been found in me. That my mouth may not speak the works of men: for the words of thy lips I have kept hard ways. Perfect thou my goings in thy paths: that my footsteps be not moved. I have cried to thee, for thou, O God, hast heard me: incline thy ear unto me, and hear my words.'},
+  {ref:'Psalm 17:2-3 (18:2-3)',theme:'Strength & Perseverance',text:'I will love thee, O Lord, my strength. The Lord is my firmament, my refuge, and my deliverer. My God is my helper, and in him will I put my trust.'},
+  {ref:'Psalm 22 (23)',theme:'Protection & Refuge',text:'A psalm for David. The Lord ruleth me: and I shall want nothing. He hath set me in a place of pasture. He hath brought me up, on the water of refreshment: he hath converted my soul. He hath led me on the paths of justice, for his own name\'s sake. For though I should walk in the midst of the shadow of death, I will fear no evils, for thou art with me. Thy rod and thy staff, they have comforted me. Thou hast prepared a table before me against them that afflict me. Thou hast anointed my head with oil; and my chalice which inebriateth me, how goodly is it! And thy mercy will follow me all the days of my life. And that I may dwell in the house of the Lord unto length of days.'},
+  {ref:'Psalm 23:4-5 (24:4-5)',theme:'Humility & Service',text:'He that hath innocent hands, and clean heart, who hath not taken his soul in vain, nor sworn deceitfully to his neighbour. He shall receive a blessing from the Lord, and mercy from God his Saviour.'},
+  {ref:'Psalm 24:4-5 (25:4-5)',theme:'Guidance & Wisdom',text:'Shew me, O Lord, thy ways, and teach me thy paths. Direct me in thy truth, and teach me: for thou art God my Saviour; and thee have I waited all the day long.'},
+  {ref:'Psalm 26 (27)',theme:'Courage',text:'The Lord is my light and my salvation, whom shall I fear? The Lord is the protector of my life: of whom shall I be afraid? Whilst the wicked draw near against me, to eat my flesh. My enemies that trouble me, have themselves been weakened, and have fallen. If armies in camp should stand together against me, my heart shall not fear. If a battle should rise up against me, in this will I be confident. One thing I have asked of the Lord, this will I seek after; that I may dwell in the house of the Lord all the days of my life. That I may see the delight of the Lord, and may visit his temple. For he hath hidden me in his tabernacle; in the day of evils, he hath protected me in the secret place of his tabernacle. He hath exalted me upon a rock: and now he hath lifted up my head above my enemies. I have gone round, and have offered up in his tabernacle a sacrifice of jubilation: I will sing, and recite a psalm to the Lord. Hear, O Lord, my voice, with which I have cried to thee: have mercy on me and hear me. My heart hath said to thee: My face hath sought thee: thy face, O Lord, will I still seek. Turn not away thy face from me; decline not in thy wrath from thy servant. Be thou my helper, forsake me not; do not thou despise me, O God my Savior. For my father and my mother have left me: but the Lord hath taken me up. Set me, O Lord, a law in thy way, and guide me in the right path, because of my enemies. Deliver me not over to the will of them that trouble me; for unjust witnesses have risen up against me; and iniquity hath lied to itself. I believe to see the good things of the Lord in the land of the living. Expect the Lord, do manfully, and let thy heart take courage, and wait thou for the Lord.'},
+  {ref:'Psalm 26:13-14 (27:13-14)',theme:'Hope',text:'I believe to see the good things of the Lord in the land of the living. Expect the Lord, do manfully, and let thy heart take courage, and wait thou for the Lord.'},
+  {ref:'Psalm 30:2-3 (31:2-3)',theme:'Trust & Faith',text:'In thee, O Lord, I have hoped, let me never be confounded: deliver me in thy justice. Bow down thy ear to me, make haste to deliver me. Be thou unto me a God, a protector, and a house of refuge, to save me.'},
+  {ref:'Psalm 30:24 (31:25)',theme:'Strength & Perseverance',text:'Do ye manfully, and let your heart be strengthened, all ye that hope in the Lord.'},
+  {ref:'Psalm 31:7 (32:7)',theme:'Protection & Refuge',text:'Thou art my refuge from the tribulation which hath encompassed me: my joy, deliver me from them that surround me.'},
+  {ref:'Psalm 32:4-5 (33:4-5)',theme:'Love & Compassion',text:'For the word of the Lord is right, and all his works are done with faithfulness. He loveth mercy and judgment: the earth is full of the mercy of the Lord.'},
+  {ref:'Psalm 33:4 (34:4)',theme:'Anxiety & Worry',text:'I sought the Lord, and he heard me; and he delivered me from all my troubles.'},
+  {ref:'Psalm 33:18-19 (34:18-19)',theme:'Comfort & Grief',text:'The Lord is nigh unto them that are of a contrite heart: and he will save the humble of spirit. Many are the afflictions of the just; but out of them all will the Lord deliver them.'},
+  {ref:'Psalm 36:5-6 (37:5-6)',theme:'Trust & Faith',text:'Commit thy way to the Lord, and trust in him, and he will do it. And he will bring forth thy justice as the light, and thy judgment as the noonday.'},
+  {ref:'Psalm 36:7-8 (37:7-8)',theme:'Patience & Waiting',text:'Be subject to the Lord and pray to him. Envy not him who prospereth in his way; the man who doth unjust things. Cease from anger, and leave rage; have no emulation to do evil.'},
+  {ref:'Psalm 38:8-9 (39:8-9)',theme:'Patience & Waiting',text:'And now what is my hope? Is it not the Lord? And thou indeed hast made all my days old; and my substance is as nothing before thee.'},
+  {ref:'Psalm 39:2-3 (40:2-3)',theme:'Hope',text:'With expectation I have waited for the Lord, and he was attentive to me. And he brought me out of the pit of misery, and the mire of dregs. And he set my feet upon a rock, and directed my steps.'},
+  {ref:'Psalm 41:6 (42:5)',theme:'Hope',text:'Why art thou sad, O my soul? and why dost thou trouble me? Hope in God, for I will still give praise to him: the salvation of my countenance.'},
+  {ref:'Psalm 44:11 (45:11)',theme:'Humility & Service',text:'Hearken, O daughter, and see, and incline thy ear: for the king hath greatly desired thy beauty.'},
+  {ref:'Psalm 45:11 (46:11)',theme:'Peace & Stillness',text:'Be still and see that I am God: I will be exalted among the nations, and I will be exalted in the earth.'},
+  {ref:'Psalm 49:15 (50:15)',theme:'Prayer & Gratitude',text:'And call upon me in the day of trouble: I will deliver thee, and thou shalt glorify me.'},
+  {ref:'Psalm 50:12-14 (51:10-12)',theme:'Forgiveness & Mercy',text:'Create a clean heart in me, O God: and renew a right spirit within me. Cast me not away from thy face; and take not thy holy spirit from me. Restore unto me the joy of thy salvation, and strengthen me with a perfect spirit.'},
+  {ref:'Psalm 50:17 (51:17)',theme:'Humility & Service',text:'A sacrifice to God is an afflicted spirit: a contrite and humbled heart, O God, thou wilt not despise.'},
+  {ref:'Psalm 54:4-5 (55:4-5)',theme:'Anxiety & Worry',text:'My heart is troubled within me: and the fear of death is fallen upon me. Fear and trembling are come upon me: and darkness hath covered me.'},
+  {ref:'Psalm 55:4-5 (56:3-4)',theme:'Courage',text:'In God I have hoped, I will not fear what flesh can do to me. All the day long they detracted my words: all their thoughts were against me unto evil.'},
+  {ref:'Psalm 60:2-3 (61:2-3)',theme:'Comfort & Grief',text:'Hear, O God, my supplication: be attentive to my prayer. To thee have I cried from the ends of the earth: when my heart was in anguish, thou hast exalted me on a rock.'},
+  {ref:'Psalm 61:6-7 (62:6-7)',theme:'Peace & Stillness',text:'But my soul be subject to God: for from him is my patience. For he is my God and my saviour: he is my protector, I shall be moved no more.'},
+  {ref:'Psalm 70:5 (71:5)',theme:'Hope',text:'For thou art my patience, O Lord: my hope, O Lord, from my youth.'},
+  {ref:'Psalm 85:11 (86:11)',theme:'Guidance & Wisdom',text:'Set thy ways before me, O Lord, and teach me thy paths: and I will walk in thy truth: unite my heart to fear thy name.'},
+  {ref:'Psalm 90:1-4 (91:1-4)',theme:'Protection & Refuge',text:'He that dwelleth in the aid of the most High, shall abide under the protection of the God of Jacob. He shall say to the Lord: Thou art my protector, and my refuge: my God I will hope in him. Because he hath delivered me from the snare of the hunters, and from the sharp word. He will overshadow thee with his shoulders: and under his wings thou shalt hope.'},
+  {ref:'Psalm 102:8-12 (103:8-12)',theme:'Forgiveness & Mercy',text:'The Lord is compassionate and merciful: longsuffering and plenteous in mercy. He will not always be angry: nor will he threaten for ever. He hath not dealt with us according to our sins: nor rewarded us according to our iniquities. For according to the height of the heaven above the earth: he hath strengthened his mercy towards them that fear him. As far as the east is from the west, so far hath he removed our iniquities from us.'},
+  {ref:'Psalm 114:1-2 (116:1-2)',theme:'Prayer & Gratitude',text:'I have loved, because the Lord will hear the voice of my prayer. Because he hath inclined his ear unto me: and in my days I will call upon him.'},
+  {ref:'Psalm 117:6 (118:6)',theme:'Courage',text:'The Lord is my helper: I will not fear what man can do unto me.'},
+  {ref:'Psalm 120 (121)',theme:'Protection & Refuge',text:'I have lifted up my eyes to the mountains, from whence help shall come to me. My help is from the Lord, who made heaven and earth. May he not suffer thy foot to be moved: neither let him slumber that keepeth thee. Behold he shall neither slumber nor sleep, that keepeth Israel. The Lord is thy keeper, the Lord is thy protection upon thy right hand. The sun shall not burn thee by day: nor the moon by night. The Lord keepeth thee from all evil: may the Lord keep thy soul. May the Lord keep thy coming in and thy going out; from henceforth now and for ever.'},
+  {ref:'Psalm 126:1-2 (127:1-2)',theme:'Trust & Faith',text:'Unless the Lord build the house, they labour in vain that build it. Unless the Lord keep the city, he watcheth in vain that keepeth it. It is vain for you, before light, to rise: rise ye after you have sitten, you that eat the bread of sorrow.'},
+  {ref:'Psalm 127:1-2 (128:1-2)',theme:'Love & Compassion',text:'Blessed are all they that fear the Lord: that walk in his ways. For thou shalt eat the labours of thy hands: blessed art thou, and it shall be well with thee.'},
+  {ref:'Psalm 130:2-3 (131:2-3)',theme:'Peace & Stillness',text:'Surely I have behaved myself quietly, and as one weaned from his mother: my soul is as a weaned child. Let Israel hope in the Lord, from henceforth now and for ever.'},
+  {ref:'Psalm 144:18-19 (145:18-19)',theme:'Prayer & Gratitude',text:'The Lord is nigh unto all them that call upon him: to all that call upon him in truth. He will do the will of them that fear him: and he will hear their prayer, and save them.'},
+  {ref:'Psalm 145:8-9 (146:8-9)',theme:'Love & Compassion',text:'The Lord looseth them that are fettered: the Lord enlighteneth the blind. The Lord lifteth up them that are cast down: the Lord loveth the just. The Lord keepeth the strangers, he will support the fatherless and the widow.'},
+  {ref:'Psalm 146:3-4 (147:3-4)',theme:'Comfort & Grief',text:'Who healeth the broken of heart, and bindeth up their bruises. Who telleth the number of the stars: and calleth them all by their names.'},
+  {ref:'Psalm 147:1 (148:1)',theme:'Light & Creation',text:'Praise ye the Lord from the heavens: praise ye him in the high places.'},
+  {ref:'Psalm 148:13-14 (149:13-14)',theme:'Prayer & Gratitude',text:'Let them praise the name of the Lord: for his name alone is exalted. The praise of him is above heaven and earth: and he hath exalted the horn of his people.'}
 ];
 const themes = [...new Set(passages.map(p => p.theme))];
 const prayers = [
@@ -393,6 +439,7 @@ function buildStructuredPrayer(id='rosary',date=new Date()){
 
 const gardenBackgrounds = [
   {id:'morning', name:'Morning Garden', file:'./assets/garden/morning-garden.png'},
+  {id:'afternoon', name:'Afternoon Garden', file:null},
   {id:'autumn', name:'Autumn Garden', file:'./assets/garden/autumn-garden.png'},
   {id:'winter', name:'Winter Garden', file:null},
   {id:'summer', name:'Summer Garden', file:null},
@@ -401,10 +448,10 @@ const gardenBackgrounds = [
 ];
 const defaultState = {
   bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
-  bloom:0,level:1,streak:0,lastPracticeDate:'',
+  bloom:0,level:1,streak:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
   sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
-  mode:'scripture', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0
+  mode:'scripture', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0
 };
 
 let state = load();
@@ -484,6 +531,10 @@ function mergeState(saved){
     today:{...defaultState.today,...(saved.today || {}),prayers:Number(saved.today?.prayers)||0},
     practice:{...(saved.practice || {})},
     themeCounts:{...(saved.themeCounts || {})},
+    themeMastery:{...(saved.themeMastery || {})},
+    themeMilestones:{...(saved.themeMilestones || {})},
+    perfectPassages:Number(saved.perfectPassages)||0,
+    perfectBestWpm:Number(saved.perfectBestWpm)||0,
     history:Array.isArray(saved.history) ? saved.history : [],
     prayerPractice:{...(saved.prayerPractice || {})},
     prayerHistory:Array.isArray(saved.prayerHistory) ? saved.prayerHistory : [],
@@ -491,7 +542,9 @@ function mergeState(saved){
     structuredPlayStyle:['typing','meditation'].includes(saved.structuredPlayStyle)?saved.structuredPlayStyle:'typing',
     structuredHistory:Array.isArray(saved.structuredHistory) ? saved.structuredHistory : [],
     mode:['prayer','structured'].includes(saved.mode)?saved.mode:'scripture',
-    gardenIndex:Number.isInteger(saved.gardenIndex) ? saved.gardenIndex : 0
+    gardenIndex:Number.isInteger(saved.gardenIndex) ? saved.gardenIndex : 0,
+    gardenStage:['seedling','growing','flowering','flourishing','sanctuary'].includes(saved.gardenStage)?saved.gardenStage:'seedling',
+    gardenLevelCelebration:Number(saved.gardenLevelCelebration)||0
   };
 }
 function save(){localStorage.setItem(STORE, JSON.stringify(state));}
@@ -513,6 +566,61 @@ function updateStreak(){
   state.lastPracticeDate = today;
 }
 
+const gardenStages = [
+  {min:1,id:'seedling',name:'Seedling',description:'A quiet beginning. Every accurate word takes root.',next:'Reach Level 2 to help the first beds grow.'},
+  {min:2,id:'growing',name:'Growing Garden',description:'New growth is taking hold. Keep a steady rhythm.',next:'Reach Level 4 for the first flowers.'},
+  {min:4,id:'flowering',name:'Flowering Garden',description:'The garden begins to flower with sustained practice.',next:'Reach Level 7 for a fuller garden.'},
+  {min:7,id:'flourishing',name:'Flourishing Garden',description:'Your practice has become a generous, living rhythm.',next:'Reach Level 10 for Sanctuary.'},
+  {min:10,id:'sanctuary',name:'Garden Sanctuary',description:'A deeply established garden shaped by faithful practice.',next:'Keep growing — there is no finish line.'}
+];
+function gardenStageForLevel(level=state.level){
+  return [...gardenStages].reverse().find(stage=>level>=stage.min) || gardenStages[0];
+}
+function updateGardenStage({celebrate=false}={}){
+  const stage=gardenStageForLevel(state.level);
+  const changed=state.gardenStage!==stage.id;
+  state.gardenStage=stage.id;
+  const hero=$('gardenHero');
+  if(hero){
+    hero.dataset.growth=stage.id;
+    hero.setAttribute('aria-label',`Scripture Paws garden — ${stage.name}`);
+  }
+  if($('gardenStageName')) $('gardenStageName').textContent=stage.name;
+  if($('gardenStageLevel')) $('gardenStageLevel').textContent=state.level;
+  const stageTrack=$('gardenStageTrack');
+  if(stageTrack) stageTrack.dataset.stage=stage.id;
+  if($('gardenStageDescription')) $('gardenStageDescription').textContent=stage.description;
+  if($('gardenStageNext')) $('gardenStageNext').textContent=stage.next;
+  if(changed && celebrate && !state.reduceMotion){
+    const fx=$('gardenEffects');
+    if(fx){
+      fx.innerHTML='';
+      for(let i=0;i<14;i++){
+        const p=document.createElement('i');
+        p.textContent=i%3===0?'✿':(i%2?'✦':'❀');
+        p.className='growth-particle';
+        p.style.left=(10+Math.random()*80)+'%';
+        p.style.top=(35+Math.random()*45)+'%';
+        p.style.setProperty('--delay',(Math.random()*.45)+'s');
+        fx.appendChild(p);
+      }
+      setTimeout(()=>fx.innerHTML='',2200);
+    }
+  }
+  return {stage,changed};
+}
+function levelUpCelebration(newLevel,stage){
+  state.gardenLevelCelebration=newLevel;
+  const hero=$('gardenHero');
+  if(hero){
+    hero.classList.remove('level-up-celebration');
+    void hero.offsetWidth;
+    hero.classList.add('level-up-celebration');
+    setTimeout(()=>hero.classList.remove('level-up-celebration'),1300);
+  }
+  showToast(`✦ Garden Level ${newLevel} · ${stage.name}`);
+  playTone('level');
+}
 function setGardenBackground(index, reason=''){
   const available = gardenBackgrounds.filter(x=>x.file);
   if(!available.length) return;
@@ -528,19 +636,25 @@ function setGardenBackground(index, reason=''){
   const actualIndex=gardenBackgrounds.findIndex(x=>x.id===target.id);
   state.gardenIndex=actualIndex;
   const image=$('gardenImage');
+  const hero=$('gardenHero');
+  const same=currentId===target.id;
   if(image) image.style.backgroundImage=`url('${target.file}')`;
   $('gardenMood').textContent=target.name;
-  $('gardenHero').dataset.garden=target.id;
-  const hero=$('gardenHero');
-  hero.classList.remove('garden-changing');
-  void hero.offsetWidth;
-  hero.classList.add('garden-changing');
+  hero.dataset.garden=target.id;
+  if(!same){
+    hero.classList.remove('garden-changing');
+    void hero.offsetWidth;
+    hero.classList.add('garden-changing');
+  }
   save();
-  if(reason) showToast(`✦ ${target.name} · ${reason}`);
+  if(reason && !same) showToast(`✦ ${target.name} · ${reason}`);
 }
 function advanceGarden(reason){
-  const next=(state.gardenIndex+1)%gardenBackgrounds.length;
-  setGardenBackground(next,reason);
+  const available=gardenBackgrounds.filter(x=>x.file);
+  if(available.length<2){ setGardenBackground(state.gardenIndex,reason); return; }
+  const nextAvailable=available[(Math.max(0,state.level-1))%available.length];
+  const nextIndex=gardenBackgrounds.findIndex(x=>x.id===nextAvailable.id);
+  setGardenBackground(nextIndex,reason);
 }
 function resetBloomForGarden(){
   state.bloom=0;
@@ -563,6 +677,8 @@ function nextPrayer(){
 function renderModeUI(){
   const prayerMode=state.mode==='prayer';
   const structuredMode=state.mode==='structured';
+  document.body.classList.toggle('meditation-active', structuredMode && state.structuredPlayStyle==='meditation');
+  document.body.classList.toggle('structured-mode', structuredMode);
   $('scriptureModeBtn').classList.toggle('active',!prayerMode&&!structuredMode);
   $('prayerModeBtn').classList.toggle('active',prayerMode);
   $('structuredModeBtn').classList.toggle('active',structuredMode);
@@ -601,6 +717,7 @@ function renderModeUI(){
     // alongside the normal typing controls.
     if($('meditationAction')) $('meditationAction').hidden=true;
     if($('mysteryContinueBtn')) $('mysteryContinueBtn').hidden=true;
+    $('verseText').classList.remove('structured-long-prayer');
     $('verseTheme').textContent=prayerMode ? (prayerCurrent?.category || 'PRAYER') : (current?.theme || '').toUpperCase();
     $('verseRef').textContent=prayerMode ? `${prayerPhraseIndex+1} / ${prayerCurrent?.phrases.length || 1}` : (current?.ref || '');
     $('newPromptBtn').textContent=prayerMode?'↻ Next prayer':'↻ New passage';
@@ -610,6 +727,9 @@ function renderModeUI(){
   $('libraryJump').textContent=structuredMode?'☩ Structured Prayer Library ›':prayerMode?'☩ Prayer Library ›':'♧ Scripture Library ›';
   if($('prayerSource')) $('prayerSource').hidden=!(prayerMode||structuredMode);
   if($('structuredMeta')) $('structuredMeta').hidden=!structuredMode;
+  // Keep the structured-prayer bead tracker synchronized with the mode.
+  // This also forces it hidden immediately when returning to Scripture or Prayer.
+  renderRosaryProgress();
 }
 function setStructuredPlayStyle(style,{restart=true}={}){
   if(!['typing','meditation'].includes(style))return;
@@ -765,6 +885,7 @@ function renderStructuredStep(){
     return;
   }
   $('meditationAction').hidden=true;
+  $('verseText').classList.toggle('structured-long-prayer', structuredMode && /apostles.? creed/i.test(step.label||''));
   $('verseText').innerHTML='';
   const text=step.text, typed=$('typingInput').value;
   let html='';
@@ -898,12 +1019,48 @@ function calc(){
   const progress = Math.min(100, Math.round(correct/text.length*100));
   return {typed,text,correct,errors,ms,wpm,accuracy,progress};
 }
+function comboMultiplier(value=combo){
+  return Math.min(2, 1 + Math.floor(Math.max(0,value)/5)*0.1);
+}
+function comboLabel(value=combo){
+  return `${comboMultiplier(value).toFixed(1)}×`;
+}
+function updateGardenCombo(value=combo){
+  const el=$('combo');
+  if(el) el.textContent=value;
+  const hero=$('gardenHero');
+  if(hero) hero.dataset.combo=value;
+}
+function gardenComboPulse(value){
+  if(state.reduceMotion || value<5) return;
+  const fx=$('gardenEffects');
+  if(!fx) return;
+  fx.innerHTML='';
+  const count=value>=20?14:10;
+  for(let i=0;i<count;i++){
+    const p=document.createElement('i');
+    p.textContent=i%3===0?'✿':(i%3===1?'✦':'❀');
+    p.style.left=(10+Math.random()*80)+'%';
+    p.style.top=(38+Math.random()*42)+'%';
+    p.style.setProperty('--delay',(Math.random()*.28)+'s');
+    p.className='combo-particle';
+    fx.appendChild(p);
+  }
+  const hero=$('gardenHero');
+  if(hero){
+    hero.classList.remove('combo-burst');
+    void hero.offsetWidth;
+    hero.classList.add('combo-burst');
+  }
+  setTimeout(()=>{if(fx)fx.innerHTML='';},1400);
+}
 function updateStats(s){
   $('liveWpm').textContent=s.wpm;
   $('accuracy').textContent=s.accuracy+'%';
   $('elapsed').textContent=time(s.seconds ?? s.ms/1000);
   $('errors').textContent=s.errors;
   $('liveCombo').textContent=s.combo;
+  updateGardenCombo(s.combo);
   $('progressFill').style.width=s.progress+'%';
   $('progressLabel').textContent=s.progress+'%';
 }
@@ -980,6 +1137,7 @@ function completeStructuredStep(s){
     state.today.bestCombo=Math.max(state.today.bestCombo,combo);
   }
   save();renderAll();gardenReact(aggregateAccuracy>=95);playTone('level');
+  if(aggregateAccuracy>=95 || state.structuredPlayStyle==='meditation') showGardenMoment();
   showToast(`✦ ${structuredCurrent.title} completed`);
   $('gameMessage').textContent=`${structuredCurrent.title} complete · ${state.structuredPlayStyle==='meditation'?'prayer companion session completed':aggregateAccuracy+'% accuracy'} · the garden has journeyed with you.`;
   transitionTimer=setTimeout(()=>chooseStructured({focus:true}),state.reduceMotion?300:850);
@@ -1073,7 +1231,11 @@ function onInput(){
   if(newChar !== undefined){
     if(newChar === expected){
       combo++;
-      if(combo===5 || combo===10 || combo===20 || combo%25===0) playTone('combo');
+      const milestone = combo===5 || combo===10 || combo===20 || combo===30 || combo===50 || (combo>50 && combo%25===0);
+      if(milestone){
+        playTone('combo');
+        gardenComboPulse(combo);
+      }
     } else {
       combo=0;
       playTone('error');
@@ -1082,7 +1244,7 @@ function onInput(){
   const s=calc();
   renderPrompt();
   updateStats({...s,seconds:s.ms/1000,combo});
-  if(s.errors===0) $('gameMessage').textContent = combo>=10 ? `✦ ${combo}× flow — stay with the words.` : 'Keep going — the garden is listening.';
+  if(s.errors===0) $('gameMessage').textContent = combo>=5 ? `✦ ${combo}× flow · Bloom ${comboLabel()} ready — stay with the words.` : 'Keep going — the garden is listening.';
   else {
     let mismatch=-1;
     for(let i=0;i<Math.min(s.typed.length,s.text.length);i++){
@@ -1090,7 +1252,7 @@ function onInput(){
     }
     $('gameMessage').textContent = mismatch>=0 && s.text[mismatch]===' '
       ? 'A space was missed. Press Space again and I’ll help place it.'
-      : 'A missed letter is only a breath. Correct it and continue.';
+      : (combo===0 && previousLength>0 ? 'Combo reset — take a breath, correct it, and continue.' : 'A missed letter is only a breath. Correct it and continue.');
   }
   if(typed===current.text) complete(s);
 }
@@ -1112,20 +1274,37 @@ function complete(s){
   if(s.accuracy>=95) state.today.highAccuracy=true;
   state.practice[ref]=(state.practice[ref]||0)+1;
   state.themeCounts[current.theme]=(state.themeCounts[current.theme]||0)+1;
+  const themePool=passages.filter(p=>p.theme===current.theme);
+  const masteredBefore=themePool.filter(p=>state.practice[p.ref]).length;
+  state.themeMastery[current.theme]=masteredBefore;
   updateStreak();
 
+  const isPerfect=s.accuracy>=98 && s.errors===0;
+  if(isPerfect){ state.perfectPassages++; state.perfectBestWpm=Math.max(state.perfectBestWpm,s.wpm); }
   const accuracyBonus = Math.round(s.accuracy/10);
   const comboBonus = Math.min(20,Math.floor(combo/2));
   const cleanBonus = s.errors===0 ? 5 : 0;
-  const bloomGain = Math.max(8,accuracyBonus+comboBonus+cleanBonus);
+  const perfectBonus = isPerfect ? 10 : 0;
+  const flowMultiplier = comboMultiplier(combo);
+  const bloomGain = Math.max(8, Math.round((accuracyBonus + comboBonus + cleanBonus + perfectBonus) * flowMultiplier));
   const oldBloom=state.bloom;
   state.bloom += bloomGain;
-  const levelUp=state.bloom>=100;
-  if(levelUp){
+  let levelUps=0;
+  while(state.bloom>=100){
     state.level++;
-    state.bloom=state.bloom%100;
+    state.bloom-=100;
+    levelUps++;
+  }
+  const levelUp=levelUps>0;
+  const themeComplete=masteredBefore===themePool.length;
+  const priorMilestone=state.themeMilestones[current.theme]||0;
+  let themeMilestone=null;
+  if(themeComplete && priorMilestone<100){ themeMilestone=100; state.themeMilestones[current.theme]=100; }
+  else if(masteredBefore>=Math.ceil(themePool.length*.5) && priorMilestone<50){ themeMilestone=50; state.themeMilestones[current.theme]=50; }
+  const stageInfo=updateGardenStage({celebrate:levelUp});
+  if(levelUp){
     gardenBloom();
-    advanceGarden('Bloom 100%');
+    advanceGarden(`Level ${state.level}`);
   }
 
   state.history.unshift({ref,wpm:s.wpm,accuracy:s.accuracy,combo,date:new Date().toISOString()});
@@ -1134,13 +1313,18 @@ function complete(s){
   renderAll();
   gardenReact(s.accuracy>=95);
 
-  if(s.accuracy>=98) showToast(`✦ Beautifully typed · +${bloomGain} Bloom`);
-  else if(s.accuracy>=95) showToast(`Steady practice · +${bloomGain} Bloom`);
-  else showToast(`Passage complete · +${bloomGain} Bloom`);
-  if(levelUp) playTone('level'); else playTone('complete');
+  if(themeMilestone===100) showToast(`✿ ${current.theme} complete · every verse practiced`);
+  else if(themeMilestone===50) showToast(`✦ ${current.theme} · halfway to theme mastery`);
+  else if(isPerfect) showToast(`✦ PERFECT PASSAGE · +${bloomGain} Bloom · ${flowMultiplier.toFixed(1)}× flow`);
+  else if(s.accuracy>=95) showToast(`Steady practice · +${bloomGain} Bloom · ${flowMultiplier.toFixed(1)}× flow`);
+  else showToast(`Passage complete · +${bloomGain} Bloom · ${flowMultiplier.toFixed(1)}× flow`);
+  if(levelUp){
+    levelUpCelebration(state.level,stageInfo.stage);
+  } else playTone('complete');
+  if(s.accuracy>=95 && (state.totalPassages % 3 === 0 || levelUp)) showGardenMoment();
 
   $('gameMessage').textContent = levelUp
-    ? `Garden level ${state.level}! The next passage is ready.`
+    ? `Garden level ${state.level} · ${stageInfo.stage.name}. ${stageInfo.stage.description}`
     : `${ref} practiced ${state.practice[ref]}× · best ${practiceBest(ref)}. Next passage loading…`;
 
   transitionTimer=setTimeout(()=>{
@@ -1175,6 +1359,59 @@ function showToast(text){
   setTimeout(()=>t.classList.remove('show'),1800);
 }
 
+function renderWhatsNew(){
+  const box=$('whatsNewList');
+  if(!box) return;
+  const items=[
+    ['Phase 1 · Core garden feedback','Combos now trigger gentle garden bursts at key milestones.'],
+    ['Flow multiplier','Sustained combos increase Bloom rewards, up to 2.0×.'],
+    ['Phase 2 · Garden progression','Bloom now drives persistent garden stages, level-up celebrations, and visible growth milestones.'],
+    ['Phase 3 · Mastery','Perfect Passage recognition, accuracy rewards, persistent perfect counts, and theme completion milestones.'],
+    ['Comfort polish','Typing and prayer text stay visually steady; the subtle garden scene fade remains.'],
+    ['Phase 4 · Garden Moments','Occasional butterflies, birds, fireflies, and quiet garden encounters appear during good practice. These are gentle moments, not collectibles or inventory.'],
+    ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 99 passages across 15 themes.']
+  ];
+  box.innerHTML=items.map(([title,body])=>`<article><strong>${escapeHtml(title)}</strong><p>${escapeHtml(body)}</p></article>`).join('');
+}
+
+function showGardenMoment(){
+  const moment=$('gardenMoment');
+  if(!moment || state.reduceMotion) return;
+  const moments=[
+    ['🦋','A butterfly pauses','A little visitor rests among the flowers.'],
+    ['🐦','A quiet visitor','A garden bird settles nearby for a moment.'],
+    ['✦','A soft glimmer','A few fireflies gather as the garden grows quiet.'],
+    ['❀','A flower opens','A small flower has opened in the garden.'],
+    ['🍃','A gentle breeze','The leaves seem to settle into a calmer rhythm.'],
+    ['☀','A warm patch of light','A little sunlight finds its way through the garden.']
+  ];
+  const [icon,title,text]=moments[Math.floor(Math.random()*moments.length)];
+  $('gardenMomentIcon').textContent=icon;
+  $('gardenMomentTitle').textContent=title;
+  $('gardenMomentText').textContent=text;
+  moment.hidden=false;
+  moment.classList.remove('show');
+  void moment.offsetWidth;
+  moment.classList.add('show');
+  state.gardenMoments=(state.gardenMoments||0)+1;
+  save();
+  clearTimeout(window._gardenMomentTimer);
+  window._gardenMomentTimer=setTimeout(()=>{ moment.classList.remove('show'); setTimeout(()=>{moment.hidden=true;},350); },3600);
+}
+
+function renderMastery(){
+  const box=$('themeMastery'); if(!box) return;
+  const rows=themes.map(theme=>{
+    const items=passages.filter(p=>p.theme===theme);
+    const practiced=items.filter(p=>state.practice[p.ref]).length;
+    const pct=Math.round(practiced/items.length*100);
+    const label=practiced===items.length?'Complete':`${practiced} / ${items.length}`;
+    return `<article class=\"mastery-row ${pct===100?'complete':''}\"><div class=\"mastery-row-head\"><span>${escapeHtml(theme)}</span><b>${label}</b></div><div class=\"mastery-track\"><i style=\"width:${pct}%\"></i></div></article>`;
+  }).join('');
+  box.innerHTML=rows;
+  if($('masteryPerfect')) $('masteryPerfect').textContent=`${state.perfectPassages} perfect passage${state.perfectPassages===1?'':'s'}`;
+}
+
 function renderAll(){
   prepToday();
   $('bestWpm').textContent=state.bestWpm;
@@ -1188,14 +1425,17 @@ function renderAll(){
   $('recordAccuracy').textContent=state.bestAccuracy?state.bestAccuracy+'%':'—';
   $('recordCombo').textContent=state.bestCombo;
   $('recordPassages').textContent=state.totalPassages;
+  renderMastery();
   $('goalPassages').textContent=Math.min(5,state.today.passages)+' / 5';
   $('goalAccuracy').textContent=(state.today.highAccuracy?'1':'0')+' / 1';
   $('goalCombo').textContent=Math.min(10,state.today.bestCombo)+' / 10';
   if($('goalPrayers')) $('goalPrayers').textContent=Math.min(1,state.today.prayers||0)+' / 1';
   $('bloomMessage').textContent=state.bloom>=80?'Almost there — let the garden bloom.':state.bloom>=50?'The garden is beginning to stir.':'Accurate typing fills the Bloom meter.';
+  updateGardenStage();
   renderModeUI();
   setGardenBackground(state.gardenIndex);
   renderLibrary();
+  renderWhatsNew();
 }
 function renderLibrary(){
   const box=$('themeLibrary');box.innerHTML='';
@@ -1218,7 +1458,7 @@ function renderLibrary(){
   }
   $('librarySummary').textContent=state.mode==='prayer'
     ? `${prayers.filter(p=>state.prayerPractice[p.id]).length} prayers practiced`
-    : `${practiced} theme${practiced===1?'':'s'} practiced`;
+    : `${passages.length} passages · ${practiced} theme${practiced===1?'':'s'} practiced`;
   $('libraryToggle').querySelector('small').textContent=state.mode==='prayer'?'PRAYER LIBRARY':'SCRIPTURE LIBRARY';
   $('libraryToggle').querySelector('strong').textContent=state.mode==='prayer'?'Your prayers in practice':'Your verses by spiritual theme';
   if($('themeLibrary')) $('themeLibrary').hidden=state.mode==='prayer';
@@ -1317,6 +1557,15 @@ $('libraryToggle').addEventListener('click',()=>{
   $('libraryPanel').hidden=!open;
   $('libraryToggle').setAttribute('aria-expanded',String(open));
   $('libraryToggle').querySelector('b').textContent=open?'−':'＋';
+});
+$('whatsNewToggle')?.addEventListener('click',()=>{
+  const panel=$('whatsNewPanel');
+  const btn=$('whatsNewToggle');
+  if(!panel||!btn)return;
+  const open=panel.hidden;
+  panel.hidden=!open;
+  btn.setAttribute('aria-expanded',String(open));
+  if($('whatsNewChevron')) $('whatsNewChevron').textContent=open?'−':'＋';
 });
 $('settingsBtn').addEventListener('click',()=>{$('settingsPanel').hidden=false});
 $('closeSettings').addEventListener('click',()=>{$('settingsPanel').hidden=true});
