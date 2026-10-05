@@ -452,7 +452,8 @@ const gardenBackgrounds = [
   {id:'morning', name:'Morning Garden', file:'./assets/garden/morning-garden.png'},
   {id:'afternoon', name:'Afternoon Garden', file:'./assets/garden/afternoon-garden.png'},
   {id:'autumn', name:'Autumn Garden', file:'./assets/garden/autumn-garden.png'},
-  {id:'winter', name:'Winter Garden', file:null},
+  {id:'winter', name:'Winter Garden', file:'./assets/garden/winter-garden.png'},
+  {id:'church', name:'Church Garden', file:'./assets/garden/church-garden.png'},
   {id:'summer', name:'Summer Garden', file:null},
   {id:'scottish', name:'Scottish Garden', file:null},
   {id:'mushroom', name:'Mushroom Garden', file:null}
@@ -668,7 +669,12 @@ function setGardenBackground(index, reason=''){
 function advanceGarden(reason){
   const available=gardenBackgrounds.filter(x=>x.file);
   if(available.length<2){ setGardenBackground(state.gardenIndex,reason); return; }
-  const nextAvailable=available[(Math.max(0,state.level-1))%available.length];
+  // Advance to a genuinely different scene. Previously this was derived only
+  // from the player's level, so repeated prayer completions at the same level
+  // could keep selecting the same background and appear not to change.
+  const currentId=gardenBackgrounds[state.gardenIndex]?.id;
+  const currentPos=Math.max(0,available.findIndex(x=>x.id===currentId));
+  const nextAvailable=available[(currentPos+1)%available.length];
   const nextIndex=gardenBackgrounds.findIndex(x=>x.id===nextAvailable.id);
   setGardenBackground(nextIndex,reason);
 }
@@ -768,7 +774,24 @@ function renderModeUI(){
   // Keep the structured-prayer bead tracker synchronized with the mode.
   // This also forces it hidden immediately when returning to Scripture or Prayer.
   renderRosaryProgress();
+  syncPracticePlayStyleUI();
 }
+function syncPracticePlayStyleUI(){
+  // Keep the ordinary Scripture/Prayer typing controls in a single, explicit
+  // state. The meditation card hides the typing row by design, but switching
+  // back must also clear both the CSS state and the textarea's hidden flag.
+  const meditation = state.mode!=='structured' && state.practicePlayStyle==='meditation';
+  const row = document.querySelector('.garden-typing-row');
+  const input = $('typingInput');
+  const label = $('typingLabel');
+  const stats = $('gardenLiveStats');
+  if(row) row.classList.toggle('practice-typing-hidden', meditation);
+  if(input) input.hidden = meditation;
+  if(label) label.hidden = meditation;
+  if(stats) stats.hidden = meditation;
+  document.body.classList.toggle('practice-meditation-active', meditation);
+}
+
 function setPracticePlayStyle(style,{restart=true}={}){
   if(!['typing','meditation'].includes(style))return;
   state.practicePlayStyle=style;
@@ -782,6 +805,12 @@ function setPracticePlayStyle(style,{restart=true}={}){
     else { renderModeUI(); renderPrayerPhrase(); if(style==='meditation') renderPrayerMeditation(); updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:style==='meditation'?100:0}); }
   }else{
     renderModeUI();
+  }
+  syncPracticePlayStyleUI();
+  if(state.mode==='prayer' && style==='typing') {
+    $('typingInput').hidden=false;
+    $('typingInput').disabled=false;
+    $('typingInput').focus({preventScroll:true});
   }
   save();
 }

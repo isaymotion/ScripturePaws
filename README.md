@@ -100,7 +100,7 @@ The app keeps the selected source wording ordered for typing practice and does n
 
 ## Garden progression
 
-Completing a prayer changes the garden scene. In Scripture mode, reaching Bloom 100% also changes the garden. The current build includes Morning Garden and Autumn Garden artwork; additional scenes are intentionally staged one at a time so each background can be quality-checked before being added.
+Completing a prayer changes the garden scene. In Scripture mode, reaching Bloom 100% also changes the garden. The current build includes Starter, Morning, Afternoon, Autumn, and Winter Garden artwork; additional scenes are intentionally staged one at a time so each background can be quality-checked before being added.
 
 ## Structured Prayer — Holy Rosary
 
@@ -177,7 +177,7 @@ EWTN states that the Novena begins on Good Friday, has a different group of soul
 
 This phase deepens garden progression without adding currencies, lives, ads, or leaderboards. Bloom now advances persistent garden levels and five visual growth stages: Seedling, Growing Garden, Flowering Garden, Flourishing Garden, and Garden Sanctuary. Level-up celebrations include a gentle garden reaction and the background advances through the garden images that are actually bundled.
 
-The Afternoon Garden remains a prepared progression slot but is not bundled unless its generated image is available in the build workspace. This build does not fabricate or substitute a missing asset.
+Winter Garden is now bundled as a progression scene with a snow-covered cottage terrace, frozen lake, snowy mountains, and a rabbit companion. Summer, Scottish, and Mushroom remain prepared slots until their artwork is added.
 
 
 ## Release 2 · Pass 3 · Phase 4 — Mastery
@@ -206,3 +206,8 @@ This build expands the Scripture library from 55 to 99 passages. The 44 new Psal
 The app now opens in **Starter Garden** every time. It is intentionally the quiet starting scene: a more open garden with a Virgin Mary statue, one cat, and a vine-covered cottage. Persistent practice progress is retained, but the active garden scene resets to Starter Garden on a fresh app opening so changing gardens feels intentional.
 
 A **Change garden** control selects a random different bundled garden, excluding Starter Garden and the garden currently shown.
+
+
+## Garden backgrounds
+
+Active bundled scenes include Starter Garden, Morning Garden, Afternoon Garden, Autumn Garden, Winter Garden, and Church Garden.

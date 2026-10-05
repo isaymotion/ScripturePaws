@@ -398,7 +398,8 @@ body{font-size:13px}
 .practice-style-picker[hidden]{display:none!important}
 .practice-style-btn{border:0;background:transparent;color:#b8cba5;border-radius:999px;padding:5px 8px;font:inherit;font-size:7px;font-weight:900;letter-spacing:.4px;cursor:pointer;white-space:nowrap}
 .practice-style-btn.active{background:#f3ecd4;color:#18382e;box-shadow:0 2px 5px #06120d44}
-.practice-meditation-active .garden-typing-row{display:none}
+.practice-meditation-active .garden-typing-row,.garden-typing-row.practice-typing-hidden{display:none!important}
+.garden-typing-row:not(.practice-typing-hidden){display:grid}
 .practice-meditation-card{display:grid;gap:8px;margin:8px 0 5px;padding:14px 18px;text-align:center;cursor:pointer;background:linear-gradient(145deg,#173b2df0,#102b21f0);color:#fff8e6;border:1px solid #92aa7c;border-radius:15px;box-shadow:0 5px 0 #10271ccc,0 9px 18px #07150e44;outline:none}
 .practice-meditation-card:hover{border-color:#c7d99d;box-shadow:0 5px 0 #10271ccc,0 10px 20px #07150e55}
 .practice-meditation-card:focus-visible{box-shadow:0 0 0 3px #d2e8aa88,0 5px 0 #10271ccc}
