@@ -1,152 +1,66 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#203b32">
-  <meta name="description" content="Scripture Paws — grow a pixel garden by typing Scripture.">
-  <title>Scripture Paws — First Sprout</title>
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="stylesheet" href="./style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#18382e"><meta name="description" content="Scripture Paws — a peaceful continuous Scripture typing garden.">
+<title>Scripture Paws — Type • Grow • Be Still</title>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <a class="brand" href="./" aria-label="Scripture Paws home">
-        <span class="brand-mark" aria-hidden="true">🐈</span>
-        <span><strong>Scripture Paws</strong><small>type • tend • bloom</small></span>
-      </a>
-      <div class="top-actions">
-        <button id="whatsNewBtn" class="quiet-button" type="button">✦ What’s New?</button>
-        <div class="top-stats">
-          <div><span class="stat-label">BEST WPM</span><strong id="bestWpm">—</strong></div>
-          <div><span class="stat-label">PLANTS</span><strong id="flowerCount">0</strong></div>
-        </div>
-      </div>
-    </header>
+<div class="app-shell">
+<header class="topbar">
+  <a class="brand" href="./"><span class="brand-mark">🐈</span><span><strong>Scripture Paws</strong><small>type • grow • be still</small></span></a>
+  <div class="top-stats"><div><small>BEST WPM</small><strong id="bestWpm">0</strong></div><div><small>TODAY</small><strong id="todayCount">0</strong></div><button id="settingsBtn" class="icon-btn" aria-label="Open settings">⚙</button></div>
+</header>
 
-    <main>
-      <section class="hero-panel">
-        <div class="hero-copy">
-          <p class="eyebrow">YOUR LITTLE SANCTUARY</p>
-          <h1>A garden grows<br><span>one verse at a time.</span></h1>
-          <p class="intro">Take a breath, settle in, and help your garden bloom with every character you type.</p>
-          <div class="companion-pill"><span class="pill-cat-sprite" aria-hidden="true"><img src="./assets/cats/miso.svg" alt=""></span><span><b>Miso</b><small>Your first garden companion</small></span><span class="online-dot"></span></div>
-        </div>
-        <div class="pixel-garden" aria-label="Pixel art garden with a cat and growing plant">
-          <div class="sun"></div><div class="cloud cloud-a"></div><div class="cloud cloud-b"></div>
-          <div class="hill hill-back"></div><div class="hill hill-front"></div>
-          <div class="garden-bed bed-one" aria-hidden="true"><span></span><span></span><span></span></div><div class="garden-bed bed-two" aria-hidden="true"><span></span><span></span><span></span></div><div class="pixel-flower flower-one" aria-hidden="true"><img src="./assets/flowers/cosmos.svg" alt=""></div><div class="pixel-flower flower-two" aria-hidden="true"><img src="./assets/flowers/sunflower.svg" alt=""></div><div class="garden-stone stone-one" aria-hidden="true"></div><div class="garden-stone stone-two" aria-hidden="true"></div>
-          <div class="cat-pixel cat-sprite-wrap" id="gardenCat" aria-hidden="true"><img class="cat-sprite" src="./assets/cats/miso.svg" alt=""></div>
-          <div class="plant-stage" id="plantStage" aria-hidden="true"><span class="plant-stem"></span><span class="leaf leaf-left"></span><span class="leaf leaf-right"></span><span class="plant-bloom">✿</span></div>
-          <div class="soil"></div>
-          <div class="garden-sign">VERSE GARDEN <span>✦</span></div>
-        </div>
-      </section>
-
-      <section class="game-grid">
-        <div class="typing-card panel">
-          <div class="section-heading">
-            <div><p class="eyebrow">TODAY'S PRACTICE</p><h2>Help a seedling grow</h2></div>
-            <span class="seed-badge">✦ FIRST SPROUT</span>
-          </div>
-          <div class="mode-row">
-            <label for="modeSelect">Typing mode</label>
-            <select id="modeSelect"><option value="phrase">Quick phrase</option><option value="verse">Full verse</option></select>
-            <button id="newPromptBtn" class="quiet-button" type="button">↻ New prompt</button>
-          </div>
-          <div class="verse-card">
-            <div class="verse-top"><span id="verseCategory">HOPE & COURAGE · SAMPLE TEXT</span><span id="verseRef">Practice 01</span></div>
-            <p id="verseText" class="verse-text"></p>
-            <p class="licensing-note" id="licensingNote">Starter demo text — replace with licensed NABRE text when permission is obtained.</p>
-          </div>
-          <label class="input-label" for="typingInput">Type the text above</label>
-          <textarea id="typingInput" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Begin typing here…" aria-describedby="typingHelp"></textarea>
-          <p id="typingHelp" class="help-text">Keep going! Mistakes are part of learning; correct them as you go.</p>
-          <div class="progress-line"><div class="progress-track"><div id="growthBar" class="progress-fill"></div></div><strong id="growthPercent">0%</strong></div>
-          <div class="live-stats">
-            <div><span>LIVE WPM</span><strong id="liveWpm">0</strong></div>
-            <div><span>ACCURACY</span><strong id="accuracy">100%</strong></div>
-            <div><span>TIME</span><strong id="elapsed">0:00</strong></div>
-            <div><span>ERRORS</span><strong id="errors">0</strong></div>
-          </div>
-          <div class="action-row"><button id="resetBtn" class="secondary-button" type="button">Start over</button><span id="gameMessage" role="status" aria-live="polite">Your plant is ready when you are.</span></div>
-        </div>
-
-        <aside class="side-column">
-          <section class="panel cat-card">
-            <div class="card-heading"><h2>Garden buddy</h2><span class="paw">🐾</span></div>
-            <div class="cat-scene"><div class="cat-big cat-sprite-wrap" id="buddyCat" aria-hidden="true"><img class="cat-sprite" src="./assets/cats/miso.svg" alt=""></div><div class="cat-speech" id="catSpeech">“I'm here for moral support.”</div></div>
-            <div class="cat-details"><div><strong>Miso</strong><small>Curious tabby · Level 1</small></div><span class="rarity">COMMON</span></div>
-            <p class="small-copy">Miso will keep you company while you practise. Complete more prompts to meet new garden cats.</p>
-            <div class="cat-collection-heading"><b>Cat companions</b><span id="catUnlockCount">1 / 4 found</span></div>
-            <div id="catCollection" class="cat-collection" aria-label="Collectible cat companions"></div>
-          </section>
-          <section class="panel collection-card">
-            <div class="card-heading"><h2>Your collection</h2><span class="count-chip" id="collectionCount">0 botanical finds</span></div>
-            <div class="collection-tabs" role="group" aria-label="Botanical collection view"><button type="button" class="collection-tab active" data-collection-view="recent" aria-pressed="true">Recent finds</button><button type="button" class="collection-tab" data-collection-view="varieties" aria-pressed="false">Botanical collection</button></div>
-            <div id="flowerCollection" class="flower-collection" aria-live="polite"><div class="empty-flower">✿</div><div class="empty-copy"><b>Your first bloom awaits.</b><small>Finish a prompt to discover a new plant here.</small></div></div>
-            <div class="collection-footer"><span>Garden journal</span><span id="versesCompleted">0 verses completed</span></div>
-          </section>
-        </aside>
-      </section>
-
-      <section class="panel builder-panel" id="gardenBuilder">
-        <div class="card-heading"><div><p class="eyebrow">YOUR LITTLE WORLD</p><h2>Isometric garden builder</h2><p class="small-copy">Discover a surprise after each passage, then arrange your finds. Each garden can hold up to 50 elements.</p></div><span class="count-chip" id="gardenElementCount">0 / 50 elements</span></div>
-        <div class="builder-toolbar"><label for="gardenNameInput">Garden name</label><input id="gardenNameInput" maxlength="32" value="My Scripture Garden"/><button id="saveGardenBtn" class="primary-button" type="button">Save garden</button><button id="newGardenBtn" class="secondary-button" type="button">＋ New garden</button></div>
-        <div id="isometricGarden" class="isometric-garden" aria-label="Isometric garden grid"><div class="iso-ground"></div><div class="iso-empty-note" id="isoEmptyNote">Your garden is waiting to grow. Finish a Scripture passage to discover your first element.</div></div>
-        <div class="builder-bottom"><div><h3>Discovered elements</h3><p class="small-copy">Tap an element to place it randomly. Large trees reserve more space, so little flowers and creatures stay visible.</p></div><span class="count-chip" id="inventoryCount">0 discoveries</span></div>
-        <div id="gardenInventory" class="garden-inventory"></div>
-        <div class="gallery-heading"><h3>Saved garden gallery</h3><span class="small-copy">Saved on this device</span></div><div id="gardenGallery" class="garden-gallery"></div>
-        <p id="builderMessage" class="help-text" role="status" aria-live="polite">Complete a passage to earn a random garden discovery.</p>
-      </section>
-
-      <section class="lower-grid">
-        <section class="panel score-card">
-          <div class="card-heading"><div><p class="eyebrow">YOUR PROGRESS</p><h2>Personal bests</h2></div><span class="trophy">🏆</span></div>
-          <div class="record-grid">
-            <div><small>BEST WPM</small><strong id="recordWpm">0</strong></div>
-            <div><small>BEST ACCURACY</small><strong id="recordAccuracy">—</strong></div>
-            <div><small>VERSES TYPED</small><strong id="recordVerses">0</strong></div>
-          </div>
-          <h3 class="table-title">Recent blooms</h3>
-          <div class="table-wrap"><table><thead><tr><th>Prompt</th><th>WPM</th><th>Accuracy</th></tr></thead><tbody id="scoreRows"><tr><td colspan="3" class="empty-row">Your completed rounds will appear here.</td></tr></tbody></table></div>
-        </section>
-        <section class="panel settings-card">
-          <div class="card-heading"><h2>Garden settings</h2><span>⚙</span></div>
-          <label class="setting-row"><span><b>Sound effects</b><small>Gentle sounds on milestones</small></span><input id="soundToggle" type="checkbox"></label>
-          <label class="setting-row"><span><b>Reduce animations</b><small>Keep movement subtle</small></span><input id="motionToggle" type="checkbox"></label>
-          <button id="exportBtn" class="secondary-button full-button" type="button">Export my garden data</button>
-          <button id="clearBtn" class="danger-button full-button" type="button">Reset all progress</button>
-          <p class="small-copy">Progress is saved in this browser on this device. Global scores and cross-device sync are planned for a later release.</p>
-        </section>
-      </section>
-    </main>
-    <section id="whatsNewPanel" class="panel whats-new-panel" hidden aria-labelledby="whatsNewTitle">
-    <div class="card-heading"><div><p class="eyebrow">THE GARDEN JOURNAL</p><h2 id="whatsNewTitle">What’s New?</h2></div><button id="closeWhatsNewBtn" class="quiet-button" type="button" aria-label="Close What's New">✕ Close</button></div>
-    <p class="small-copy">A changelog of features and improvements in Scripture Paws.</p>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 7 UPDATE</span><h3>A wider botanical collection</h3><ul><li>Expanded the collection beyond flowers with oak, cherry, and willow trees plus ivy, flowering, and grape vines.</li><li>Typing rewards now rotate through all 14 botanical varieties, while older flower records remain available.</li><li>Added distinct local pixel-art tree and vine sprites and included them in offline caching.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 6</span><h3>Garden scene &amp; flower journal</h3><ul><li>Added flower-bed details, stepping stones, and more layered garden scenery.</li><li>Introduced eight distinct local flower sprites for the garden and collection.</li><li>Added Recent Blooms and Flower Varieties views, including per-variety collection counts.</li><li>Improved flower tile spacing, labels, and responsive layout; all artwork remains local for offline use.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 5 UPDATE</span><h3>Larger, more detailed garden cats</h3><ul><li>Redrew all four companions on a larger 96px pixel-art canvas with extra coat markings, facial detail, paws, and accessories.</li><li>Made each cat more visually distinct: Miso's ginger tabby stripes and flower scarf, Luna's charcoal coat and moon charm, Clover's calico patches and leafy collar, and Pip's cream coat and blue flower collar.</li><li>Increased sprite display sizes in the garden, buddy card, companion pill, and collection tiles while keeping responsive sizing.</li><li>Bumped the offline cache version so the refreshed artwork is picked up after deployment.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 5</span><h3>Garden cat sprite collection</h3><ul><li>Added four original transparent pixel-art cat sprites with distinct colors and accessories.</li><li>Added gentle idle motion, blinking, typing-progress reactions, and a completion celebration.</li><li>Updated the garden companion, buddy card, and collection tiles to use the new art.</li><li>Kept sprites local for offline use and honored reduced-motion preferences.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 4</span><h3>Living garden &amp; cat companions</h3><ul><li>Added animated seedling growth, leaves, and a glowing bloom at completion.</li><li>Introduced four collectible garden cats with unlock milestones.</li><li>Expanded the flower reward variety and added a companion collection panel.</li><li>Improved motion preference support for the growing garden effects.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 2</span><h3>Douay-Rheims Scripture &amp; garden polish</h3><ul><li>Added a starter selection of Douay-Rheims passages in quick-phrase and longer-practice modes.</li><li>Added verse references and edition labels.</li><li>Updated documentation about public-domain text and source attribution.</li><li>Kept personal progress, flower collection, WPM and accuracy tracking, and offline app-shell caching.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 1</span><h3>First Sprout</h3><ul><li>Introduced the typing practice engine with live WPM, accuracy, elapsed time, errors, and plant growth.</li><li>Added Miso, the first cat companion, and a flower collection.</li><li>Added local saving, personal bests, recent results, and garden-data export.</li><li>Created the responsive GitHub Pages structure and initial offline service worker.</li></ul></div>
-    <div class="release-entry"><span class="release-tag">OCT 2026 · RELEASE 1, PASS 7</span><h3>Isometric garden worlds</h3><ul><li>Replaced milestone-based visitors with random rarity-based garden discoveries.</li><li>Build and save multiple gardens with up to 50 elements each.</li><li>Added isometric placement with footprint reservations and depth sorting to keep small creatures and flowers visible around trees.</li><li>Added a saved-garden gallery and local garden persistence.</li></ul></div>
-  </section>
-  <footer class="site-footer">
-    <div><span>Scripture Paws · Release 1: First Sprout</span><span>Made for peaceful practice ✦</span></div>
-    <p>This game was created by Isabella Navarro, MD. Latest version October 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
-  </footer>
+<main>
+<section class="garden-hero" id="gardenHero" aria-label="Scripture Paws garden">
+  <div class="garden-image" aria-hidden="true"></div>
+  <div class="garden-vignette" aria-hidden="true"></div>
+  <div class="garden-hud">
+    <div class="garden-title"><span>YOUR QUIET GARDEN</span><strong id="gardenMood">Morning Garden</strong></div>
+    <div class="hud-pills"><span>LEVEL <b id="level">1</b></span><span>COMBO <b id="combo">0</b></span><span>BLOOM <b id="bloomPercent">0%</b></span></div>
   </div>
-  <div id="completionModal" class="modal-backdrop" hidden>
-    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
-      <div class="modal-sparkle">✿</div><p class="eyebrow">A NEW BOTANICAL FIND!</p><h2 id="completeTitle">You grew something new.</h2>
-      <p id="completionText">Your practice helped the garden grow.</p>
-      <div class="result-grid"><div><small>WPM</small><strong id="finalWpm">0</strong></div><div><small>ACCURACY</small><strong id="finalAccuracy">100%</strong></div><div><small>TIME</small><strong id="finalTime">0:00</strong></div></div>
-      <button id="continueBtn" class="primary-button full-button" type="button">Back to the garden 🌱</button>
-    </section>
-  </div>
-  <script src="./app.js"></script>
-</body>
-</html>
+  <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
+</section>
+
+<section class="typing-wrap">
+  <div class="practice-head"><div><p class="eyebrow">SCRIPTURE PRACTICE</p><h1>Stay with the words.</h1></div><button id="newPromptBtn" class="text-btn" type="button">↻ New passage</button></div>
+  <div class="theme-row"><label for="themeSelect">Theme</label><select id="themeSelect"><option value="all">All themes</option><option>Peace & Stillness</option><option>Comfort & Grief</option><option>Hope</option><option>Trust & Faith</option><option>Strength & Perseverance</option><option>Guidance & Wisdom</option><option>Love & Compassion</option><option>Prayer & Gratitude</option><option>Anxiety & Worry</option><option>Forgiveness & Mercy</option><option>Courage</option></select></div>
+  <article class="verse-card"><div class="verse-meta"><span id="verseTheme">PEACE & STILLNESS</span><span id="verseRef">John 14:27</span></div><p id="verseText" class="verse-text"></p><div class="practice-count" id="practiceCount">Practiced 0 times</div></article>
+  <label class="sr-only" for="typingInput">Type the Scripture passage</label>
+  <textarea id="typingInput" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Begin typing…"></textarea>
+  <div class="typing-progress"><div class="track"><div id="progressFill"></div></div><span id="progressLabel">0%</span></div>
+  <div class="live-stats"><div><small>WPM</small><strong id="liveWpm">0</strong></div><div><small>ACCURACY</small><strong id="accuracy">100%</strong></div><div><small>COMBO</small><strong id="liveCombo">0</strong></div><div><small>TIME</small><strong id="elapsed">0:00</strong></div><div><small>ERRORS</small><strong id="errors">0</strong></div></div>
+  <p id="gameMessage" class="game-message" role="status" aria-live="polite">Take a breath, then begin.</p>
+</section>
+
+<section class="bloom-card">
+  <div class="bloom-copy"><div><p class="eyebrow">GARDEN BLOOM</p><h2 id="bloomTitle">A quiet garden grows with you.</h2></div><strong id="bloomBig">0%</strong></div>
+  <div class="bloom-track"><div id="bloomBar"></div></div><p id="bloomMessage">Type accurately to fill the Bloom meter.</p>
+</section>
+
+<section class="goals-grid">
+  <article class="info-card"><p class="eyebrow">TODAY'S GOALS</p><h2>Gentle practice</h2><div class="goal"><span>Complete 5 passages</span><b id="goalPassages">0 / 5</b></div><div class="goal"><span>Reach 95% accuracy</span><b id="goalAccuracy">0 / 1</b></div><div class="goal"><span>Reach a 10× combo</span><b id="goalCombo">0 / 10</b></div></article>
+  <article class="info-card"><p class="eyebrow">PERSONAL RECORDS</p><h2>Your journey</h2><div class="records"><div><small>BEST WPM</small><strong id="recordWpm">0</strong></div><div><small>BEST ACCURACY</small><strong id="recordAccuracy">—</strong></div><div><small>BEST COMBO</small><strong id="recordCombo">0</strong></div><div><small>PASSAGES</small><strong id="recordPassages">0</strong></div></div></article>
+</section>
+
+<section class="library-card">
+  <button id="libraryToggle" class="library-toggle" type="button" aria-expanded="false"><span><small>SCRIPTURE LIBRARY</small><strong>Your verses by spiritual theme</strong></span><span id="librarySummary">0 themes practiced</span><b>＋</b></button>
+  <div id="libraryPanel" class="library-panel" hidden><div id="themeLibrary" class="theme-library"></div></div>
+</section>
+
+<section class="settings-panel" id="settingsPanel" hidden>
+ <div class="settings-head"><div><p class="eyebrow">SETTINGS</p><h2>Make the garden yours</h2></div><button id="closeSettings" class="icon-btn">×</button></div>
+ <label class="setting"><span><b>Sound effects</b><small>Gentle milestone sounds</small></span><input id="soundToggle" type="checkbox"></label>
+ <label class="setting"><span><b>Reduce motion</b><small>Keep garden movement subtle</small></span><input id="motionToggle" type="checkbox"></label>
+ <div class="setting-actions"><button id="exportBtn" class="secondary" type="button">Export progress</button><button id="clearBtn" class="danger" type="button">Reset progress</button></div>
+ <p class="small">Everything is stored locally in this browser. No account or leaderboard is required.</p>
+</section>
+
+<section class="about"><b>Scripture Paws</b><span>Offline-first Scripture typing practice</span><span>This game was created by Isabella Navarro, MD. Latest version October 2026. isaymotion@gmail.com</span></section>
+</main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="./app.js"></script>
+</body></html>

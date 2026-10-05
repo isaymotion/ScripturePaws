@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" shape-rendering="crispEdges"><rect width="64" height="80" fill="none"/><ellipse cx="32" cy="72" rx="22" ry="4" fill="#233c2c" opacity=".22"/><path d="M27 71V38h10v33z" fill="#80502f"/><path d="M30 44h4v22h-4z" fill="#ad754a"/><path d="M15 45H8V31h7V20h9V10h19v7h8v10h6v13h-7v8H15z" fill="#bd8ab0"/><path d="M19 31H12v-9h10V15h11v4h11v-4h7v11h5v9h-8v9H20z" fill="#e7a9ca"/><path d="M18 22h7v5h-7zM37 20h7v5h-7zM28 31h7v5h-7zM43 34h5v5h-5z" fill="#ffd8e8"/><path d="M22 15h5v5h-5zM44 26h5v5h-5zM15 36h5v5h-5z" fill="#f6c2da"/><path d="M27 71h-7v3h14v-3zM37 71h8v3H34v-3z" fill="#70462b"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 128" shape-rendering="crispEdges" role="img" aria-label="Cherry blossom tree">
+<ellipse cx="56" cy="119" rx="31" ry="5" fill="#294633" opacity=".5"/>
+<!-- trunk outline and roots --> <path d="M45 69h22v35h10v6H35v-6h10z" fill="#4e3628"/><path d="M49 70h14v34h7v3H42v-3h7z" fill="#8b5a3b"/><path d="M53 72h6v29h6v4h-12z" fill="#b67a4d"/><path d="M46 91h-8v5h8zM66 92h10v5H66z" fill="#70472f"/>
+<!-- canopy outline --> <path d="M35 12h23v4h12v6h9v8h8v10h7v18h-7v10h-9v8H66v7H46v-5H33v-7H22v-8h-8V59H8V41h7V30h8v-8h12z" fill="#5a3b42"/>
+<!-- canopy base --> <path d="M37 16h20v5h11v6h9v8h7v10h6v13h-7v9h-9v8H62v6H47v-5H34v-7H24v-8h-8V58h-5V43h6V32h8v-8h12z" fill="#c77fa5"/>
+<!-- blossom clusters --> <path d="M27 25h11v4h5v8h-5v6H26v-4h-6v-7h7zM55 20h12v5h6v8h-5v6H55v-5h-6v-7h6zM72 39h13v5h5v9h-6v6H72v-4h-7v-8h7zM31 50h13v5h6v8h-6v7H31v-4h-7v-8h7zM51 64h13v5h5v8h-6v6H51v-4h-6v-8h6z" fill="#e28fb6"/>
+<!-- blossom highlights --> <path d="M28 29h7v4h4v4h-6v4h-6v-4h-4v-5h5zM57 24h7v4h4v5h-5v4h-6v-4h-4v-5h4zM74 43h8v4h3v5h-5v4h-7v-4h-4v-5h5zM33 55h7v4h4v5h-5v4h-7v-4h-4v-5h5zM53 69h7v4h4v5h-5v4h-7v-4h-4v-5h5z" fill="#f5b5d0"/>
+<!-- flower centers --> <path d="M31 32h5v5h-5zM59 28h5v5h-5zM76 47h5v5h-5zM35 58h5v5h-5zM55 73h5v5h-5z" fill="#f4c55f"/>
+<!-- scattered leaf/branch pixels --> <path d="M18 39h6v4h-6zM84 60h7v4h-7zM42 17h5v4h-5zM65 84h5v4h-5z" fill="#7b9f65"/>
+</svg>

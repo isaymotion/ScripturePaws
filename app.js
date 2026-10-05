@@ -1,283 +1,420 @@
 (() => {
-  "use strict";
-  const $ = (id) => document.getElementById(id);
-  const STORE_KEY = "scripture-paws-release1-v1";
-  // Douay-Rheims (Challoner revision) passages. The historical translation is public domain;
-  // see README.md for edition/source notes.
-  const prompts = {
-    phrase: [
-      {ref:"Psalm 22:1 (23:1)", category:"PSALM · DOUAY-RHEIMS", text:"The Lord ruleth me: and I shall want nothing."},
-      {ref:"Philippians 4:13", category:"COURAGE · DOUAY-RHEIMS", text:"I can do all things in him who strengtheneth me."},
-      {ref:"John 14:27", category:"PEACE · DOUAY-RHEIMS", text:"Peace I leave with you, my peace I give unto you."},
-      {ref:"1 John 4:19", category:"LOVE · DOUAY-RHEIMS", text:"Let us therefore love God, because God first hath loved us."},
-      {ref:"Psalm 118:105 (119:105)", category:"WISDOM · DOUAY-RHEIMS", text:"Thy word is a lamp to my feet, and a light to my paths."}
-    ],
-    verse: [
-      {ref:"Matthew 11:28", category:"REST · DOUAY-RHEIMS", text:"Come to me, all you that labour, and are burdened, and I will refresh you."},
-      {ref:"Philippians 4:6", category:"TRUST · DOUAY-RHEIMS", text:"Be nothing solicitous; but in every thing, by prayer and supplication, with thanksgiving, let your petitions be made known to God."},
-      {ref:"1 Corinthians 13:4", category:"LOVE · DOUAY-RHEIMS", text:"Charity is patient, is kind: charity envieth not, dealeth not perversely; is not puffed up;"}
-    ]
-  };
-  const botanicals = [
-    {name:"Cosmos",file:"cosmos",group:"Flower",folder:"flowers"},{name:"Daisy",file:"daisy",group:"Flower",folder:"flowers"},
-    {name:"Tulip",file:"tulip",group:"Flower",folder:"flowers"},{name:"Rose",file:"rose",group:"Flower",folder:"flowers"},
-    {name:"Sunflower",file:"sunflower",group:"Flower",folder:"flowers"},{name:"Lavender",file:"lavender",group:"Flower",folder:"flowers"},
-    {name:"Lily",file:"lily",group:"Flower",folder:"flowers"},{name:"Marigold",file:"marigold",group:"Flower",folder:"flowers"},
-    {name:"Bluebells",file:"bluebells",group:"Flower",folder:"flowers"},{name:"Poppy",file:"poppy",group:"Flower",folder:"flowers"},{name:"Stargazer Lily",file:"stargazer-lily",group:"Flower",folder:"flowers"},{name:"Petunia",file:"petunia",group:"Flower",folder:"flowers"},{name:"Dandelion",file:"dandelion",group:"Flower",folder:"flowers"},
-    {name:"Oak Tree",file:"oak-tree",group:"Tree",folder:"botanicals"},{name:"Cherry Tree",file:"cherry-tree",group:"Tree",folder:"botanicals"},
-    {name:"Willow Tree",file:"willow-tree",group:"Tree",folder:"botanicals"},{name:"Apple Tree",file:"apple-tree",group:"Fruit Tree",folder:"botanicals"},{name:"Orange Tree",file:"orange-tree",group:"Fruit Tree",folder:"botanicals"},{name:"Pear Tree",file:"pear-tree",group:"Fruit Tree",folder:"botanicals"},{name:"Peach Tree",file:"peach-tree",group:"Fruit Tree",folder:"botanicals"},{name:"Ivy Vine",file:"ivy-vine",group:"Vine",folder:"botanicals"},
-    {name:"Flowering Vine",file:"flowering-vine",group:"Vine",folder:"botanicals"},{name:"Grapevine",file:"grapevine",group:"Vine",folder:"botanicals"}
-  ];
-  const flowers = botanicals.map(item=>item.file);
-  const flowerNames = botanicals.map(item=>item.name);
-  let collectionView = "recent";
-  function flowerAsset(name){const item=botanicals.find(entry=>entry.name===name);return item?"./assets/"+item.folder+"/"+item.file+".svg":"./assets/flowers/cosmos.svg";}
-  const cats = [
-    {name:"Miso",kind:"Curious tabby",sprite:"miso",unlock:0,quote:"I'm here for moral support."},
-    {name:"Luna",kind:"Moonlit tuxedo",sprite:"luna",unlock:3,quote:"A little moonlight for your garden."},
-    {name:"Clover",kind:"Garden calico",sprite:"clover",unlock:6,quote:"Let's help another flower grow."},
-    {name:"Pip",kind:"Tiny ginger kitten",sprite:"pip",unlock:10,quote:"Tiny paws, big encouragement!"}
-  ];
-  let state = loadState();
-  let current = null, startTime = null, timer = null, completed = false, errorsCount = 0, promptIndex = 0;
+'use strict';
 
-  function defaultState(){ return {bestWpm:0,bestAccuracy:0,versesCompleted:0,flowers:[],scores:[],sound:false,reduceMotion:false,unlockedCats:["Miso"],inventory:[],gardens:[],activeGardenId:null}; }
-  function loadState(){
-    try { const saved = JSON.parse(localStorage.getItem(STORE_KEY)); const loaded=saved && typeof saved==="object" ? {...defaultState(),...saved} : defaultState(); if(!Array.isArray(loaded.inventory))loaded.inventory=[]; if(!Array.isArray(loaded.gardens))loaded.gardens=[]; return loaded; }
-    catch (_) { return defaultState(); }
+const $ = id => document.getElementById(id);
+const STORE = 'scripture-paws-v2';
+const TRANSITION_MS = 850;
+
+const passages = [
+  {ref:'John 14:27',theme:'Peace & Stillness',text:'Peace I leave with you, my peace I give unto you.'},
+  {ref:'Matthew 11:28',theme:'Comfort & Grief',text:'Come to me, all you that labour, and are burdened, and I will refresh you.'},
+  {ref:'Romans 15:13',theme:'Hope',text:'Now the God of hope fill you with all joy and peace in believing.'},
+  {ref:'Philippians 4:13',theme:'Strength & Perseverance',text:'I can do all things in him who strengtheneth me.'},
+  {ref:'Proverbs 3:5',theme:'Trust & Faith',text:'Have confidence in the Lord with all thy heart, and lean not upon thy own prudence.'},
+  {ref:'Psalm 118:105 (119:105)',theme:'Guidance & Wisdom',text:'Thy word is a lamp to my feet, and a light to my paths.'},
+  {ref:'1 John 4:19',theme:'Love & Compassion',text:'Let us therefore love God, because God first hath loved us.'},
+  {ref:'Philippians 4:6',theme:'Prayer & Gratitude',text:'Be nothing solicitous; but in every thing, by prayer and supplication, with thanksgiving, let your petitions be made known to God.'},
+  {ref:'Matthew 6:34',theme:'Anxiety & Worry',text:'Be not therefore solicitous for to morrow; for the morrow will be solicitous for itself.'},
+  {ref:'Luke 6:36',theme:'Forgiveness & Mercy',text:'Be ye therefore merciful, as your Father also is merciful.'},
+  {ref:'Joshua 1:9',theme:'Courage',text:'Take courage, and be valiant. Fear not, nor be ye dismayed.'}
+];
+const themes = [...new Set(passages.map(p => p.theme))];
+const defaultState = {
+  bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
+  bloom:0,level:1,streak:0,lastPracticeDate:'',
+  today:{date:'',passages:0,highAccuracy:false,bestCombo:0},
+  sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[]
+};
+
+let state = load();
+let current = null;
+let startedAt = 0;
+let timer = null;
+let finished = false;
+let combo = 0;
+let transitionTimer = null;
+let audioContext = null;
+
+function load(){
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE) || '{}');
+    return mergeState(saved);
+  } catch { return mergeState({}); }
+}
+function mergeState(saved){
+  return {
+    ...defaultState,
+    ...saved,
+    today:{...defaultState.today,...(saved.today || {})},
+    practice:{...(saved.practice || {})},
+    themeCounts:{...(saved.themeCounts || {})},
+    history:Array.isArray(saved.history) ? saved.history : []
+  };
+}
+function save(){localStorage.setItem(STORE, JSON.stringify(state));}
+function todayKey(date = new Date()){
+  const y = date.getFullYear(), m = String(date.getMonth()+1).padStart(2,'0'), d = String(date.getDate()).padStart(2,'0');
+  return `${y}-${m}-${d}`;
+}
+function yesterdayKey(){
+  const d = new Date(); d.setDate(d.getDate()-1); return todayKey(d);
+}
+function prepToday(){
+  const d = todayKey();
+  if(state.today.date !== d) state.today = {date:d,passages:0,highAccuracy:false,bestCombo:0};
+}
+function updateStreak(){
+  const today = todayKey();
+  if(state.lastPracticeDate === today) return;
+  state.streak = state.lastPracticeDate === yesterdayKey() ? state.streak + 1 : 1;
+  state.lastPracticeDate = today;
+}
+
+function choosePrompt({focus=false} = {}){
+  prepToday();
+  clearTimeout(transitionTimer);
+  const wanted = $('themeSelect').value;
+  let pool = wanted === 'all' ? passages : passages.filter(p => p.theme === wanted);
+  if(!pool.length) pool = passages;
+  const recent = current?.ref;
+  let choices = pool.filter(p => p.ref !== recent);
+  if(!choices.length) choices = pool;
+  current = choices[Math.floor(Math.random()*choices.length)];
+  finished = false;
+  combo = 0;
+  startedAt = 0;
+  stopTimer();
+  $('typingInput').value = '';
+  $('typingInput').disabled = false;
+  renderPrompt();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  updateVerseMeta();
+  $('gameMessage').textContent = focus ? 'Next passage — settle in and begin.' : 'Take a breath, then begin.';
+  $('typingInput').focus({preventScroll:true});
+}
+function selectPassage(p){
+  clearTimeout(transitionTimer);
+  current = p;
+  finished = false;
+  combo = 0;
+  startedAt = 0;
+  stopTimer();
+  $('themeSelect').value = p.theme;
+  $('typingInput').value = '';
+  $('typingInput').disabled = false;
+  updateVerseMeta(); renderPrompt();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  $('gameMessage').textContent = 'Practice this verse again — one careful line at a time.';
+  $('typingInput').focus({preventScroll:true});
+}
+function updateVerseMeta(){
+  const count = state.practice[current.ref] || 0;
+  $('verseTheme').textContent = current.theme.toUpperCase();
+  $('verseRef').textContent = current.ref;
+  $('practiceCount').textContent = count
+    ? `Practiced ${count} time${count===1?'':'s'} · ${practiceBest(current.ref)}`
+    : 'First practice — make this one yours.';
+}
+function practiceBest(ref){
+  const rows = state.history.filter(x => x.ref === ref);
+  if(!rows.length) return 'building your best';
+  const bestWpm = Math.max(...rows.map(x=>x.wpm||0));
+  const bestAcc = Math.max(...rows.map(x=>x.accuracy||0));
+  return `best ${bestWpm} WPM · ${bestAcc}% accuracy`;
+}
+function renderPrompt(){
+  if(!current) return;
+  const typed = $('typingInput').value;
+  const text = current.text;
+  let html = '';
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    let cls='';
+    if(i < typed.length) cls = typed[i] === c ? 'correct' : 'wrong';
+    else if(i === typed.length) cls='cursor';
+    html += `<span class="${cls}">${escapeHtml(c)}</span>`;
   }
-  function saveState(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (_) { setMessage("Progress could not be saved in this browser."); } }
-  function setMessage(msg){ $("gameMessage").textContent = msg; }
-  function activePrompts(){ return prompts[$("modeSelect").value]; }
-  function choosePrompt(){
-    const list=activePrompts();
-    current=list[promptIndex % list.length]; promptIndex++;
-    startTime=null; completed=false; errorsCount=0;
-    if(timer){clearInterval(timer);timer=null;}
-    $("typingInput").disabled=false; $("typingInput").value="";
-    $("verseRef").textContent=current.ref; $("verseCategory").textContent=current.category;
-    $("licensingNote").textContent="Douay-Rheims (Challoner revision) · public-domain Scripture text.";
-    renderPrompt(0); updateStats(0,100,0,0); setPlantGrowth(0); setMessage("Your plant is ready when you are.");
-    $("typingInput").focus({preventScroll:true});
+  $('verseText').innerHTML = html;
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function calc(){
+  const typed = $('typingInput').value;
+  const text = current.text;
+  let correct=0, errors=0;
+  for(let i=0;i<typed.length;i++){
+    if(i<text.length && typed[i]===text[i]) correct++; else errors++;
   }
-  function renderPrompt(position){
-    const text=current.text, typed=$("typingInput").value;
-    $("verseText").innerHTML="";
-    for(let i=0;i<text.length;i++){
-      const span=document.createElement("span"); span.textContent=text[i];
-      if(i<typed.length) span.className=typed[i]===text[i]?"correct":"incorrect";
-      else if(i===typed.length) span.className="current";
-      $("verseText").appendChild(span);
+  const ms = startedAt ? Math.max(1,Date.now()-startedAt) : 0;
+  const wpm = ms ? Math.round((correct/5)/(ms/60000)) : 0;
+  const accuracy = typed.length ? Math.round(correct/typed.length*100) : 100;
+  const progress = Math.min(100, Math.round(correct/text.length*100));
+  return {typed,text,correct,errors,ms,wpm,accuracy,progress};
+}
+function updateStats(s){
+  $('liveWpm').textContent=s.wpm;
+  $('accuracy').textContent=s.accuracy+'%';
+  $('elapsed').textContent=time(s.seconds ?? s.ms/1000);
+  $('errors').textContent=s.errors;
+  $('liveCombo').textContent=s.combo;
+  $('progressFill').style.width=s.progress+'%';
+  $('progressLabel').textContent=s.progress+'%';
+}
+function time(s){s=Math.floor(s||0);return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
+function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
+function startTimer(){
+  if(timer) return;
+  timer=setInterval(()=>{
+    if(finished || !startedAt) return;
+    const s=calc();
+    updateStats({...s,seconds:s.ms/1000,combo});
+  },250);
+}
+
+function onInput(){
+  if(finished || !current) return;
+  const input=$('typingInput');
+  // Never let pasted/held input run beyond the target passage.
+  if(input.value.length > current.text.length) input.value=input.value.slice(0,current.text.length);
+  if(!startedAt && input.value.length){startedAt=Date.now();startTimer();}
+
+  const typed=input.value;
+  const previousLength=Math.max(0,typed.length-1);
+  const newChar=typed[typed.length-1];
+  const expected=current.text[previousLength];
+  if(newChar !== undefined){
+    if(newChar === expected){
+      combo++;
+      if(combo===5 || combo===10 || combo===20 || combo%25===0) playTone('combo');
+    } else {
+      combo=0;
+      playTone('error');
     }
   }
-  function stats(){
-    const typed=$("typingInput").value, target=current.text;
-    let correct=0, errors=0;
-    for(let i=0;i<typed.length;i++){ if(i<target.length && typed[i]===target[i]) correct++; else errors++; }
-    const elapsedMs=startTime?Math.max(1,Date.now()-startTime):0;
-    const mins=elapsedMs/60000;
-    const wpm=mins>0?Math.round((correct/5)/mins):0;
-    const accuracy=typed.length?Math.round(correct/typed.length*100):100;
-    const progress=Math.min(100,Math.round(correct/target.length*100));
-    return {typed,target,correct,errors,elapsedMs,wpm,accuracy,progress};
+  const s=calc();
+  renderPrompt();
+  updateStats({...s,seconds:s.ms/1000,combo});
+  if(s.errors===0) $('gameMessage').textContent = combo>=10 ? `✦ ${combo}× flow — stay with the words.` : 'Keep going — the garden is listening.';
+  else {
+    let mismatch=-1;
+    for(let i=0;i<Math.min(s.typed.length,s.text.length);i++){
+      if(s.typed[i]!==s.text[i]){mismatch=i;break;}
+    }
+    $('gameMessage').textContent = mismatch>=0 && s.text[mismatch]===' '
+      ? 'A space was missed. Press Space again and I’ll help place it.'
+      : 'A missed letter is only a breath. Correct it and continue.';
   }
-  function updateStats(wpm,accuracy,elapsed,errors){
-    $("liveWpm").textContent=wpm; $("accuracy").textContent=accuracy+"%";
-    $("elapsed").textContent=formatTime(elapsed/1000); $("errors").textContent=errors;
-  }
-  function formatTime(seconds){ seconds=Math.floor(seconds||0); return Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0"); }
-  function setPlantGrowth(percent){
-    $("growthBar").style.width=percent+"%"; $("growthPercent").textContent=percent+"%";
-    const stage=$("plantStage");
-    stage.style.setProperty("--stem-height",(8+percent*0.85)+"px");
-    stage.style.setProperty("--leaf-bottom",(18+percent*.45)+"px");
-    stage.style.setProperty("--leaf-opacity",String(Math.min(1,percent/22)));
-    stage.style.setProperty("--bloom-size",percent>=100?"34px":percent>=75?"18px":"0px");
-    stage.style.setProperty("--bloom-bottom",(35+percent*.5)+"px");
-    stage.dataset.stage = percent>=100 ? "bloom" : percent>=65 ? "bud" : percent>=25 ? "sprout" : "seed";
-    if(percent>=100) stage.classList.add("blooming","toast"); else stage.classList.remove("blooming","toast");
-  }
-  function onInput(){
-    if(completed || !current) return;
-    const input=$("typingInput"), typed=input.value;
-    if(typed.length && startTime===null){ startTime=Date.now(); timer=setInterval(tick,250); }
-    // Don't allow text beyond the target; a completed exact match should be unambiguous.
-    if(typed.length>current.text.length){input.value=typed.slice(0,current.text.length);}
-    const s=stats(); errorsCount=s.errors;
-    if(s.errors>0) setCatReaction("cat-react-oops");
-    else if(s.progress>0 && s.progress<100) setCatReaction("cat-react-typing");
-    renderPrompt(input.value.length); updateStats(s.wpm,s.accuracy,s.elapsedMs/1000,s.errors); setPlantGrowth(s.progress);
-    if(s.errors===0 && s.typed.length===s.target.length && s.typed===s.target) completeRound(s);
-    else if(s.errors>0) setMessage("A few letters need tending — you can correct them.");
-    else setMessage("Lovely progress. Keep growing!");
-  }
-  function tick(){
-    if(!startTime||completed)return;
-    const s=stats(); updateStats(s.wpm,s.accuracy,s.elapsedMs/1000,s.errors);
-  }
-  function setCatReaction(reaction){
-    [$("gardenCat"),$("buddyCat")].forEach(el=>{
-      if(!el) return;
-      el.classList.remove("cat-react-typing","cat-react-cheer","cat-react-oops");
-      if(reaction) { void el.offsetWidth; el.classList.add(reaction); }
-    });
-  }
-  function showCompanion(cat){
-    const src="./assets/cats/"+cat.sprite+".svg";
-    [$("gardenCat"),$("buddyCat")].forEach(el=>{const img=el&&el.querySelector("img");if(img) img.src=src;});
-    const pillImg=document.querySelector(".pill-cat-sprite img"); if(pillImg) pillImg.src=src;
-    const details=document.querySelector(".cat-details");
-    if(details){details.querySelector("strong").textContent=cat.name;details.querySelector("small").textContent=cat.kind+" · Garden companion";}
-    setCatReaction("");
-  }
-  function completeRound(s){
-    completed=true; if(timer){clearInterval(timer);timer=null;}
-    const elapsed=Math.max(1,s.elapsedMs), finalWpm=Math.round((s.correct/5)/(elapsed/60000));
-    const result={ref:current.ref,wpm:finalWpm,accuracy:s.accuracy,time:formatTime(elapsed/1000),date:new Date().toISOString()};
-    state.versesCompleted++; state.bestWpm=Math.max(state.bestWpm,finalWpm); state.bestAccuracy=Math.max(state.bestAccuracy,s.accuracy);
-    const discovery=rollDiscovery();
-    state.inventory.unshift({...discovery,id:makeId(),foundAt:new Date().toISOString(),source:current.ref});
-    if(discovery.kind==="flower"||discovery.kind==="tree"||discovery.kind==="fruit-tree"||discovery.kind==="vine")state.flowers.unshift({symbol:discovery.file,name:discovery.name,ref:current.ref,wpm:finalWpm,accuracy:s.accuracy,group:discovery.kind});
-    if(discovery.kind==="cat"&&!state.unlockedCats.includes(discovery.name))state.unlockedCats.push(discovery.name);
-    state.scores.unshift(result); state.scores=state.scores.slice(0,10); ensureGarden(); saveState(); renderSaved(); renderBuilder();
-    $("typingInput").disabled=true; setMessage("A new "+discovery.rarity.toLowerCase()+" discovery: "+discovery.name+"! Add it to your garden.");
-    $("builderMessage").textContent="New discovery: "+discovery.name+" · "+discovery.rarity+". Tap it in your collection to place it.";
-    const companion=discovery.kind==="cat"?(cats.find(c=>c.name===discovery.name)||cats[0]):([...cats].reverse().find(cat=>state.unlockedCats.includes(cat.name))||cats[0]);
-    showCompanion(companion); setCatReaction("cat-react-cheer");
-    $("catSpeech").textContent="“"+companion.quote+"”";
-    $("finalWpm").textContent=finalWpm; $("finalAccuracy").textContent=s.accuracy+"%"; $("finalTime").textContent=result.time;
-    $("completionText").textContent="You finished "+current.ref+" and discovered "+discovery.name+" ("+discovery.rarity+"). Add your new find to an isometric garden, then save your world to the gallery.";
-    $("completionModal").hidden=false; $("continueBtn").focus();
-  }
-  function renderSaved(){
-    $("bestWpm").textContent=state.bestWpm||"—"; $("flowerCount").textContent=state.flowers.length;
-    $("recordWpm").textContent=state.bestWpm; $("recordAccuracy").textContent=state.bestAccuracy?state.bestAccuracy+"%":"—";
-    $("recordVerses").textContent=state.versesCompleted; $("versesCompleted").textContent=state.versesCompleted+" verses completed";
-    $("collectionCount").textContent=state.flowers.length+" botanical find"+(state.flowers.length===1?"":"s");
-    const collection=$("flowerCollection"); collection.innerHTML="";
-    collection.classList.toggle("variety-view",collectionView==="varieties");
-    document.querySelectorAll("[data-collection-view]").forEach(btn=>{const active=btn.dataset.collectionView===collectionView;btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",String(active));});
-    if(collectionView==="varieties"){
-      botanicals.forEach((item,index)=>{
-        const name=item.name; const count=state.flowers.filter(f=>f.name===name).length;
-        const tile=document.createElement("div");tile.className="flower-variety botanical-variety "+item.group.toLowerCase()+(count?" collected":"");
-        const img=document.createElement("img");img.src=flowerAsset(name);img.alt="";img.loading="lazy";
-        const label=document.createElement("b");label.textContent=name;
-        const type=document.createElement("small");type.textContent=item.group;
-        const number=document.createElement("small");number.textContent=count?count+" collected":"Not found yet";
-        tile.append(img,label,type,number);tile.title=name+" ("+item.group+"): "+(count?count+" collected":"not collected yet");collection.appendChild(tile);
-      });
-    } else if(!state.flowers.length){collection.innerHTML='<div class="empty-flower">✿</div><div class="empty-copy"><b>Your first botanical find awaits.</b><small>Finish a prompt to discover flowers, fruit trees, vines, and other botanical treasures.</small></div>';}
-    else state.flowers.slice(0,8).forEach((f,index)=>{
-      const el=document.createElement("div");el.className="flower-tile";el.title=(f.name||"Flower")+" · "+f.ref+" · "+f.wpm+" WPM";
-      const img=document.createElement("img");img.src=flowerAsset(f.name);img.alt=f.name||"Flower";img.loading="lazy";
-      const small=document.createElement("small");small.textContent="#"+(index+1);el.append(img,small);collection.appendChild(el);
-    });
-    const catGrid=$("catCollection"); catGrid.innerHTML="";
-    cats.forEach(cat=>{
-      const unlocked=state.unlockedCats.includes(cat.name);
-      const tile=document.createElement("div"); tile.className="cat-collect-tile"+(unlocked?"":" locked-cat");
-      const icon=document.createElement("span"); icon.className="cat-collect-icon";
-      if(unlocked){const img=document.createElement("img");img.src="./assets/cats/"+cat.sprite+".svg";img.alt="";img.loading="lazy";icon.appendChild(img);}else{icon.textContent="?";}
-      const name=document.createElement("b"); name.textContent=unlocked?cat.name:"???";
-      const note=document.createElement("small"); note.textContent=unlocked?cat.kind:"Find through random discoveries";
-      if(unlocked){tile.title=cat.name+" — "+cat.kind;tile.setAttribute("aria-label",cat.name+", "+cat.kind);}
-      tile.append(icon,name,note); catGrid.appendChild(tile);
-    });
-    $("catUnlockCount").textContent=state.unlockedCats.length+" / "+cats.length+" found";
-    const rows=$("scoreRows"); rows.innerHTML="";
-    if(!state.scores.length){rows.innerHTML='<tr><td colspan="3" class="empty-row">Your completed rounds will appear here.</td></tr>';}
-    else state.scores.slice(0,5).forEach(s=>{const tr=document.createElement("tr");[s.ref,s.wpm+" WPM",s.accuracy+"%"].forEach(v=>{const td=document.createElement("td");td.textContent=v;tr.appendChild(td);});rows.appendChild(tr);});
-  }
-  const creatureDefs=[
-    {name:"Songbird",file:"songbird",folder:"creatures",kind:"creature",rarity:"Common",note:"A bright little singer"},
-    {name:"Rabbit",file:"rabbit",folder:"creatures",kind:"creature",rarity:"Common",note:"A shy garden hopper"},
-    {name:"Turtle",file:"turtle",folder:"creatures",kind:"creature",rarity:"Uncommon",note:"A slow and steady friend"},
-    {name:"Skunk",file:"skunk",folder:"creatures",kind:"creature",rarity:"Rare",note:"A sweet-natured night visitor"},
-    {name:"Squirrel",file:"squirrel",folder:"creatures",kind:"creature",rarity:"Uncommon",note:"A nimble acorn collector"},
-    {name:"Chipmunk",file:"chipmunk",folder:"creatures",kind:"creature",rarity:"Rare",note:"A tiny seed stasher"},
-    {name:"Unicorn",file:"unicorn",folder:"creatures",kind:"creature",rarity:"Legendary",note:"A moonlit mythical visitor"},
-    {name:"Phoenix",file:"phoenix",folder:"creatures",kind:"creature",rarity:"Legendary",note:"A bright-hearted firebird"},
-    {name:"Horse",file:"horse",folder:"creatures",kind:"creature",rarity:"Uncommon",note:"A gentle meadow friend"},
-    {name:"Fox",file:"fox",folder:"creatures",kind:"creature",rarity:"Uncommon",note:"A clever dusk wanderer"},
-    {name:"Wolf",file:"wolf",folder:"creatures",kind:"creature",rarity:"Rare",note:"A quiet woodland guardian"},
-    {name:"Deer / Fawn",file:"deer",folder:"creatures",kind:"creature",rarity:"Rare",note:"A gentle forest visitor"},
-    {name:"Owl",file:"owl",folder:"creatures",kind:"creature",rarity:"Very Rare",note:"A wise night watcher"}
-  ];
-  const allElements=[
-    ...botanicals.map((b,i)=>({...b,kind:b.group==="Flower"?"flower":b.group==="Tree"?"tree":b.group==="Fruit Tree"?"fruit-tree":"vine",rarity:["Common","Common","Uncommon","Uncommon","Rare","Common","Uncommon","Common","Rare","Very Rare","Uncommon","Uncommon","Rare","Very Rare","Common","Rare","Uncommon","Rare"][i],note:b.group})),
-    ...cats.map((c,i)=>({name:c.name,file:c.sprite,folder:"cats",kind:"cat",rarity:["Common","Rare","Very Rare","Uncommon"][i],note:c.kind})),
-    ...creatureDefs,
-    {name:"Golden Sunflower",file:"sunflower",folder:"flowers",kind:"flower",rarity:"Legendary",group:"Flower",note:"A radiant golden bloom",special:"golden"}
-  ];
-  const rarityWeight={Common:55,Uncommon:27,Rare:13,"Very Rare":4,Legendary:1};
-  const gridCols=10,gridRows=8;
-  function makeId(){return "g"+Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
-  function assetFor(item){return "./assets/"+item.folder+"/"+item.file+".svg";}
-  function rollDiscovery(){
-    const roll=Math.random()*100;let sum=0,rarity="Common";
-    for(const [tier,weight] of Object.entries(rarityWeight)){sum+=weight;if(roll<sum){rarity=tier;break;}}
-    let eligible=allElements.filter(e=>e.rarity===rarity);
-    if(!eligible.length)eligible=allElements.filter(e=>e.rarity==="Common");
-    const item=eligible[Math.floor(Math.random()*eligible.length)];
-    return {...item,rarity};
-  }
-  function ensureGarden(){
-    if(!state.gardens.length){const garden={id:makeId(),name:"My Scripture Garden",elements:[],updatedAt:new Date().toISOString()};state.gardens.push(garden);state.activeGardenId=garden.id;}
-    if(!state.gardens.some(g=>g.id===state.activeGardenId))state.activeGardenId=state.gardens[0].id;
-    if(!Array.isArray(state.inventory))state.inventory=[];
-  }
-  function activeGarden(){ensureGarden();return state.gardens.find(g=>g.id===state.activeGardenId)||state.gardens[0];}
-  function footprint(item){return item.kind==="tree"||item.kind==="fruit-tree"?{w:2,h:3}:item.kind==="cat"?{w:2,h:2}:item.kind==="vine"?{w:2,h:1}:{w:1,h:1};}
-  function occupiedCells(elements){const cells=new Set();elements.forEach(e=>{const f=footprint(e);for(let x=e.gx;x<e.gx+f.w;x++)for(let y=e.gy;y<e.gy+f.h;y++)cells.add(x+","+y);});return cells;}
-  function findRandomPosition(item,elements){const f=footprint(item),occupied=occupiedCells(elements),spots=[];for(let y=0;y<=gridRows-f.h;y++)for(let x=0;x<=gridCols-f.w;x++){let free=true;for(let dx=0;dx<f.w;dx++)for(let dy=0;dy<f.h;dy++)if(occupied.has((x+dx)+","+(y+dy)))free=false;if(free)spots.push({gx:x,gy:y});}if(!spots.length)return null;return spots[Math.floor(Math.random()*spots.length)];}
-  function addToGarden(inventoryId){
-    const garden=activeGarden(),item=state.inventory.find(i=>i.id===inventoryId);if(!item)return;
-    if(garden.elements.length>=50){$("builderMessage").textContent="This garden has reached its 50-element limit. Start or open another garden to keep building.";return;}
-    const pos=findRandomPosition(item,garden.elements);if(!pos){$("builderMessage").textContent="This garden is full. Remove an element or start a new garden.";return;}
-    garden.elements.push({...item,placedId:makeId(),...pos});garden.updatedAt=new Date().toISOString();saveState();renderBuilder();
-    $("builderMessage").textContent=item.name+" placed at a random isometric grid position. Its footprint is reserved so other elements won't overlap it.";
-  }
-  function renderBuilder(){
-    if(!$("isometricGarden"))return;ensureGarden();const garden=activeGarden();
-    $("gardenNameInput").value=garden.name;$("gardenElementCount").textContent=garden.elements.length+" / 50 elements";
-    const board=$("isometricGarden");board.querySelectorAll(".iso-item").forEach(n=>n.remove());$("isoEmptyNote").hidden=garden.elements.length>0;
-    const ordered=[...garden.elements].sort((a,b)=>(a.gy+footprint(a).h)-(b.gy+footprint(b).h));
-    ordered.forEach(item=>{const btn=document.createElement("button");btn.type="button";btn.className="iso-item "+item.kind;btn.title=item.name+" · "+item.rarity+" — tap to remove";btn.setAttribute("aria-label",btn.title);const f=footprint(item);btn.style.left=((item.gx+f.w/2)/gridCols*100)+"%";btn.style.top=((item.gy+f.h*.68)/gridRows*100)+"%";btn.style.zIndex=String(10+item.gy*10+f.h);const img=document.createElement("img");img.src=assetFor(item);img.alt="";if(item.special)img.classList.add(item.special);btn.appendChild(img);btn.addEventListener("click",()=>{if(confirm("Remove "+item.name+" from this garden? It will remain in your discoveries.")){garden.elements=garden.elements.filter(e=>e.placedId!==item.placedId);saveState();renderBuilder();}});board.appendChild(btn);});
-    $("inventoryCount").textContent=state.inventory.length+" discoveries";const inv=$("gardenInventory");inv.innerHTML="";
-    if(!state.inventory.length){inv.innerHTML='<p class="small-copy">No discoveries yet. Finish a passage to receive your first random plant, cat, or creature.</p>';}
-    state.inventory.forEach(item=>{const btn=document.createElement("button");btn.type="button";btn.className="inventory-item rarity-"+item.rarity.toLowerCase().replace(/\s+/g,"-");btn.disabled=garden.elements.length>=50;btn.title="Place "+item.name+" at a random open position";const img=document.createElement("img");img.src=assetFor(item);img.alt="";if(item.special)img.classList.add(item.special);const name=document.createElement("b");name.textContent=item.name;const rarity=document.createElement("small");rarity.textContent=item.rarity;btn.append(img,name,rarity);btn.addEventListener("click",()=>addToGarden(item.id));inv.appendChild(btn);});
-    const gallery=$("gardenGallery");gallery.innerHTML="";state.gardens.forEach(g=>{const card=document.createElement("article");card.className="gallery-card";const preview=document.createElement("div");preview.className="gallery-preview";g.elements.slice(0,8).forEach((it,index)=>{const im=document.createElement("img");im.src=assetFor(it);im.alt="";im.style.left=(10+(index%4)*22)+"%";im.style.top=(10+Math.floor(index/4)*40)+"%";preview.appendChild(im);});const title=document.createElement("h4");title.textContent=g.name;const meta=document.createElement("p");meta.textContent=g.elements.length+" / 50 elements"+(g.id===state.activeGardenId?" · Current garden":"");const actions=document.createElement("div");actions.className="gallery-actions";const open=document.createElement("button");open.className="secondary-button";open.type="button";open.textContent=g.id===state.activeGardenId?"Current":"Open";open.disabled=g.id===state.activeGardenId;open.addEventListener("click",()=>{state.activeGardenId=g.id;saveState();renderBuilder();});const rename=document.createElement("button");rename.className="secondary-button";rename.type="button";rename.textContent="Rename";rename.addEventListener("click",()=>{const next=prompt("Name this garden",g.name);if(next&&next.trim()){g.name=next.trim().slice(0,32);saveState();renderBuilder();}});actions.append(open,rename);card.append(preview,title,meta,actions);gallery.appendChild(card);});
-  }
-  $("saveGardenBtn").addEventListener("click",()=>{const garden=activeGarden(),name=$("gardenNameInput").value.trim();garden.name=name||"Untitled Garden";garden.updatedAt=new Date().toISOString();saveState();renderBuilder();$("builderMessage").textContent="Garden saved to your local gallery.";});
-  $("newGardenBtn").addEventListener("click",()=>{if(state.gardens.length>=20){$("builderMessage").textContent="You can save up to 20 gardens on this device.";return;}const garden={id:makeId(),name:"Garden "+(state.gardens.length+1),elements:[],updatedAt:new Date().toISOString()};state.gardens.push(garden);state.activeGardenId=garden.id;saveState();renderBuilder();$("builderMessage").textContent="A new garden is ready to decorate.";});
+  if(typed===current.text) complete(s);
+}
 
-  const whatsNewPanel = $("whatsNewPanel");
-  $("whatsNewBtn").addEventListener("click", () => {
-    whatsNewPanel.hidden = !whatsNewPanel.hidden;
-    if (!whatsNewPanel.hidden) whatsNewPanel.scrollIntoView({behavior: state.reduceMotion ? "auto" : "smooth", block:"start"});
+function complete(s){
+  if(finished) return;
+  finished=true;
+  stopTimer();
+  $('typingInput').disabled=true;
+
+  const ref=current.ref;
+  state.totalPassages++;
+  state.totalChars+=current.text.length;
+  state.bestWpm=Math.max(state.bestWpm,s.wpm);
+  state.bestAccuracy=Math.max(state.bestAccuracy,s.accuracy);
+  state.bestCombo=Math.max(state.bestCombo,combo);
+  state.today.passages++;
+  state.today.bestCombo=Math.max(state.today.bestCombo,combo);
+  if(s.accuracy>=95) state.today.highAccuracy=true;
+  state.practice[ref]=(state.practice[ref]||0)+1;
+  state.themeCounts[current.theme]=(state.themeCounts[current.theme]||0)+1;
+  updateStreak();
+
+  const accuracyBonus = Math.round(s.accuracy/10);
+  const comboBonus = Math.min(20,Math.floor(combo/2));
+  const cleanBonus = s.errors===0 ? 5 : 0;
+  const bloomGain = Math.max(8,accuracyBonus+comboBonus+cleanBonus);
+  const oldBloom=state.bloom;
+  state.bloom += bloomGain;
+  const levelUp=state.bloom>=100;
+  if(levelUp){state.level++;state.bloom=state.bloom%100;gardenBloom();}
+
+  state.history.unshift({ref,wpm:s.wpm,accuracy:s.accuracy,combo,date:new Date().toISOString()});
+  state.history=state.history.slice(0,60);
+  save();
+  renderAll();
+  gardenReact(s.accuracy>=95);
+
+  if(s.accuracy>=98) showToast(`✦ Beautifully typed · +${bloomGain} Bloom`);
+  else if(s.accuracy>=95) showToast(`Steady practice · +${bloomGain} Bloom`);
+  else showToast(`Passage complete · +${bloomGain} Bloom`);
+  if(levelUp) playTone('level'); else playTone('complete');
+
+  $('gameMessage').textContent = levelUp
+    ? `Garden level ${state.level}! The next passage is ready.`
+    : `${ref} practiced ${state.practice[ref]}× · best ${practiceBest(ref)}. Next passage loading…`;
+
+  transitionTimer=setTimeout(()=>{
+    if(finished) choosePrompt({focus:true});
+  }, state.reduceMotion ? 350 : TRANSITION_MS);
+}
+
+function gardenBloom(){
+  if(state.reduceMotion)return;
+  const hero=$('gardenHero');
+  hero.classList.remove('full-bloom');
+  void hero.offsetWidth;
+  hero.classList.add('full-bloom');
+}
+function gardenReact(good){
+  const fx=$('gardenEffects');
+  if(state.reduceMotion||!good)return;
+  fx.innerHTML='';
+  for(let i=0;i<9;i++){
+    const p=document.createElement('i');
+    p.textContent=i%2?'✦':'✿';
+    p.style.left=(12+Math.random()*76)+'%';
+    p.style.top=(48+Math.random()*34)+'%';
+    p.style.setProperty('--delay',(Math.random()*.35)+'s');
+    fx.appendChild(p);
+  }
+  setTimeout(()=>fx.innerHTML='',1800);
+}
+function showToast(text){
+  const t=$('toast');
+  t.textContent=text;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+function renderAll(){
+  prepToday();
+  $('bestWpm').textContent=state.bestWpm;
+  $('todayCount').textContent=state.today.passages;
+  $('level').textContent=state.level;
+  $('combo').textContent=state.bestCombo;
+  $('bloomPercent').textContent=state.bloom+'%';
+  $('bloomBar').style.width=state.bloom+'%';
+  $('bloomBig').textContent=state.bloom+'%';
+  $('recordWpm').textContent=state.bestWpm;
+  $('recordAccuracy').textContent=state.bestAccuracy?state.bestAccuracy+'%':'—';
+  $('recordCombo').textContent=state.bestCombo;
+  $('recordPassages').textContent=state.totalPassages;
+  $('goalPassages').textContent=Math.min(5,state.today.passages)+' / 5';
+  $('goalAccuracy').textContent=(state.today.highAccuracy?'1':'0')+' / 1';
+  $('goalCombo').textContent=Math.min(10,state.today.bestCombo)+' / 10';
+  $('bloomMessage').textContent=state.bloom>=80?'Almost there — let the garden bloom.':state.bloom>=50?'The garden is beginning to stir.':'Accurate typing fills the Bloom meter.';
+  renderLibrary();
+}
+function renderLibrary(){
+  const box=$('themeLibrary');box.innerHTML='';
+  let practiced=0;
+  themes.forEach(theme=>{
+    const items=passages.filter(p=>p.theme===theme);
+    const count=items.reduce((n,p)=>n+(state.practice[p.ref]||0),0);
+    if(count)practiced++;
+    const el=document.createElement('article');el.className='theme-card';
+    el.innerHTML=`<div class="theme-head"><div><small>${escapeHtml(theme)}</small><strong>${count} practice${count===1?'':'s'}</strong></div><span>${items.length} verse${items.length===1?'':'s'}</span></div><div class="theme-verses">${items.map(p=>`<button type="button" data-ref="${escapeHtml(p.ref)}"><span>${escapeHtml(p.ref)}</span><b>${state.practice[p.ref]||0}×</b></button>`).join('')}</div>`;
+    box.appendChild(el);
   });
-  $("closeWhatsNewBtn").addEventListener("click", () => {
-    whatsNewPanel.hidden = true;
-    $("whatsNewBtn").focus();
-  });
-  document.querySelectorAll("[data-collection-view]").forEach(btn=>btn.addEventListener("click",()=>{collectionView=btn.dataset.collectionView;renderSaved();}));
-  $("typingInput").addEventListener("input",onInput);
-  $("modeSelect").addEventListener("change",()=>{promptIndex=0;choosePrompt();});
-  $("newPromptBtn").addEventListener("click",choosePrompt);
-  $("resetBtn").addEventListener("click",()=>choosePrompt());
-  $("continueBtn").addEventListener("click",()=>{$("completionModal").hidden=true;choosePrompt();});
-  $("soundToggle").addEventListener("change",e=>{state.sound=e.target.checked;saveState();});
-  $("motionToggle").addEventListener("change",e=>{state.reduceMotion=e.target.checked;document.body.classList.toggle("reduce-motion",state.reduceMotion);saveState();});
-  $("exportBtn").addEventListener("click",()=>{
-    const blob=new Blob([JSON.stringify({app:"Scripture Paws",version:1,exportedAt:new Date().toISOString(),state},null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="scripture-paws-garden.json";a.click();URL.revokeObjectURL(url);
-    setMessage("Garden data exported.");
-  });
-  $("clearBtn").addEventListener("click",()=>{
-    if(confirm("Reset all Scripture Paws progress on this device? This cannot be undone.")){state=defaultState();ensureGarden();saveState();renderSaved();renderBuilder();choosePrompt();setMessage("Your garden has a fresh start.");}
-  });
-  if(state.reduceMotion){document.body.classList.add("reduce-motion");$("motionToggle").checked=true;}
-  $("soundToggle").checked=!!state.sound; ensureGarden(); renderSaved(); renderBuilder(); showCompanion(cats[0]); choosePrompt();
-  if("serviceWorker" in navigator && location.protocol.startsWith("http")) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  box.querySelectorAll('[data-ref]').forEach(b=>b.addEventListener('click',()=>{
+    const p=passages.find(x=>x.ref===b.dataset.ref);if(p)selectPassage(p);
+  }));
+  $('librarySummary').textContent=`${practiced} theme${practiced===1?'':'s'} practiced`;
+}
+
+function playTone(kind){
+  if(!state.sound) return;
+  try{
+    audioContext ||= new (window.AudioContext||window.webkitAudioContext)();
+    const osc=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+    const now=audioContext.currentTime;
+    const freq=kind==='error'?180:kind==='level'?660:kind==='combo'?520:440;
+    osc.frequency.value=freq;osc.type='sine';
+    gain.gain.setValueAtTime(0.0001,now);
+    gain.gain.exponentialRampToValueAtTime(0.045,now+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001,now+(kind==='level'?0.35:0.12));
+    osc.connect(gain);gain.connect(audioContext.destination);osc.start(now);osc.stop(now+(kind==='level'?0.36:0.13));
+  }catch{}
+}
+
+$('typingInput').addEventListener('input',onInput);
+
+// Keep ordinary typing behavior intact, but explicitly preserve the Space key.
+// This prevents a lost focus / browser scroll interaction from making a verse
+// appear impossible to finish, especially when the next expected character
+// is a space. We still require the exact Scripture text before completion.
+$('typingInput').addEventListener('keydown',e=>{
+  if(e.key !== ' ') return;
+  if(finished || !current) return;
+
+  const el=e.currentTarget;
+  const startPos=el.selectionStart ?? el.value.length;
+  const endPos=el.selectionEnd ?? startPos;
+
+  // If focus has somehow moved away from the textarea, keep Space from
+  // scrolling the page and restore focus before inserting it normally.
+  if(document.activeElement !== el){
+    e.preventDefault();
+    el.focus({preventScroll:true});
+    if(el.value.length < current.text.length) el.setRangeText(' ',startPos,endPos,'end');
+    onInput();
+    return;
+  }
+
+  // Friendly recovery for a very common typing mistake: the player misses
+  // a required space, keeps typing, then presses Space to recover. If the
+  // first mismatch is a space, repair that missing space at the mismatch
+  // instead of adding another space at the end.
+  if(startPos === el.value.length && startPos === endPos){
+    const typed=el.value;
+    const target=current.text;
+    let mismatch=-1;
+    const limit=Math.min(typed.length,target.length);
+    for(let i=0;i<limit;i++){
+      if(typed[i]!==target[i]){mismatch=i;break;}
+    }
+    if(mismatch>=0 && target[mismatch]===' ' && typed[mismatch]!==' '){
+      e.preventDefault();
+      const before=typed.slice(0,mismatch);
+      const after=typed.slice(mismatch+1);
+      // If the omitted-space character was otherwise duplicated into the
+      // correct suffix, replacing it is enough (e.g. "lamptto" -> "lamp to").
+      const shiftedSuffix=target.slice(mismatch+1);
+      if(after === shiftedSuffix) el.value=before+' '+after;
+      else el.value=before+' '+typed.slice(mismatch);
+      el.selectionStart=el.selectionEnd=el.value.length;
+      onInput();
+    }
+  }
+});
+$('themeSelect').addEventListener('change',()=>choosePrompt());
+$('newPromptBtn').addEventListener('click',()=>choosePrompt());
+$('libraryToggle').addEventListener('click',()=>{
+  const open=$('libraryPanel').hidden;
+  $('libraryPanel').hidden=!open;
+  $('libraryToggle').setAttribute('aria-expanded',String(open));
+  $('libraryToggle').querySelector('b').textContent=open?'−':'＋';
+});
+$('settingsBtn').addEventListener('click',()=>{$('settingsPanel').hidden=false});
+$('closeSettings').addEventListener('click',()=>{$('settingsPanel').hidden=true});
+$('soundToggle').addEventListener('change',e=>{state.sound=e.target.checked;save();if(state.sound)playTone('complete');});
+$('motionToggle').addEventListener('change',e=>{state.reduceMotion=e.target.checked;document.body.classList.toggle('reduce-motion',state.reduceMotion);save();});
+$('exportBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify({app:'Scripture Paws',version:2,exportedAt:new Date().toISOString(),state},null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='scripture-paws-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),0);
+});
+$('clearBtn').addEventListener('click',()=>{
+  if(confirm('Reset all Scripture Paws progress on this device?')){
+    state=mergeState({});save();renderAll();choosePrompt();showToast('A fresh garden beginning.');
+  }
+});
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden) stopTimer();
+  else if(startedAt&&!finished) startTimer();
+});
+
+prepToday();
+$('soundToggle').checked=state.sound;
+$('motionToggle').checked=state.reduceMotion;
+document.body.classList.toggle('reduce-motion',state.reduceMotion);
+renderAll();
+choosePrompt();
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();

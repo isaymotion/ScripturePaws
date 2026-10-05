@@ -1,11 +1,1 @@
-{
-  "name": "Scripture Paws \u2014 Cat & Garden Typing",
-  "short_name": "Scripture Paws",
-  "description": "Grow a pixel garden and collect cat companions as you practise typing.",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#101d1a",
-  "theme_color": "#203b32",
-  "icons": []
-}
+{"name":"Scripture Paws — Type • Grow • Be Still","short_name":"Scripture Paws","description":"An offline-first Scripture typing garden.","start_url":"./","scope":"./","display":"standalone","background_color":"#10251d","theme_color":"#18382e","icons":[]}

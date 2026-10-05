@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" shape-rendering="crispEdges" role="img" aria-label="Miso, a ginger tabby cat with a sage scarf">
-<!-- curled tail --> <path d="M19 68H11V58H15V49H23V54H19V62H25V69H22V76H14V72H19Z" fill="#8e4d2d"/><path d="M19 65H15V58H19V53H22V58H20V64H26V69H22V73H17V70H19Z" fill="#e58c43"/>
-<!-- ears and head --> <path d="M19 37V14H29V20H37V25H59V20H67V14H77V37H82V54H77V64H70V69H27V64H19V54H14V42H19Z" fill="#8e4d2d"/><path d="M24 36V20H29V27H38V31H58V27H67V20H72V36H77V53H72V60H65V64H31V60H24V53H19V41H24Z" fill="#f39a4c"/>
-<path d="M27 34V24H31V31H36V35H29Z M65 35H60V31H67V24H70V34Z" fill="#ffd0a0"/><path d="M37 37H42V41H37Z M53 37H58V41H53Z" fill="#c76c35"/>
-<!-- body --> <path d="M26 62H70V69H76V82H70V88H58V84H39V88H27V84H20V75H26Z" fill="#8e4d2d"/><path d="M31 65H65V71H70V80H65V83H57V79H40V83H31V79H26V71H31Z" fill="#f39a4c"/><path d="M39 69H57V81H62V84H54V81H42V84H34V81H39Z" fill="#fff0d8"/><path d="M28 81H38V86H28Z M58 81H68V86H58Z" fill="#fff0d8"/>
-<!-- tabby stripes --> <path d="M29 42H34V46H29Z M35 47H40V51H35Z M63 42H68V46H63Z M57 47H62V51H57Z M45 29H50V34H45Z" fill="#b96330"/><path d="M29 53H34V56H29Z M63 53H68V56H63Z" fill="#c76c35"/>
-<!-- face --> <path d="M27 43H36V51H32V55H27Z M60 43H69V55H64V51H60Z" fill="#fff0d8"/><rect class="cat-eye" x="31" y="43" width="6" height="8" fill="#2d2b27"/><rect class="cat-eye" x="59" y="43" width="6" height="8" fill="#2d2b27"/><rect x="33" y="44" width="2" height="2" fill="#fff"/><rect x="61" y="44" width="2" height="2" fill="#fff"/><path d="M46 51H50V54H46Z" fill="#e8797c"/><path d="M48 54V58H43V56H40V59H46V61H50V59H56V56H53V58H49V54Z" fill="#8e4d2d"/><path d="M24 54H31V56H24Z M65 56H72V58H65Z" fill="#fff0d8"/><path d="M23 56H29V58H23Z M67 58H73V60H67Z" fill="#f5b5a7"/>
-<!-- scarf + tiny flower --> <path d="M29 64H67V69H60V73H39V69H29Z" fill="#527d54"/><path d="M38 65H43V69H38Z M48 65H53V69H48Z M58 65H63V69H58Z" fill="#8fb46e"/><path d="M65 64H70V69H66V75H62V70H65Z" fill="#527d54"/><rect x="44" y="65" width="4" height="4" fill="#f4d88d"/><rect x="40" y="65" width="4" height="4" fill="#f4d88d"/><rect x="44" y="61" width="4" height="4" fill="#f4d88d"/><rect x="48" y="65" width="4" height="4" fill="#f4d88d"/><rect x="44" y="69" width="4" height="3" fill="#e78d9a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" shape-rendering="crispEdges" role="img" aria-label="Miso, ginger tabby cat">
+<ellipse cx="48" cy="88" rx="26" ry="5" fill="#d8c99e" opacity=".55"/>
+<!-- tail --> <path d="M23 73h-9v-8h4v-12h8v5h4v10h7v7h-6v8h-8z" fill="#623b2b"/><path d="M23 73h-6v-8h4v-10h5v6h4v9h7v4h-7v7h-7z" fill="#d97837"/><path d="M18 65h5v5h-5zM25 76h5v5h-5z" fill="#f2a05c"/>
+<!-- head/body silhouette --> <path d="M20 40V18h9v5h8v5h22v-5h8v-5h9v22h5v20h-5v10h-9v7H29v-7h-9V60h-5V45h5z" fill="#5b3a2c"/>
+<!-- orange body --> <path d="M24 40V23h6v6h9v4h18v-4h9v-6h6v17h5v17h-5v8h-9v7H33v-7h-9v-8h-5V45h5z" fill="#e9843b"/>
+<!-- ear interiors --> <path d="M28 25h5v9h-5zM63 34v-9h5v9z" fill="#f6a07b"/>
+<!-- face patches --> <path d="M27 38h9v6h-9zM58 38h9v6h-9z" fill="#f4a35c"/><path d="M38 49h20v13H38z" fill="#fff0d1"/><path d="M31 47h7v9h-7zM58 47h7v9h-7z" fill="#fff0d1"/>
+<!-- eyes --> <path d="M29 43h7v7h-7zM60 43h7v7h-7z" fill="#fff9df"/><path d="M32 45h3v4h-3zM61 45h3v4h-3z" fill="#293329"/><path d="M33 45h2v2h-2zM62 45h2v2h-2z" fill="#e8c45d"/>
+<!-- muzzle --> <path d="M38 55h8v7h-8zM50 55h8v7h-8z" fill="#f9e9cc"/><path d="M44 55h8v5h-8z" fill="#7d3e31"/><path d="M47 60h3v5h-3z" fill="#6d3a2e"/>
+<!-- whiskers --> <path d="M25 58h13v2H25zM24 63h14v2H24zM59 58h13v2H59zM58 63h14v2H58z" fill="#f3e6c9"/>
+<!-- chest/paws --> <path d="M36 65h24v12H36z" fill="#fff0d1"/><path d="M30 72h10v11H30zM56 72h10v11H56z" fill="#f8e5c4"/>
+<!-- scarf --> <path d="M31 67h34v5H31zM38 71h20v5H38z" fill="#5e9460"/><path d="M53 74h7v9h-7z" fill="#4b7b52"/>
+<!-- tabby marks --> <path d="M27 32h7v4h-7zM36 35h6v4h-6zM58 35h6v4h-6zM67 32h5v4h-5z" fill="#b95e2f"/>
 </svg>
