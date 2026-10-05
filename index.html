@@ -43,10 +43,6 @@
       <p id="verseText" class="verse-text"></p>
       <div class="practice-count" id="practiceCount">First practice — make this one yours.</div><div class="prayer-source" id="prayerSource" hidden></div>
       <div class="structured-meta" id="structuredMeta" hidden></div>
-      <div class="rosary-progress" id="rosaryProgress" hidden aria-label="Rosary decade and bead progress">
-        <div class="rosary-progress-head"><span id="rosaryProgressLabel">Opening prayers</span><span id="rosaryProgressDetail">0 of 5 decades</span></div>
-        <div class="rosary-decades" id="rosaryDecades"></div>
-      </div>
     </div>
 
     <div class="garden-typing-row">
@@ -90,9 +86,25 @@
         <label for="structuredSelect"><span class="leaf-mark">✦</span> STRUCTURE</label>
         <select id="structuredSelect">
           <option value="rosary">Holy Rosary</option>
+          <option value="divine-mercy">Divine Mercy Chaplet</option>
+          <option value="divine-mercy-novena">Divine Mercy Novena</option>
         </select>
       </div>
-      <div class="structured-style-picker" id="structuredStylePicker" hidden aria-label="Rosary play style">
+      <div class="garden-theme-picker divine-mercy-novena-day-picker" id="divineMercyNovenaDayPicker" hidden>
+        <label for="divineMercyNovenaDay"><span class="leaf-mark">✦</span> NOVENA DAY</label>
+        <select id="divineMercyNovenaDay">
+          <option value="1">Day 1 · All mankind</option>
+          <option value="2">Day 2 · Priests & religious</option>
+          <option value="3">Day 3 · Devout & faithful souls</option>
+          <option value="4">Day 4 · Those who do not believe / know Jesus</option>
+          <option value="5">Day 5 · Separated brethren</option>
+          <option value="6">Day 6 · Meek, humble & children</option>
+          <option value="7">Day 7 · Devotees of Divine Mercy</option>
+          <option value="8">Day 8 · Souls in purgatory</option>
+          <option value="9">Day 9 · Lukewarm souls</option>
+        </select>
+      </div>
+      <div class="structured-style-picker" id="structuredStylePicker" hidden aria-label="Structured prayer play style">
         <button id="structuredTypingBtn" type="button" class="structured-style-btn active" aria-pressed="true">⌨ Typing</button>
         <button id="structuredMeditationBtn" type="button" class="structured-style-btn" aria-pressed="false">◉ Meditation Mode</button>
       </div>
@@ -107,6 +119,13 @@
   <div class="garden-side-note" id="gardenSideNote"><span>GARDEN RHYTHM</span><strong>Stay with the words.</strong><small>Accurate typing helps the garden bloom.</small></div>
   <div class="garden-library-link"><button id="libraryJump" type="button">♧ Scripture Library <span>›</span></button></div>
   <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
+</section>
+
+<section class="rosary-progress-card" aria-label="Rosary decade and bead progress">
+  <div class="rosary-progress" id="rosaryProgress" hidden>
+    <div class="rosary-progress-head"><span id="rosaryProgressLabel">Opening prayers</span><span id="rosaryProgressDetail">0 of 5 decades</span></div>
+    <div class="rosary-decades" id="rosaryDecades"></div>
+  </div>
 </section>
 
 <section class="bloom-card">

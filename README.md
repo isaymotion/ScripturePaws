@@ -11,7 +11,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 - Bloom meter that advances with practice and triggers subtle garden reactions.
 - Daily goals: passages, high accuracy, combo, and at least one complete prayer.
 - Personal records: best WPM, best accuracy, best combo, total passages, total characters.
-- Static garden background with Miso as a visual companion.
+- Static garden backgrounds are the primary visual world; legacy botanical, creature, flower, and cat asset collections have been removed.
 - LocalStorage persistence and JSON export.
 - Service-worker offline shell.
 - Reduced-motion setting.
@@ -122,3 +122,36 @@ Structured Prayer now has two Rosary play styles:
 Mystery meditation remains a separate pause before each decade. The user reads the Mystery card and Scripture reference, contemplates it, and then chooses **Continue to prayer**. Meditation Mode does not require keyboard input and does not count spoken prayer as typed characters.
 
 The Rosary's structural order, Mystery selection, feast overrides, and contemplative Mystery cards are shared by both play styles; only the interaction model changes.
+
+
+### Divine Mercy Chaplet — dedicated bead tracker
+
+The Divine Mercy Chaplet has its own progress visualization rather than reusing the Rosary's decade bar. It shows the four opening prayers, five decades with one larger Eternal Father bead plus ten smaller mercy beads per decade, and the three concluding Holy God repetitions followed by the Sign of the Cross. This mirrors EWTN's published Chaplet sequence.
+
+In Meditation Mode, the current Divine Mercy bead can be pressed after the prayer is spoken aloud. The tracker is a progress/companion aid only; it does not add extra prayers to the Chaplet. Optional Three O'Clock Hour prayers remain outside the core Chaplet.
+
+Primary source: EWTN, *The Chaplet of the Divine Mercy*: https://www.ewtn.com/catholicism/devotions/chaplet-of-the-divine-mercy-387
+Additional EWTN source: *How do you recite the Divine Mercy Chaplet?*: https://www.ewtn.com/catholicism/seasons-and-feast-days/how-do-you-recite-the-divine-mercy-chaplet-21612
+
+### Divine Mercy Chaplet — Structured Prayer
+
+The Structured Prayer system now includes the **Divine Mercy Chaplet** alongside the Holy Rosary. Its core sequence is based on EWTN's *Chaplet of the Divine Mercy*: Sign of the Cross, Our Father, Hail Mary, Apostles' Creed; five decades with the Eternal Father prayer on the large bead and the Divine Mercy invocation on each of ten small beads; three repetitions of the Holy God prayer; and the Sign of the Cross. EWTN notes that additional prayers at the Three O'Clock Hour are optional and are not included in this core Chaplet sequence.
+
+The Chaplet supports the same two interaction styles as the Rosary:
+- **Typing** — type each prayer exactly.
+- **Meditation Mode** — pray each displayed prayer aloud, then tap the bead/continue control when ready.
+
+Each decade receives a quiet transition card encouraging the user to entrust themselves and the whole world to Divine Mercy before beginning the decade. This is an educational/contemplative UI treatment, not an additional liturgical prayer.
+
+Primary source: EWTN, *The Chaplet of the Divine Mercy*: https://www.ewtn.com/catholicism/devotions/chaplet-of-the-divine-mercy-387
+Secondary EWTN source: https://www.ewtn.com/catholicism/seasons-and-feast-days/how-do-you-recite-the-divine-mercy-chaplet-21612
+
+### Divine Mercy Structured Prayer — Pass 3
+
+The Structured Prayer area now includes a **Divine Mercy Novena** companion in addition to the Divine Mercy Chaplet. The Novena is represented as nine selectable intention days, followed by the existing Divine Mercy Chaplet. The app uses the current calendar to default to the appropriate day when the Novena falls between Good Friday and the Saturday before Divine Mercy Sunday; outside that window, Day 1 is the default and the user may choose any day manually.
+
+The nine intention groups are paraphrased from EWTN's *Divine Mercy Novena*. The app does not reproduce the full EWTN Novena prayers; instead, it provides a contemplative intention card and then launches the full in-app Chaplet sequence. This keeps the app's devotional guidance source-based while avoiding unnecessary duplication of the longer source text.
+
+Source: EWTN, *Divine Mercy Novena*: https://www.ewtn.com/catholicism/library/divine-mercy-novena-9119
+
+EWTN states that the Novena begins on Good Friday, has a different group of souls/intention for each of nine days, and is prayed along with the Divine Mercy Chaplet.

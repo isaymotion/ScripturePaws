@@ -233,6 +233,37 @@ const rosaryMysteries = {
     {title:'The Institution of the Eucharist',scripture:'Matthew 26:26',prompt:'Contemplate Christ giving Himself as food and remain quietly with His self-giving love.'}
   ]}
 };
+
+const divineMercyChaplet = {
+  id:'divine-mercy',
+  name:'Divine Mercy Chaplet',
+  kind:'divine-mercy',
+  days:'Five decades',
+  season:'Divine Mercy devotion',
+  source:'EWTN · Chaplet of the Divine Mercy',
+  decadePrompt:'Pray this decade for mercy for yourself and for the whole world.'
+};
+const divineMercyNovenaDays = [
+  {day:1,title:'All mankind, especially sinners',prompt:'Bring the needs of all people before Divine Mercy, especially those burdened by sin. Ask for trust, compassion, and a merciful heart.'},
+  {day:2,title:'Priests and religious',prompt:'Pray for priests and religious, asking that they be strengthened to serve, guide, and witness to God’s mercy.'},
+  {day:3,title:'Devout and faithful souls',prompt:'Pray for those striving to remain faithful. Ask that they be protected in faith and strengthened in love.'},
+  {day:4,title:'Those who do not believe or do not yet know Jesus',prompt:'Pray for those who do not believe or have not yet come to know Christ. Ask that they encounter the light of the Gospel.'},
+  {day:5,title:'Separated brethren',prompt:'Pray for Christians who are separated from full communion with the Catholic Church, asking for grace, unity, and mutual charity.'},
+  {day:6,title:'The meek and humble and little children',prompt:'Pray for the meek and humble, and for children. Ask for protection, gentleness, humility, and trust.'},
+  {day:7,title:'Those who especially venerate Divine Mercy',prompt:'Pray for those devoted to Divine Mercy, asking that their trust become a living witness through works of mercy.'},
+  {day:8,title:'Souls in purgatory',prompt:'Pray for the souls being purified, entrusting them to Divine Mercy and remembering the communion of the Church.'},
+  {day:9,title:'Lukewarm souls',prompt:'Pray for those whose faith and love have grown cold. Ask that they be renewed in trust and love.'}
+];
+function divineMercySunday(year){ return addDays(easterSunday(year),7); }
+function divineMercyNovenaDayForDate(date=new Date()){
+  const d=dateOnly(date), y=d.getFullYear(), easter=easterSunday(y), start=addDays(easter,-2), end=addDays(easter,6);
+  if(d>=start && d<=end) return Math.round((d-start)/86400000)+1;
+  return 1;
+}
+function divineMercyNovenaDay(id){
+  const n=Number(id)||divineMercyNovenaDayForDate(new Date());
+  return divineMercyNovenaDays[Math.min(9,Math.max(1,n))-1];
+}
 const rosaryWeekday = ['glorious','joyful','sorrowful','glorious','luminous','sorrowful','joyful'];
 function dateOnly(date){ return new Date(date.getFullYear(),date.getMonth(),date.getDate()); }
 function addDays(date,n){ const d=dateOnly(date); d.setDate(d.getDate()+n); return d; }
@@ -321,8 +352,45 @@ function buildRosary(date=new Date()){
   });
   add('prayer','Hail, Holy Queen','hail-holy-queen',prayerText('hail-holy-queen'));
   add('prayer','Sign of the Cross','sign-of-cross','In the name of the Father, and of the Son, and of the Holy Spirit. Amen.');
-  return {set,steps};
+  return {type:'rosary',title:'Holy Rosary',set,steps};
 }
+
+function buildDivineMercyChaplet(){
+  const set=divineMercyChaplet;
+  const steps=[];
+  const add=(kind,label,id,text,extra={})=>steps.push({kind,label,id,text,...extra});
+  add('prayer','Sign of the Cross','sign-of-cross','In the name of the Father, and of the Son, and of the Holy Spirit. Amen.',{opening:true});
+  add('prayer','The Our Father','our-father',prayerText('our-father'),{opening:true});
+  add('prayer','Hail Mary','hail-mary',prayerText('hail-mary'),{opening:true});
+  add('prayer',"The Apostles' Creed",'apostles-creed',prayerText('apostles-creed'),{opening:true});
+  for(let d=0;d<5;d++){
+    add('mystery',`Decade ${d+1} of 5 · Divine Mercy`,'divine-mercy-decade','',{decade:d,decadeIndex:d,prompt:set.decadePrompt});
+    add('prayer',`Decade ${d+1} · Our Father Bead`,'divine-mercy-large-bead',
+      'Eternal Father, I offer You the Body and Blood, Soul and Divinity of Your dearly beloved Son, Our Lord Jesus Christ, in atonement for our sins and those of the whole world.',
+      {decade:d,largeBead:true});
+    for(let h=1;h<=10;h++) add('prayer',`Decade ${d+1} · Mercy Prayer ${h} of 10`,'divine-mercy-small-bead',
+      'For the sake of His sorrowful Passion, have mercy on us and on the whole world.',
+      {decade:d,hailMary:h,mercyBead:h});
+  }
+  for(let n=1;n<=3;n++) add('prayer',`Holy God · ${n} of 3`,'holy-god',
+    'Holy God, Holy Mighty One, Holy Immortal One, have mercy on us and on the whole world.',
+    {closing:true});
+  add('prayer','Sign of the Cross','sign-of-cross','In the name of the Father, and of the Son, and of the Holy Spirit. Amen.',{closing:true});
+  return {type:'divine-mercy',title:'Divine Mercy Chaplet',set,steps};
+}
+
+function buildDivineMercyNovena(day=divineMercyNovenaDayForDate(new Date())){
+  const dayInfo=divineMercyNovenaDay(day);
+  const chaplet=buildDivineMercyChaplet();
+  const steps=[{kind:'novena-intention',label:`Divine Mercy Novena · Day ${dayInfo.day}`,id:'divine-mercy-novena-intention',text:'',novenaDay:dayInfo.day,title:dayInfo.title,prompt:dayInfo.prompt}];
+  return {type:'divine-mercy-novena',title:`Divine Mercy Novena · Day ${dayInfo.day}`,set:{...divineMercyChaplet,source:'EWTN · Divine Mercy Novena',novenaDay:dayInfo.day,novenaTitle:dayInfo.title},steps:steps.concat(chaplet.steps)};
+}
+function buildStructuredPrayer(id='rosary',date=new Date()){
+  if(id==='divine-mercy') return buildDivineMercyChaplet();
+  if(id==='divine-mercy-novena') return buildDivineMercyNovena(Number(document.getElementById('divineMercyNovenaDay')?.value)||divineMercyNovenaDayForDate(date));
+  return buildRosary(date);
+}
+
 const gardenBackgrounds = [
   {id:'morning', name:'Morning Garden', file:'./assets/garden/morning-garden.png'},
   {id:'autumn', name:'Autumn Garden', file:'./assets/garden/autumn-garden.png'},
@@ -336,7 +404,7 @@ const defaultState = {
   bloom:0,level:1,streak:0,lastPracticeDate:'',
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
   sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
-  mode:'scripture', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0
+  mode:'scripture', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0
 };
 
 let state = load();
@@ -504,6 +572,7 @@ function renderModeUI(){
   $('themePicker').hidden=prayerMode||structuredMode;
   $('prayerPicker').hidden=!prayerMode;
   $('structuredPicker').hidden=!structuredMode;
+  if($('divineMercyNovenaDayPicker')) $('divineMercyNovenaDayPicker').hidden=!(structuredMode && $('structuredSelect')?.value==='divine-mercy-novena');
   if($('structuredStylePicker')) $('structuredStylePicker').hidden=!structuredMode;
   if($('structuredTypingBtn')){ $('structuredTypingBtn').classList.toggle('active',state.structuredPlayStyle==='typing'); $('structuredTypingBtn').setAttribute('aria-pressed',String(state.structuredPlayStyle==='typing')); }
   if($('structuredMeditationBtn')){ $('structuredMeditationBtn').classList.toggle('active',state.structuredPlayStyle==='meditation'); $('structuredMeditationBtn').setAttribute('aria-pressed',String(state.structuredPlayStyle==='meditation')); }
@@ -511,26 +580,34 @@ function renderModeUI(){
   $('practiceLabel').textContent=structuredMode?'STRUCTURED PRAYER':prayerMode?'PRAYER PRACTICE':'SCRIPTURE PRACTICE';
   if(structuredMode && structuredCurrent){
     const step=structuredCurrent.steps[structuredStepIndex];
-    $('verseTheme').textContent=structuredCurrent.set.name.toUpperCase();
+    $('verseTheme').textContent=structuredCurrent.title.toUpperCase();
     $('verseRef').textContent=`STEP ${structuredStepIndex+1} / ${structuredCurrent.steps.length}`;
-    $('practiceCount').textContent=`Today · ${structuredCurrent.set.name}`;
+    $('practiceCount').textContent=`Today · ${structuredCurrent.title}`;
     const set=structuredCurrent.set;
-    $('structuredMeta').textContent=`${set.days} · ${set.season}${set.selectionReason ? ` · ${set.selectionReason}` : ''} · ${set.feastOverride ? 'Feast override · ' : ''}Mysteries selected for today`;
-    $('newPromptBtn').textContent='↻ Restart Rosary';
+    const isRosary=structuredCurrent.type==='rosary';
+    const isDivine=structuredCurrent.type==='divine-mercy' || structuredCurrent.type==='divine-mercy-novena';
+    const note=isRosary ? `${set.days} · ${set.season}${set.selectionReason ? ` · ${set.selectionReason}` : ''} · ${set.feastOverride ? 'Feast override · ' : ''}Mysteries selected for today` : `${set.days} · ${set.season}`;
+    $('structuredMeta').textContent=note;
+    $('newPromptBtn').textContent=isRosary?'↻ Restart Rosary':isDivine?'↻ Restart Chaplet':'↻ Restart Structured Prayer';
     $('typingInput').placeholder=step?.kind==='mystery'?'Meditate quietly on this mystery…':'Type the prayer here…';
-    $('typingLabel').textContent=step?.kind==='mystery'?'Mystery meditation':'Type the prayer';
+    $('typingLabel').textContent=step?.kind==='mystery'?'Quiet meditation':'Type the prayer';
     if($('typingInput')) $('typingInput').hidden=state.structuredPlayStyle==='meditation';
     if($('gardenLiveStats')) $('gardenLiveStats').hidden=state.structuredPlayStyle==='meditation';
     if($('meditationAction')) $('meditationAction').hidden=state.structuredPlayStyle!=='meditation';
     if($('typingLabel')) $('typingLabel').hidden=state.structuredPlayStyle==='meditation';
   }else{
+    // Structured Prayer controls must never leak into Scripture or regular Prayer mode.
+    // This is especially important for Meditation Mode, whose bead action lives
+    // alongside the normal typing controls.
+    if($('meditationAction')) $('meditationAction').hidden=true;
+    if($('mysteryContinueBtn')) $('mysteryContinueBtn').hidden=true;
     $('verseTheme').textContent=prayerMode ? (prayerCurrent?.category || 'PRAYER') : (current?.theme || '').toUpperCase();
     $('verseRef').textContent=prayerMode ? `${prayerPhraseIndex+1} / ${prayerCurrent?.phrases.length || 1}` : (current?.ref || '');
     $('newPromptBtn').textContent=prayerMode?'↻ Next prayer':'↻ New passage';
     $('typingInput').placeholder=prayerMode?'Type the prayer phrase here…':'Type the words here…';
     $('typingLabel').textContent=prayerMode?'Type the prayer phrase':'Type the Scripture passage';
   }
-  $('libraryJump').textContent=structuredMode?'☩ Rosary Library ›':prayerMode?'☩ Prayer Library ›':'♧ Scripture Library ›';
+  $('libraryJump').textContent=structuredMode?'☩ Structured Prayer Library ›':prayerMode?'☩ Prayer Library ›':'♧ Scripture Library ›';
   if($('prayerSource')) $('prayerSource').hidden=!(prayerMode||structuredMode);
   if($('structuredMeta')) $('structuredMeta').hidden=!structuredMode;
 }
@@ -543,19 +620,21 @@ function setStructuredPlayStyle(style,{restart=true}={}){
 function chooseStructured({focus=true}={}){
   clearTimeout(transitionTimer);
   state.mode='structured';
-  structuredCurrent=buildRosary(new Date());
+  const id=$('structuredSelect')?.value || 'rosary';
+  structuredCurrent=buildStructuredPrayer(id,new Date());
   structuredStepIndex=0;
   structuredStartedAt=0; structuredSessionCorrect=0; structuredSessionTyped=0; structuredSessionErrors=0;
   finished=false; combo=0; startedAt=0; stopTimer();
   $('typingInput').value='';$('typingInput').disabled=false;
   renderModeUI();renderStructuredStep();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
   const set=structuredCurrent.set;
-  $('prayerSource').textContent=`EWTN · Rosary Prayers · Vatican · Rosarium Virginis Mariae · ${set.name}`;
+  $('prayerSource').textContent=set.source || 'EWTN · Structured Prayer';
   const seasonalNote=set.selectionReason ? ` · ${set.selectionReason}` : '';
-  $('structuredMeta').textContent=`${set.days} · ${set.season}${seasonalNote} · ${set.feastOverride ? 'Feast override · ' : ''}Mysteries selected for today`;
-  $('gameMessage').textContent=`${set.name}${set.selectionReason ? ` · ${set.selectionReason}` : ''} · begin with the Sign of the Cross.`;
+  $('structuredMeta').textContent=structuredCurrent.type==='rosary' ? `${set.days} · ${set.season}${seasonalNote} · ${set.feastOverride ? 'Feast override · ' : ''}Mysteries selected for today` : structuredCurrent.type==='divine-mercy-novena' ? `Day ${set.novenaDay} of 9 · ${set.novenaTitle} · EWTN Novena intention` : `${set.days} · ${set.season}`;
+  $('gameMessage').textContent=structuredCurrent.type==='rosary' ? `${set.name}${set.selectionReason ? ` · ${set.selectionReason}` : ''} · begin with the Sign of the Cross.` : structuredCurrent.type==='divine-mercy-novena' ? `Day ${set.novenaDay} · begin with the Novena intention, then pray the Chaplet.` : 'Begin with the Sign of the Cross.';
   save();
-  if(focus) $('typingInput').focus({preventScroll:true});
+  if($('divineMercyNovenaDay')) $('divineMercyNovenaDay').value=String(structuredCurrent.set.novenaDay || divineMercyNovenaDayForDate(new Date()));
+  if(focus && state.structuredPlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function renderRosaryProgress(){
   const box=$('rosaryProgress');
@@ -563,51 +642,113 @@ function renderRosaryProgress(){
   if(!box||!decades||state.mode!=='structured'||!structuredCurrent){ if(box)box.hidden=true; return; }
   box.hidden=false;
   const step=structuredCurrent.steps[structuredStepIndex];
-  const currentDecade=Number.isInteger(step?.decade)?step.decade:-1;
+  const isRosary=structuredCurrent.type==='rosary';
+  const isDivine=structuredCurrent.type==='divine-mercy' || structuredCurrent.type==='divine-mercy-novena';
   const completed=Array(5).fill(0);
+  const largeDone=Array(5).fill(false);
+  const holyGodDone=[false,false,false];
+  let openingDone=0;
   for(let i=0;i<structuredStepIndex;i++){
     const prior=structuredCurrent.steps[i];
-    if(Number.isInteger(prior.decade) && Number.isInteger(prior.hailMary)) completed[prior.decade]=Math.max(completed[prior.decade],prior.hailMary);
+    if(isDivine){
+      if(prior.opening) openingDone++;
+      if(Number.isInteger(prior.decade) && prior.largeBead) largeDone[prior.decade]=true;
+      if(Number.isInteger(prior.decade) && Number.isInteger(prior.mercyBead)) completed[prior.decade]=Math.max(completed[prior.decade],prior.mercyBead);
+      if(prior.id==='holy-god' && prior.closing) holyGodDone[Number(prior.label.match(/(\d+) of 3$/)?.[1]||1)-1]=true;
+    }else if(Number.isInteger(prior.decade) && Number.isInteger(prior.hailMary)){
+      completed[prior.decade]=Math.max(completed[prior.decade],prior.hailMary);
+    }
   }
-  const label=currentDecade<0 ? (step?.kind==='mystery' ? `Mystery ${step.mysteryIndex+1} of 5` : 'Opening prayers') : `Decade ${currentDecade+1} of 5`;
-  const detail=currentDecade<0 ? (completed.every(n=>n===10) ? '5 of 5 decades' : 'Prepare for the decades') : `${completed[currentDecade]} of 10 Hail Marys`;
-  $('rosaryProgressLabel').textContent=label;
+  const currentDecade=Number.isInteger(step?.decade)?step.decade:-1;
+  let label='Opening prayers', detail='Prepare for the decades';
+  if(isRosary){
+    label=currentDecade<0 ? (step?.kind==='mystery' ? `Mystery ${step.mysteryIndex+1} of 5` : 'Opening prayers') : `Decade ${currentDecade+1} of 5`;
+    detail=currentDecade<0 ? 'Prepare for the decades' : `${completed[currentDecade]} of 10 Hail Marys`;
+  }else if(isDivine){
+    if(step?.closing && step.id==='holy-god') { label='Concluding prayer'; detail=`Holy God · ${step.label.match(/(\d+) of 3$/)?.[1]||1} of 3`; }
+    else if(step?.closing){ label='Closing'; detail='Sign of the Cross'; }
+    else if(currentDecade>=0){ label=`Decade ${currentDecade+1} of 5`; detail=step?.largeBead ? 'Eternal Father · large bead' : `${completed[currentDecade]} of 10 mercy beads`; }
+    else { label='Opening prayers'; detail=`${Math.min(openingDone,4)} of 4 prayers`; }
+  }
+  $('rosaryProgressLabel').textContent=isDivine ? (structuredCurrent.type==='divine-mercy-novena' ? `Novena Day ${structuredCurrent.set.novenaDay}` : 'Divine Mercy Chaplet') : label;
   $('rosaryProgressDetail').textContent=detail;
-  decades.innerHTML=structuredCurrent.set.mysteries.map((m,mi)=>{
-    const isCurrent=mi===currentDecade || (step?.kind==='mystery'&&step.mysteryIndex===mi);
-    const count=completed[mi];
-    const beads=Array.from({length:10},(_,n)=>{
-      const filled=n<count;
-      const currentDot=isCurrent && n===count && count<10;
-      const actionable=currentDot && state.structuredPlayStyle==='meditation' && step?.kind==='prayer';
-      return actionable
-        ? `<button class="rosary-bead current actionable" type="button" data-rosary-advance="true" aria-label="Pray this step aloud, then continue"></button>`
-        : `<i class="rosary-bead${filled?' filled':''}${currentDot?' current':''}" aria-hidden="true"></i>`;
+  box.classList.toggle('divine-mercy-progress',isDivine);
+  if(isDivine){
+    box.setAttribute('aria-label',structuredCurrent.type==='divine-mercy-novena'?'Divine Mercy Novena and Chaplet progress':'Divine Mercy Chaplet bead and prayer progress');
+  }else{
+    box.setAttribute('aria-label','Rosary decade and bead progress');
+  }
+  if(isDivine){
+    decades.innerHTML=`
+      <div class="divine-mercy-opening">
+        ${['Sign of the Cross','Our Father','Hail Mary','Apostles’ Creed'].map((name,i)=>`<span class="divine-mercy-opening-bead ${i<openingDone?'done':''} ${step?.opening&&openingDone===i?'current':''}" title="${name}"><i></i><small>${i+1}</small></span>`).join('')}
+      </div>
+      <div class="divine-mercy-decade-list">
+        ${Array.from({length:5},(_,mi)=>{
+          const isCurrent=mi===currentDecade;
+          const count=completed[mi];
+          const largeCurrent=isCurrent && step?.largeBead;
+          const largeAction=largeCurrent && state.structuredPlayStyle==='meditation';
+          const large=largeAction
+            ? `<button class="divine-mercy-large-bead current actionable" type="button" data-rosary-advance="true" aria-label="Pray the Eternal Father prayer aloud, then continue"><span>+</span></button>`
+            : `<i class="divine-mercy-large-bead${largeDone[mi]?' filled':''}${largeCurrent?' current':''}" aria-hidden="true"><span>+</span></i>`;
+          const beads=Array.from({length:10},(_,n)=>{
+            const filled=n<count;
+            const currentDot=isCurrent && !step?.largeBead && step?.mercyBead===n+1;
+            const actionable=currentDot && state.structuredPlayStyle==='meditation';
+            return actionable
+              ? `<button class="divine-mercy-small-bead current actionable" type="button" data-rosary-advance="true" aria-label="Pray mercy prayer ${n+1} aloud, then continue"></button>`
+              : `<i class="divine-mercy-small-bead${filled?' filled':''}${currentDot?' current':''}" aria-hidden="true"></i>`;
+          }).join('');
+          return `<div class="divine-mercy-decade${isCurrent?' current':''}${count===10?' complete':''}"><span class="divine-mercy-decade-label">${mi+1}</span>${large}<span class="divine-mercy-small-beads">${beads}</span><span class="divine-mercy-decade-count">${count}/10</span></div>`;
+        }).join('')}
+      </div>
+      <div class="divine-mercy-conclusion">
+        ${[0,1,2].map(i=>`<span class="divine-mercy-conclusion-bead ${holyGodDone[i]?'done':''} ${step?.id==='holy-god' && Number(step.label.match(/(\d+) of 3$/)?.[1]||1)-1===i?'current':''}"><i></i><small>${i+1}</small></span>`).join('')}
+        <span class="divine-mercy-cross ${step?.closing&&step.id==='sign-of-cross'?'current':''}>✝</span>
+      </div>`;
+  }else{
+    decades.innerHTML=Array.from({length:5},(_,mi)=>{
+      const isCurrent=mi===currentDecade || (step?.kind==='mystery'&&step.mysteryIndex===mi);
+      const count=completed[mi];
+      const beads=Array.from({length:10},(_,n)=>{
+        const filled=n<count;
+        const currentDot=isCurrent && n===count && count<10;
+        const actionable=currentDot && state.structuredPlayStyle==='meditation' && step?.kind==='prayer';
+        return actionable
+          ? `<button class="rosary-bead current actionable" type="button" data-rosary-advance="true" aria-label="Pray this step aloud, then continue"></button>`
+          : `<i class="rosary-bead${filled?' filled':''}${currentDot?' current':''}" aria-hidden="true"></i>`;
+      }).join('');
+      return `<div class="rosary-decade${isCurrent?' current':''}${count===10?' complete':''}"><span class="rosary-decade-name">${mi+1}</span><span class="rosary-beads">${beads}</span><span class="rosary-decade-count">${count}/10</span></div>`;
     }).join('');
-    return `<div class="rosary-decade${isCurrent?' current':''}${count===10?' complete':''}"><span class="rosary-decade-name">${mi+1}</span><span class="rosary-beads">${beads}</span><span class="rosary-decade-count">${count}/10</span></div>`;
-  }).join('');
+  }
   decades.querySelectorAll('[data-rosary-advance]').forEach(b=>b.addEventListener('click',completeStructuredMeditationStep));
 }
 function renderStructuredStep(){
   if(!structuredCurrent)return;
   renderRosaryProgress();
   const step=structuredCurrent.steps[structuredStepIndex];
+  if(step.kind==='novena-intention'){
+    $('verseText').innerHTML=`<div class="structured-mystery-card divine-mercy-novena-card"><span class="structured-mystery-kicker">DIVINE MERCY NOVENA · DAY ${step.novenaDay} OF 9</span><span class="structured-mystery-title">${escapeHtml(step.title)}</span><span class="structured-mystery-scripture">Pray this intention, then continue with the Divine Mercy Chaplet.</span><span class="structured-mystery-prompt">${escapeHtml(step.prompt)}</span><span class="structured-mystery-note">Pause here. Bring these people and needs to God before beginning the Chaplet.</span></div>`;
+    $('typingInput').value='';$('typingInput').disabled=true;$('mysteryContinueBtn').hidden=false;$('meditationAction').hidden=true;$('progressFill').style.width='0%';$('progressLabel').textContent='PRAY';$('practiceCount').textContent=`Divine Mercy Novena · Day ${step.novenaDay}`;$('gameMessage').textContent='Pause with the intention, then continue to the Chaplet.';if($('prayerSource')) $('prayerSource').textContent='EWTN · Divine Mercy Novena';return;
+  }
   if(step.kind==='mystery'){
+    const divine=structuredCurrent.type==='divine-mercy';
     $('verseText').innerHTML=`<div class="structured-mystery-card">
-      <span class="structured-mystery-kicker">MYSTERY ${step.mysteryIndex+1} OF 5</span>
-      <span class="structured-mystery-title">${escapeHtml(step.mysteryTitle)}</span>
-      <span class="structured-mystery-scripture">${step.scripture ? 'Scripture · '+escapeHtml(step.scripture) : ''}</span>
+      <span class="structured-mystery-kicker">${divine ? `DECADE ${step.decade+1} OF 5` : `MYSTERY ${step.mysteryIndex+1} OF 5`}</span>
+      <span class="structured-mystery-title">${escapeHtml(divine ? `Divine Mercy · Decade ${step.decade+1}` : step.mysteryTitle)}</span>
+      <span class="structured-mystery-scripture">${divine ? 'Chaplet · Five decades' : (step.scripture ? 'Scripture · '+escapeHtml(step.scripture) : '')}</span>
       <span class="structured-mystery-prompt">${escapeHtml(step.prompt || 'Take a quiet moment to contemplate this mystery.')}</span>
-      <span class="structured-mystery-note">Pause. Let the mystery settle before beginning the decade.</span>
+      <span class="structured-mystery-note">${divine ? 'Pause. Entrust yourself and the whole world to Divine Mercy, then begin the decade.' : 'Pause. Let the mystery settle before beginning the decade.'}</span>
     </div>`;
     $('typingInput').value='';
     $('typingInput').disabled=true;
     $('mysteryContinueBtn').hidden=false;
     $('meditationAction').hidden=true;
     $('progressFill').style.width='0%';$('progressLabel').textContent='0%';
-    $('practiceCount').textContent=`Mystery ${step.mysteryIndex+1} of 5 · ${structuredCurrent.set.name}`;
-    $('gameMessage').textContent=`${step.mysteryTitle} · meditate, then continue.`;
-    if($('prayerSource')) $('prayerSource').textContent='EWTN · Rosary Prayers · Vatican · Rosarium Virginis Mariae';
+    $('practiceCount').textContent=divine ? `Decade ${step.decade+1} of 5 · Divine Mercy` : `Mystery ${step.mysteryIndex+1} of 5 · ${structuredCurrent.set.name}`;
+    $('gameMessage').textContent=divine ? `Decade ${step.decade+1} · pause, then begin the prayer.` : `${step.mysteryTitle} · meditate, then continue.`;
+    if($('prayerSource')) $('prayerSource').textContent=structuredCurrent.set.source || 'EWTN · Structured Prayer';
     return;
   }
   $('mysteryContinueBtn').hidden=true;
@@ -620,7 +761,7 @@ function renderStructuredStep(){
     $('progressFill').style.width='100%';$('progressLabel').textContent='PRAY';
     $('practiceCount').textContent=step.label;
     $('gameMessage').textContent=`Pray aloud · ${step.label} · press the bead when you are ready.`;
-    if($('prayerSource')) $('prayerSource').textContent='EWTN · Rosary Prayers · Vatican · Rosarium Virginis Mariae';
+    if($('prayerSource')) $('prayerSource').textContent=structuredCurrent.type==='divine-mercy-novena' ? 'EWTN · Divine Mercy Novena + Divine Mercy Chaplet' : 'EWTN · Rosary Prayers · Vatican · Rosarium Virginis Mariae';
     return;
   }
   $('meditationAction').hidden=true;
@@ -798,10 +939,10 @@ function onStructuredInput(){
 }
 function continueStructuredMystery(){
   if(!structuredCurrent)return;
-  if(structuredCurrent.steps[structuredStepIndex]?.kind!=='mystery')return;
+  if(!['mystery','novena-intention'].includes(structuredCurrent.steps[structuredStepIndex]?.kind))return;
   structuredStepIndex++;finished=false;startedAt=0;combo=0;$('typingInput').disabled=false;$('typingInput').value='';
   renderModeUI();renderStructuredStep();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
-  $('typingInput').focus({preventScroll:true});
+  if(state.structuredPlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function completeStructuredMeditationStep(){
   if(finished || !structuredCurrent)return;
@@ -827,14 +968,20 @@ function completeStructuredStep(s){
   const totalMs=structuredStartedAt?Math.max(1,Date.now()-structuredStartedAt):Math.max(1,s.ms);
   const aggregateAccuracy=structuredSessionTyped?Math.round(structuredSessionCorrect/structuredSessionTyped*100):100;
   const aggregateWpm=Math.round((structuredSessionCorrect/5)/(totalMs/60000));
-  state.structuredPractice.rosary=(state.structuredPractice.rosary||0)+1;
-  state.structuredHistory.unshift({type:'rosary',mysterySet:structuredCurrent.set.name,wpm:aggregateWpm,accuracy:aggregateAccuracy,errors:structuredSessionErrors,date:new Date().toISOString()});
+  const practiceId=structuredCurrent.type==='divine-mercy'?'divine-mercy':structuredCurrent.type==='divine-mercy-novena'?'divine-mercy-novena':'rosary';
+  state.structuredPractice[practiceId]=(state.structuredPractice[practiceId]||0)+1;
+  state.structuredHistory.unshift({type:practiceId,title:structuredCurrent.title,mysterySet:structuredCurrent.set.name || structuredCurrent.set.novenaTitle,wpm:aggregateWpm,accuracy:aggregateAccuracy,errors:structuredSessionErrors,date:new Date().toISOString()});
   state.structuredHistory=state.structuredHistory.slice(0,60);state.totalStructuredPrayers=(state.totalStructuredPrayers||0)+1;
   prepToday();state.today.prayers=(state.today.prayers||0)+1;updateStreak();
-  state.bestWpm=Math.max(state.bestWpm,aggregateWpm);state.bestAccuracy=Math.max(state.bestAccuracy,aggregateAccuracy);state.bestCombo=Math.max(state.bestCombo,combo);state.today.bestCombo=Math.max(state.today.bestCombo,combo);
+  if(state.structuredPlayStyle==='typing'){
+    state.bestWpm=Math.max(state.bestWpm,aggregateWpm);
+    state.bestAccuracy=Math.max(state.bestAccuracy,aggregateAccuracy);
+    state.bestCombo=Math.max(state.bestCombo,combo);
+    state.today.bestCombo=Math.max(state.today.bestCombo,combo);
+  }
   save();renderAll();gardenReact(aggregateAccuracy>=95);playTone('level');
-  showToast(`✦ Rosary completed · ${structuredCurrent.set.name}`);
-  $('gameMessage').textContent=`Rosary complete · ${aggregateAccuracy}% accuracy · the garden has journeyed with you.`;
+  showToast(`✦ ${structuredCurrent.title} completed`);
+  $('gameMessage').textContent=`${structuredCurrent.title} complete · ${state.structuredPlayStyle==='meditation'?'prayer companion session completed':aggregateAccuracy+'% accuracy'} · the garden has journeyed with you.`;
   transitionTimer=setTimeout(()=>chooseStructured({focus:true}),state.reduceMotion?300:850);
 }
 function onPrayerInput(){
@@ -1149,6 +1296,7 @@ $('scriptureModeBtn').addEventListener('click',()=>enterScriptureMode());
 $('prayerModeBtn').addEventListener('click',()=>choosePrayer({focus:true}));
 $('structuredModeBtn').addEventListener('click',()=>chooseStructured({focus:true}));
 $('structuredSelect').addEventListener('change',()=>chooseStructured({focus:true}));
+$('divineMercyNovenaDay')?.addEventListener('change',()=>{ if($('structuredSelect').value==='divine-mercy-novena') chooseStructured({focus:true}); });
 $('structuredTypingBtn').addEventListener('click',()=>setStructuredPlayStyle('typing'));
 $('structuredMeditationBtn').addEventListener('click',()=>setStructuredPlayStyle('meditation'));
 $('meditationAction').addEventListener('click',completeStructuredMeditationStep);

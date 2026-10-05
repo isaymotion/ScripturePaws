@@ -331,10 +331,11 @@ body{font-size:13px}
 }
 
 /* Rosary bead + decade progress */
-.rosary-progress{margin-top:6px;padding:7px 8px 6px;border:1px solid #91a78366;border-radius:10px;background:#17372b8c;box-shadow:0 3px 10px #06120d20}
+.rosary-progress-card{margin:10px 0 0}
+.rosary-progress{padding:9px 12px 10px;border:1px solid #91a78366;border-radius:12px;background:var(--card,#f6f0dd);box-shadow:0 5px 16px var(--shadow,#18382e18);color:var(--ink,#18382e)}
 .rosary-progress[hidden]{display:none!important}
-.rosary-progress-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:5px;color:#e9e2ca;font-size:7px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
-.rosary-progress-head span:last-child{color:#b8cba5}
+.rosary-progress-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;color:var(--ink,#18382e);font-size:7px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.rosary-progress-head span:last-child{color:var(--muted,#71806a)}
 .rosary-decades{display:grid;gap:4px}
 .rosary-decade{display:grid;grid-template-columns:12px 1fr 26px;align-items:center;gap:6px;min-height:10px;opacity:.55}
 .rosary-decade.current{opacity:1}
@@ -345,8 +346,8 @@ body{font-size:13px}
 .rosary-bead{display:block;width:7px;height:7px;margin:auto;border-radius:50%;border:1px solid #a9bd98;background:#264838;box-shadow:inset 0 1px 1px #ffffff22}
 .rosary-bead.filled{background:#e8dcae;border-color:#f5eac5;box-shadow:0 0 4px #f4e7b455}
 .rosary-bead.current{box-shadow:0 0 0 2px #e8dcae55}
-.rosary-decade-count{font-size:6px;color:#b8cba5;text-align:right;font-variant-numeric:tabular-nums}
-@media(max-width:700px){.rosary-progress{padding:6px}.rosary-bead{width:6px;height:6px}.rosary-decade{grid-template-columns:11px 1fr 23px;gap:4px}}
+.rosary-decade-count{font-size:6px;color:var(--muted,#71806a);text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:700px){.rosary-progress{padding:7px 8px}.rosary-bead{width:6px;height:6px}.rosary-decade{grid-template-columns:11px 1fr 23px;gap:4px}}
 
 /* Structured Rosary — contemplative Mystery cards */
 .structured-mystery-card{display:grid;gap:5px;max-width:820px;margin:0 auto;text-align:center;padding:2px 6px 4px}
@@ -387,3 +388,85 @@ body{font-size:13px}
   .meditation-prayer-card p{font-size:14px}
   .meditation-bead-action{width:100%;padding:7px 10px}
 }
+
+/* Divine Mercy Chaplet — dedicated bead companion tracker */
+.rosary-progress.divine-mercy-progress{
+  background:linear-gradient(180deg,#fbf7e8 0%,#f3edd8 100%);
+  border-color:#b7a46f88;
+  box-shadow:0 6px 18px #4a3d2018;
+}
+.divine-mercy-progress .rosary-progress-head{
+  color:#5a4523;
+  letter-spacing:.7px;
+}
+.divine-mercy-progress .rosary-progress-head span:last-child{color:#877553}
+.divine-mercy-opening,.divine-mercy-conclusion{
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,4vw,34px);
+  padding:5px 4px 7px;
+}
+.divine-mercy-opening-bead,.divine-mercy-conclusion-bead{
+  display:grid;justify-items:center;gap:3px;opacity:.48;
+}
+.divine-mercy-opening-bead.current,.divine-mercy-conclusion-bead.current{opacity:1}
+.divine-mercy-opening-bead.done,.divine-mercy-conclusion-bead.done{opacity:.82}
+.divine-mercy-opening-bead i,.divine-mercy-conclusion-bead i{
+  display:block;width:11px;height:11px;border-radius:50%;
+  background:#e6ddc0;border:1px solid #a89767;
+  box-shadow:inset 0 1px 2px #fff8;
+}
+.divine-mercy-opening-bead.done i,.divine-mercy-conclusion-bead.done i{background:#9e8951;border-color:#806b3d}
+.divine-mercy-opening-bead.current i,.divine-mercy-conclusion-bead.current i{
+  box-shadow:0 0 0 3px #c8b67555,0 0 7px #8f7a4444;
+}
+.divine-mercy-opening-bead small,.divine-mercy-conclusion-bead small{
+  font-size:5.5px;color:#806d49;font-weight:800;
+}
+.divine-mercy-decade-list{display:grid;gap:5px}
+.divine-mercy-decade{
+  display:grid;grid-template-columns:15px 20px 1fr 28px;align-items:center;gap:6px;
+  padding:3px 5px;border-radius:8px;opacity:.5;
+}
+.divine-mercy-decade.current{opacity:1;background:#fffaf0;box-shadow:inset 0 0 0 1px #c8b67544}
+.divine-mercy-decade.complete{opacity:.78}
+.divine-mercy-decade-label{
+  width:15px;height:15px;border-radius:50%;display:grid;place-items:center;
+  background:#8f7a44;color:#fff9e8;font-size:6px;font-weight:900;
+}
+.divine-mercy-decade.current .divine-mercy-decade-label{background:#5d6d4c;box-shadow:0 0 0 2px #9da98344}
+.divine-mercy-large-bead{
+  width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid #8c7847;background:#d7c98f;color:#fff9df;
+  box-shadow:inset 0 2px 2px #ffffff66,0 1px 3px #4a3d2033;
+  padding:0;font:inherit;
+}
+button.divine-mercy-large-bead{cursor:pointer}
+.divine-mercy-large-bead.filled{background:#9d8850;border-color:#806b3d}
+.divine-mercy-large-bead.current{box-shadow:0 0 0 3px #c8b67555,0 1px 4px #4a3d2044}
+.divine-mercy-large-bead span{font-size:8px;font-weight:900;line-height:1}
+.divine-mercy-small-beads{display:grid;grid-template-columns:repeat(10,minmax(6px,1fr));gap:4px;align-items:center}
+.divine-mercy-small-bead{
+  display:block;width:7px;height:7px;margin:auto;border-radius:50%;
+  border:1px solid #b5a77b;background:#e4dcc2;
+  box-shadow:inset 0 1px 1px #fff8;
+  padding:0;
+}
+.divine-mercy-small-bead.filled{background:#a08b52;border-color:#806b3d}
+.divine-mercy-small-bead.current{box-shadow:0 0 0 2px #c8b67566}
+button.divine-mercy-small-bead{cursor:pointer}
+.divine-mercy-decade-count{font-size:6px;color:#806d49;text-align:right;font-variant-numeric:tabular-nums}
+.divine-mercy-cross{font-size:15px;line-height:1;color:#806d49;opacity:.45}
+.divine-mercy-cross.current{opacity:1;text-shadow:0 0 7px #9e895155}
+.divine-mercy-progress .actionable:hover{transform:scale(1.12)}
+@media(max-width:700px){
+  .divine-mercy-opening,.divine-mercy-conclusion{gap:clamp(10px,5vw,22px)}
+  .divine-mercy-decade{grid-template-columns:14px 19px 1fr 23px;gap:4px;padding:2px 3px}
+  .divine-mercy-large-bead{width:17px;height:17px}
+  .divine-mercy-small-beads{gap:3px}
+  .divine-mercy-small-bead{width:6px;height:6px}
+}
+
+/* Divine Mercy Novena — intention companion */
+.divine-mercy-novena-day-picker{display:flex;align-items:center;gap:6px}
+.divine-mercy-novena-day-picker label{white-space:nowrap}
+.divine-mercy-novena-card .structured-mystery-prompt{max-width:720px}
+@media(max-width:700px){.divine-mercy-novena-day-picker{width:100%}.divine-mercy-novena-day-picker select{max-width:100%;font-size:7px}}
