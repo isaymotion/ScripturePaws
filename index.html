@@ -8,31 +8,67 @@
 </head>
 <body>
 <div class="app-shell">
-<header class="topbar">
-  <a class="brand" href="./"><span class="brand-mark">🐈</span><span><strong>Scripture Paws</strong><small>type • grow • be still</small></span></a>
-  <div class="top-stats"><div><small>BEST WPM</small><strong id="bestWpm">0</strong></div><div><small>TODAY</small><strong id="todayCount">0</strong></div><button id="settingsBtn" class="icon-btn" aria-label="Open settings">⚙</button></div>
+<header class="topbar immersive-topbar">
+  <div class="topbar-spacer" aria-hidden="true"></div>
+  <div class="top-stats">
+    <div><small>BEST WPM</small><strong id="bestWpm">0</strong></div>
+    <div><small>TODAY</small><strong id="todayCount">0</strong></div>
+    <button id="settingsBtn" class="icon-btn" aria-label="Open settings">⚙</button>
+  </div>
 </header>
 
 <main>
-<section class="garden-hero" id="gardenHero" aria-label="Scripture Paws garden">
+<section class="garden-hero immersive-garden" id="gardenHero" aria-label="Scripture Paws garden and Scripture practice">
   <div class="garden-image" aria-hidden="true"></div>
   <div class="garden-vignette" aria-hidden="true"></div>
+
   <div class="garden-hud">
     <div class="garden-title"><span>YOUR QUIET GARDEN</span><strong id="gardenMood">Morning Garden</strong></div>
-    <div class="hud-pills"><span>LEVEL <b id="level">1</b></span><span>COMBO <b id="combo">0</b></span><span>BLOOM <b id="bloomPercent">0%</b></span></div>
+    <div class="hud-pills">
+      <span>LEVEL <b id="level">1</b></span><span>COMBO <b id="combo">0</b></span><span>BLOOM <b id="bloomPercent">0%</b></span>
+    </div>
   </div>
-  <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
-</section>
 
-<section class="typing-wrap">
-  <div class="practice-head"><div><p class="eyebrow">SCRIPTURE PRACTICE</p><h1>Stay with the words.</h1></div><button id="newPromptBtn" class="text-btn" type="button">↻ New passage</button></div>
-  <div class="theme-row"><label for="themeSelect">Theme</label><select id="themeSelect"><option value="all">All themes</option><option>Peace & Stillness</option><option>Comfort & Grief</option><option>Hope</option><option>Trust & Faith</option><option>Strength & Perseverance</option><option>Guidance & Wisdom</option><option>Love & Compassion</option><option>Prayer & Gratitude</option><option>Anxiety & Worry</option><option>Forgiveness & Mercy</option><option>Courage</option></select></div>
-  <article class="verse-card"><div class="verse-meta"><span id="verseTheme">PEACE & STILLNESS</span><span id="verseRef">John 14:27</span></div><p id="verseText" class="verse-text"></p><div class="practice-count" id="practiceCount">Practiced 0 times</div></article>
-  <label class="sr-only" for="typingInput">Type the Scripture passage</label>
-  <textarea id="typingInput" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Begin typing…"></textarea>
-  <div class="typing-progress"><div class="track"><div id="progressFill"></div></div><span id="progressLabel">0%</span></div>
-  <div class="live-stats"><div><small>WPM</small><strong id="liveWpm">0</strong></div><div><small>ACCURACY</small><strong id="accuracy">100%</strong></div><div><small>COMBO</small><strong id="liveCombo">0</strong></div><div><small>TIME</small><strong id="elapsed">0:00</strong></div><div><small>ERRORS</small><strong id="errors">0</strong></div></div>
-  <p id="gameMessage" class="game-message" role="status" aria-live="polite">Take a breath, then begin.</p>
+  <div class="garden-practice" aria-label="Scripture practice">
+    <div class="garden-passage">
+      <div class="passage-top">
+        <span class="passage-theme"><span class="leaf-mark">✦</span><span id="verseTheme">PEACE & STILLNESS</span></span>
+        <span id="verseRef">John 14:27</span>
+      </div>
+      <p id="verseText" class="verse-text"></p>
+      <div class="practice-count" id="practiceCount">First practice — make this one yours.</div>
+    </div>
+
+    <div class="garden-typing-row">
+      <label class="sr-only" for="typingInput">Type the Scripture passage</label>
+      <textarea id="typingInput" rows="2" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type the words here…"></textarea>
+      <div class="garden-live-stats" aria-label="Typing statistics">
+        <div><small>WPM</small><strong id="liveWpm">0</strong></div>
+        <div><small>ACCURACY</small><strong id="accuracy">100%</strong></div>
+        <div><small>COMBO</small><strong id="liveCombo">0</strong></div>
+        <div><small>TIME</small><strong id="elapsed">0:00</strong></div>
+        <div><small>ERRORS</small><strong id="errors">0</strong></div>
+      </div>
+    </div>
+
+    <div class="garden-practice-bottom">
+      <div class="garden-theme-picker">
+        <label for="themeSelect"><span class="leaf-mark">✦</span> THEME</label>
+        <select id="themeSelect">
+          <option value="all">All themes</option><option>Peace & Stillness</option><option>Comfort & Grief</option><option>Hope</option><option>Trust & Faith</option><option>Strength & Perseverance</option><option>Guidance & Wisdom</option><option>Love & Compassion</option><option>Prayer & Gratitude</option><option>Anxiety & Worry</option><option>Forgiveness & Mercy</option><option>Courage</option><option>Protection & Refuge</option><option>Patience & Waiting</option><option>Humility & Service</option><option>Light & Creation</option>
+        </select>
+      </div>
+      <div class="garden-progress-wrap">
+        <div class="typing-progress"><div class="track"><div id="progressFill"></div></div><span id="progressLabel">0%</span></div>
+        <p id="gameMessage" class="game-message" role="status" aria-live="polite">Take a breath, then begin.</p>
+      </div>
+      <button id="newPromptBtn" class="garden-new" type="button">↻ New passage</button>
+    </div>
+  </div>
+
+  <div class="garden-side-note"><span>GARDEN RHYTHM</span><strong>Stay with the words.</strong><small>Accurate typing helps the garden bloom.</small></div>
+  <div class="garden-library-link"><button id="libraryJump" type="button">♧ Scripture Library <span>›</span></button></div>
+  <div class="garden-effects" id="gardenEffects" aria-hidden="true"></div>
 </section>
 
 <section class="bloom-card">
@@ -45,7 +81,7 @@
   <article class="info-card"><p class="eyebrow">PERSONAL RECORDS</p><h2>Your journey</h2><div class="records"><div><small>BEST WPM</small><strong id="recordWpm">0</strong></div><div><small>BEST ACCURACY</small><strong id="recordAccuracy">—</strong></div><div><small>BEST COMBO</small><strong id="recordCombo">0</strong></div><div><small>PASSAGES</small><strong id="recordPassages">0</strong></div></div></article>
 </section>
 
-<section class="library-card">
+<section class="library-card" id="scriptureLibrary">
   <button id="libraryToggle" class="library-toggle" type="button" aria-expanded="false"><span><small>SCRIPTURE LIBRARY</small><strong>Your verses by spiritual theme</strong></span><span id="librarySummary">0 themes practiced</span><b>＋</b></button>
   <div id="libraryPanel" class="library-panel" hidden><div id="themeLibrary" class="theme-library"></div></div>
 </section>

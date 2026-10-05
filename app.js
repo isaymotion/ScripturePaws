@@ -6,17 +6,90 @@ const STORE = 'scripture-paws-v2';
 const TRANSITION_MS = 850;
 
 const passages = [
+  // Peace & Stillness
   {ref:'John 14:27',theme:'Peace & Stillness',text:'Peace I leave with you, my peace I give unto you.'},
+  {ref:'John 16:33',theme:'Peace & Stillness',text:'These things I have spoken to you, that in me you may have peace. In the world you shall have distress: but have confidence, I have overcome the world.'},
+  {ref:'Philippians 4:7',theme:'Peace & Stillness',text:'And the peace of God, which surpasseth all understanding, keep your hearts and minds in Christ Jesus.'},
+  {ref:'Psalm 4:9',theme:'Peace & Stillness',text:'In peace in the selfsame I will sleep, and I will rest.'},
+
+  // Comfort & Grief
   {ref:'Matthew 11:28',theme:'Comfort & Grief',text:'Come to me, all you that labour, and are burdened, and I will refresh you.'},
+  {ref:'Matthew 5:4',theme:'Comfort & Grief',text:'Blessed are they that mourn: for they shall be comforted.'},
+  {ref:'Psalm 33:19 (34:18)',theme:'Comfort & Grief',text:'The Lord is nigh unto them that are of a contrite heart: and he will save the humble of spirit.'},
+
+  // Hope
   {ref:'Romans 15:13',theme:'Hope',text:'Now the God of hope fill you with all joy and peace in believing.'},
-  {ref:'Philippians 4:13',theme:'Strength & Perseverance',text:'I can do all things in him who strengtheneth me.'},
+  {ref:'Isaiah 40:31',theme:'Hope',text:'But they that hope in the Lord shall renew their strength, they shall take wings as eagles, they shall run and not be weary, they shall walk and not faint.'},
+  {ref:'Jeremiah 29:11',theme:'Hope',text:'For I know the thoughts that I think towards you, saith the Lord, thoughts of peace, and not of affliction, to give you an end and patience.'},
+  {ref:'Psalm 129:5 (130:5)',theme:'Hope',text:'I have hoped in the Lord, my soul hath hoped in his word.'},
+
+  // Trust & Faith
   {ref:'Proverbs 3:5',theme:'Trust & Faith',text:'Have confidence in the Lord with all thy heart, and lean not upon thy own prudence.'},
+  {ref:'Romans 8:31',theme:'Trust & Faith',text:'If God be for us, who is against us?'},
+  {ref:'Hebrews 13:5',theme:'Trust & Faith',text:'Let your manners be without covetousness, contented with such things as you have: for he hath said: I will not leave thee, neither will I forsake thee.'},
+  {ref:'Mark 10:27',theme:'Trust & Faith',text:'With men it is impossible; but not with God: for all things are possible with God.'},
+
+  // Strength & Perseverance
+  {ref:'Philippians 4:13',theme:'Strength & Perseverance',text:'I can do all things in him who strengtheneth me.'},
+  {ref:'2 Timothy 4:7',theme:'Strength & Perseverance',text:'I have fought a good fight: I have finished my course: I have kept the faith.'},
+  {ref:'Galatians 6:9',theme:'Strength & Perseverance',text:'And in doing good, let us not fail: for in due time we shall reap, not failing.'},
+  {ref:'2 Corinthians 12:9',theme:'Strength & Perseverance',text:'And he said to me: My grace is sufficient for thee: for power is made perfect in infirmity.'},
+
+  // Guidance & Wisdom
   {ref:'Psalm 118:105 (119:105)',theme:'Guidance & Wisdom',text:'Thy word is a lamp to my feet, and a light to my paths.'},
+  {ref:'Proverbs 16:3',theme:'Guidance & Wisdom',text:'Commit thy works to the Lord, and thy thoughts shall be directed.'},
+  {ref:'Proverbs 16:9',theme:'Guidance & Wisdom',text:'The heart of man disposeth his way: but the Lord must direct his steps.'},
+  {ref:'Jeremiah 33:3',theme:'Guidance & Wisdom',text:'Cry to me and I will hear thee: and I will shew thee great things, and sure things which thou knowest not.'},
+  {ref:'James 1:5',theme:'Guidance & Wisdom',text:'But if any of you want wisdom, let him ask of God, who giveth to all abundantly, and upbraideth not: and it shall be given him.'},
+
+  // Love & Compassion
   {ref:'1 John 4:19',theme:'Love & Compassion',text:'Let us therefore love God, because God first hath loved us.'},
+  {ref:'1 Corinthians 13:4',theme:'Love & Compassion',text:'Charity is patient, is kind: charity envieth not, dealeth not perversely; is not puffed up.'},
+  {ref:'John 15:13',theme:'Love & Compassion',text:'Greater love hath no man than this, that a man lay down his life for his friends.'},
+  {ref:'Ephesians 4:32',theme:'Love & Compassion',text:'And be ye kind one to another: merciful, forgiving one another, even as God hath forgiven you in Christ.'},
+
+  // Prayer & Gratitude
   {ref:'Philippians 4:6',theme:'Prayer & Gratitude',text:'Be nothing solicitous; but in every thing, by prayer and supplication, with thanksgiving, let your petitions be made known to God.'},
+  {ref:'1 Thessalonians 5:18',theme:'Prayer & Gratitude',text:'In all things give thanks; for this is the will of God in Christ Jesus concerning all.'},
+  {ref:'Luke 11:9',theme:'Prayer & Gratitude',text:'And I say to you: Ask, and it shall be given you: seek, and you shall find: knock, and it shall be opened to you.'},
+  {ref:'Mark 11:24',theme:'Prayer & Gratitude',text:'Therefore I say unto you, all things, whatsoever you ask when you pray, believe that you shall receive; and they shall come unto you.'},
+
+  // Anxiety & Worry
   {ref:'Matthew 6:34',theme:'Anxiety & Worry',text:'Be not therefore solicitous for to morrow; for the morrow will be solicitous for itself.'},
+  {ref:'1 Peter 5:7',theme:'Anxiety & Worry',text:'Casting all your care upon him, for he hath care of you.'},
+  {ref:'Matthew 6:33',theme:'Anxiety & Worry',text:'Seek ye therefore first the kingdom of God, and his justice, and all these things shall be added unto you.'},
+  {ref:'Psalm 54:23 (55:22)',theme:'Anxiety & Worry',text:'Cast thy care upon the Lord, and he shall sustain thee: he shall not suffer the just to waver for ever.'},
+
+  // Forgiveness & Mercy
   {ref:'Luke 6:36',theme:'Forgiveness & Mercy',text:'Be ye therefore merciful, as your Father also is merciful.'},
-  {ref:'Joshua 1:9',theme:'Courage',text:'Take courage, and be valiant. Fear not, nor be ye dismayed.'}
+  {ref:'Matthew 6:14',theme:'Forgiveness & Mercy',text:'For if you will forgive men their offences, your heavenly Father will forgive you also your offences.'},
+  {ref:'Micah 7:18',theme:'Forgiveness & Mercy',text:'Who is a God like to thee, who takest away iniquity, and passest by the sin of the remnant of thy inheritance? he will send his fury no more, because he delighteth in mercy.'},
+
+  // Courage
+  {ref:'Joshua 1:9',theme:'Courage',text:'Take courage, and be valiant. Fear not, nor be ye dismayed: because the Lord thy God is with thee in all things whatsoever thou shalt go to.'},
+  {ref:'Isaiah 41:10',theme:'Courage',text:'Fear not, for I am with thee: turn not aside, for I am thy God: I have strengthened thee, and have helped thee, and the right hand of my just one hath upheld thee.'},
+  {ref:'Isaiah 43:2',theme:'Courage',text:'When thou shalt pass through the waters, I will be with thee, and the rivers shall not cover thee: when thou shalt walk in the fire, thou shalt not be burnt, and the flames shall not burn in thee.'},
+
+  // Protection & Refuge
+  {ref:'Psalm 22:1 (23:1)',theme:'Protection & Refuge',text:'The Lord ruleth me: and I shall want nothing.'},
+  {ref:'Psalm 45:2 (46:1)',theme:'Protection & Refuge',text:'Our God is our refuge and strength: a helper in troubles, which have found us exceedingly.'},
+  {ref:'Psalm 90:1 (91:1)',theme:'Protection & Refuge',text:'He that dwelleth in the aid of the most High, shall abide under the protection of the God of Jacob.'},
+  {ref:'Psalm 120:7 (121:7)',theme:'Protection & Refuge',text:'The Lord keepeth thee from all evil: the Lord keep thy soul.'},
+
+  // Patience & Waiting
+  {ref:'Lamentations 3:22-23',theme:'Patience & Waiting',text:'The mercies of the Lord that we are not consumed: because his commiserations have not failed. They are new every morning, great is thy faithfulness.'},
+  {ref:'Romans 12:12',theme:'Patience & Waiting',text:'Rejoicing in hope. Patient in tribulation. Instant in prayer.'},
+  {ref:'James 1:4',theme:'Patience & Waiting',text:'And patience hath a perfect work; that you may be perfect and entire, failing in nothing.'},
+
+  // Humility & Service
+  {ref:'Matthew 11:29',theme:'Humility & Service',text:'Take up my yoke upon you, and learn of me, because I am meek, and humble of heart: and you shall find rest to your souls.'},
+  {ref:'Micah 6:8',theme:'Humility & Service',text:'I will shew thee, O man, what is good, and what the Lord requireth of thee: Verily to do judgment, and to love mercy, and to walk solicitous with thy God.'},
+  {ref:'Philippians 2:3',theme:'Humility & Service',text:'Let nothing be done through contention, neither by vainglory: but in humility, let each esteem others better than themselves.'},
+
+  // Light & Creation
+  {ref:'John 8:12',theme:'Light & Creation',text:'I am the light of the world: he that followeth me, walketh not in darkness, but shall have the light of life.'},
+  {ref:'Matthew 5:14',theme:'Light & Creation',text:'You are the light of the world. A city seated on a mountain cannot be hid.'},
+  {ref:'Psalm 18:2 (19:1)',theme:'Light & Creation',text:'The heavens shew forth the glory of God, and the firmament declareth the work of his hands.'}
 ];
 const themes = [...new Set(passages.map(p => p.theme))];
 const defaultState = {
@@ -34,6 +107,48 @@ let finished = false;
 let combo = 0;
 let transitionTimer = null;
 let audioContext = null;
+const decks = new Map();
+const DECK_KEY = () => $('themeSelect')?.value || 'all';
+
+function shuffle(list){
+  const a=[...list];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function recentRefs(limit=8){
+  return state.history.slice(0,limit).map(x=>x.ref);
+}
+function refillDeck(key){
+  const pool=key==='all'?passages:passages.filter(p=>p.theme===key);
+  if(!pool.length) return [];
+  const recent=new Set(recentRefs());
+  const fresh=pool.filter(p=>!recent.has(p.ref));
+  const warm=pool.filter(p=>recent.has(p.ref));
+  // Prefer verses not seen recently, then shuffle within each group.
+  return shuffle(fresh).concat(shuffle(warm));
+}
+function nextFromDeck(){
+  const key=DECK_KEY();
+  let deck=decks.get(key)||[];
+  if(!deck.length) deck=refillDeck(key);
+  let next=deck.shift();
+  // Avoid an immediate repeat when a small theme has only one or two verses.
+  if(next && current && next.ref===current.ref && deck.length){
+    const alternate=deck.shift();
+    deck.push(next);
+    next=alternate;
+  }
+  decks.set(key,deck);
+  return next;
+}
+function invalidateDeckRef(ref){
+  for(const [key,deck] of decks){
+    decks.set(key,deck.filter(p=>p.ref!==ref));
+  }
+}
 
 function load(){
   try {
@@ -73,13 +188,8 @@ function updateStreak(){
 function choosePrompt({focus=false} = {}){
   prepToday();
   clearTimeout(transitionTimer);
-  const wanted = $('themeSelect').value;
-  let pool = wanted === 'all' ? passages : passages.filter(p => p.theme === wanted);
-  if(!pool.length) pool = passages;
-  const recent = current?.ref;
-  let choices = pool.filter(p => p.ref !== recent);
-  if(!choices.length) choices = pool;
-  current = choices[Math.floor(Math.random()*choices.length)];
+  current = nextFromDeck() || passages[Math.floor(Math.random()*passages.length)];
+  invalidateDeckRef(current.ref);
   finished = false;
   combo = 0;
   startedAt = 0;
@@ -95,6 +205,7 @@ function choosePrompt({focus=false} = {}){
 function selectPassage(p){
   clearTimeout(transitionTimer);
   current = p;
+  invalidateDeckRef(p.ref);
   finished = false;
   combo = 0;
   startedAt = 0;
@@ -383,8 +494,15 @@ $('typingInput').addEventListener('keydown',e=>{
     }
   }
 });
-$('themeSelect').addEventListener('change',()=>choosePrompt());
+$('themeSelect').addEventListener('change',()=>{ decks.delete(DECK_KEY()); choosePrompt(); });
 $('newPromptBtn').addEventListener('click',()=>choosePrompt());
+$('libraryJump').addEventListener('click',()=>{
+  const panel=$('libraryPanel');
+  panel.hidden=false;
+  $('libraryToggle').setAttribute('aria-expanded','true');
+  $('libraryToggle').querySelector('b').textContent='−';
+  $('scriptureLibrary').scrollIntoView({behavior: state.reduceMotion ? 'auto' : 'smooth', block:'start'});
+});
 $('libraryToggle').addEventListener('click',()=>{
   const open=$('libraryPanel').hidden;
   $('libraryPanel').hidden=!open;

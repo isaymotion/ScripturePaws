@@ -6,7 +6,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 
 - Continuous Scripture typing: completing a passage automatically prepares the next one.
 - Verses can be typed repeatedly; practice counts are retained locally.
-- Scripture library organized by spiritual theme.
+- Scripture library organized by spiritual theme, with 55 passages across 15 themes.
 - Live WPM, accuracy, errors, elapsed time, and typing combo.
 - Bloom meter that advances with practice and triggers subtle garden reactions.
 - Daily goals: passages, high accuracy, and combo.
@@ -18,9 +18,9 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 
 ## Scripture themes
 
-Peace & Stillness; Comfort & Grief; Hope; Trust & Faith; Strength & Perseverance; Guidance & Wisdom; Love & Compassion; Prayer & Gratitude; Anxiety & Worry; Forgiveness & Mercy; Courage.
+Peace & Stillness; Comfort & Grief; Hope; Trust & Faith; Strength & Perseverance; Guidance & Wisdom; Love & Compassion; Prayer & Gratitude; Anxiety & Worry; Forgiveness & Mercy; Courage; Protection & Refuge; Patience & Waiting; Humility & Service; Light & Creation.
 
-The current Scripture set uses short Douay-Rheims (Challoner revision) passages already present in the project. The historical translation is public domain; verify jurisdictional requirements before wider distribution.
+The Scripture set uses the Douay-Rheims 1899 American Edition (Challoner revision), a public-domain translation. The verse references are kept in the app as typed practice passages; Psalm references include modern-numbering equivalents where useful.
 
 ## Run locally
 
@@ -49,3 +49,10 @@ This game was created by Isabella Navarro, MD. Latest version October 2026. isay
 - Local practice streak is tracked
 - Optional lightweight sound cues are now functional
 - Timer pauses while the page is hidden
+
+## Verse selection
+- The game uses a shuffled deck rather than independent random selection.
+- A deck is exhausted before its verses are reshuffled, greatly reducing immediate repeats.
+- Recently practiced verses are deprioritized when a new deck is built.
+- Unpracticed verses naturally rise earlier in a fresh deck.
+- Theme-filtered practice uses the same no-repeat deck logic within that theme.

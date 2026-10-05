@@ -8,3 +8,276 @@
 .bloom-card,.info-card,.library-card,.settings-panel{background:#122c21cc;border:1px solid #365744;border-radius:12px;padding:14px 17px;margin-top:11px}.bloom-copy{display:flex;justify-content:space-between;align-items:end;gap:10px}.bloom-card h2{margin:0;font-family:Georgia,serif;font-size:17px;font-weight:normal}.bloom-copy strong{font-size:20px;color:var(--gold)}.bloom-track{margin-top:9px;height:9px}.bloom-message{color:#91a68f;font-size:8px;margin:6px 0 0}.goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.info-card h2{margin:0;font-family:Georgia,serif;font-size:15px;font-weight:normal}.goal{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #294a38;padding:8px 0 6px;font-size:8px;color:#b2c0ae}.goal b{color:#a9c88e}.records{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:9px}.records div{background:#10271e;border:1px solid #294b3a;border-radius:7px;padding:7px;text-align:center}.records small{display:block;font-size:5px;color:#91a58e}.records strong{display:block;font-size:13px;margin-top:2px}.library-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:none;border:0;color:var(--cream);text-align:left;cursor:pointer}.library-toggle small{display:block;color:#a9c88e;font-size:7px;letter-spacing:1.7px}.library-toggle strong{display:block;font-family:Georgia,serif;font-weight:normal;font-size:15px;margin-top:2px}.library-toggle span:nth-child(2){font-size:7px;color:#8ea08c;margin-left:auto}.library-toggle>b{font-size:17px;color:#a9c88e}.library-panel{border-top:1px solid #365744;margin-top:10px;padding-top:10px}.theme-library{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.theme-card{background:#10271e;border:1px solid #2e5140;border-radius:8px;padding:9px}.theme-head{display:flex;justify-content:space-between;gap:8px}.theme-head small{display:block;color:#f1e9ce;font-size:8px}.theme-head strong{display:block;color:#a9c88e;font-size:7px;margin-top:2px}.theme-head>span{font-size:6px;color:#849783}.theme-verses{margin-top:6px;display:grid;gap:3px}.theme-verses button{display:flex;justify-content:space-between;gap:8px;background:#173329;border:1px solid #2e5140;color:var(--cream);padding:6px;border-radius:5px;font-size:7px;text-align:left;cursor:pointer}.theme-verses b{color:var(--gold)}.settings-panel{max-width:680px}.settings-head{display:flex;justify-content:space-between}.settings-head h2{margin:0;font-family:Georgia,serif;font-weight:normal;font-size:16px}.setting{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #294b3a}.setting b{display:block;font-size:9px}.setting small{display:block;color:#8fa18c;font-size:7px;margin-top:3px}.setting input{accent-color:#86b66f;width:18px;height:18px}.setting-actions{display:flex;gap:7px;margin-top:11px}.secondary,.danger{padding:8px 11px;border-radius:999px;border:1px solid #385946;background:#10271e;color:var(--cream);cursor:pointer;font-size:8px}.danger{border-color:#75443b;color:#e8aaa0}.small{color:#879a87;font-size:7px;line-height:1.5}.about{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;color:#728772;font-size:6px;margin:15px 0}.about b{color:#91b47d}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:#f4edcf;color:#173329;border:2px solid #173329;padding:9px 13px;border-radius:999px;box-shadow:3px 3px 0 #08140f;z-index:30;font-size:8px;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.reduce-motion *{animation:none!important;transition:none!important}
 @media(max-width:700px){.app-shell{padding:9px 10px 27px}.topbar{margin-bottom:8px}.top-stats{gap:8px}.garden-hero{height:345px}.garden-hud{flex-direction:column}.hud-pills{justify-content:flex-start}.typing-wrap{margin:10px 4px 0;padding:16px 14px}.live-stats{grid-template-columns:repeat(3,1fr)}.live-stats div:nth-child(4),.live-stats div:nth-child(5){display:none}.goals-grid,.theme-library{grid-template-columns:1fr}}
 @media(max-width:430px){.brand small{font-size:6px}.brand strong{font-size:13px}.garden-hero{height:290px}.garden-image{background-position:58% 54%}.garden-title{padding:6px 8px}.garden-title strong{font-size:11px}.practice-head h1{font-size:19px}.theme-row{align-items:flex-start;flex-direction:column}.theme-row select{width:100%}.verse-text{font-size:17px}.typing-wrap textarea{min-height:78px}.records{grid-template-columns:repeat(2,1fr)}}
+
+/* Readability pass: secondary UI text should remain legible at normal desktop viewing size. */
+body{font-size:13px}
+.brand small,.top-stats small{font-size:8px}
+.brand strong{font-size:16px}
+.text-btn{font-size:9px}
+.garden-title span{font-size:8px}
+.garden-title strong{font-size:13px}
+.hud-pills span{font-size:8px}
+.eyebrow{font-size:8px}
+.practice-head h1{font-size:24px}
+.theme-row{font-size:9px}
+.theme-row select{font-size:9px}
+.verse-meta{font-size:8px}
+.verse-text{font-size:clamp(20px,2.8vw,27px)}
+.practice-count{font-size:8px}
+.typing-wrap textarea{font-size:13px}
+.typing-progress span{font-size:8px}
+.live-stats small{font-size:7px}
+.live-stats strong{font-size:14px}
+.game-message{font-size:9px}
+.bloom-card,.info-card,.library-card,.settings-panel{padding:15px 18px}
+.bloom-card h2{font-size:18px}
+.bloom-copy strong{font-size:21px}
+.bloom-message{font-size:9px}
+.info-card h2{font-size:16px}
+.goal{font-size:9px}
+.records small{font-size:6.5px}
+.records strong{font-size:14px}
+.library-toggle small{font-size:8px}
+.library-toggle strong{font-size:16px}
+.library-toggle span:nth-child(2){font-size:8px}
+.theme-head small{font-size:9px}
+.theme-head strong{font-size:8px}
+.theme-head>span{font-size:7px}
+.theme-verses button{font-size:8px}
+.setting b{font-size:10px}
+.setting small{font-size:8px}
+.secondary,.danger{font-size:9px}
+.small{font-size:8px}
+.about{font-size:7px}
+.toast{font-size:9px}
+@media(max-width:700px){
+  .practice-head h1{font-size:22px}
+  .verse-text{font-size:20px}
+}
+@media(max-width:430px){
+  .brand small{font-size:7px}
+  .brand strong{font-size:14px}
+  .garden-title span{font-size:7px}
+  .garden-title strong{font-size:12px}
+  .practice-head h1{font-size:21px}
+  .verse-text{font-size:19px}
+}
+
+/* Garden HUD readability pass: the garden labels are part of the game UI and should remain readable over the artwork. */
+.garden-title{padding:9px 12px}
+.garden-title span{font-size:10px;letter-spacing:1.7px}
+.garden-title strong{font-size:16px;line-height:1.15}
+.hud-pills{gap:6px}
+.hud-pills span{padding:6px 9px;font-size:9px}
+.hud-pills b{font-size:10px}
+
+@media(max-width:700px){
+  .garden-title{padding:8px 11px}
+  .garden-title span{font-size:9px}
+  .garden-title strong{font-size:15px}
+  .hud-pills span{font-size:9px;padding:6px 8px}
+}
+@media(max-width:430px){
+  .garden-title{padding:7px 10px}
+  .garden-title span{font-size:8px}
+  .garden-title strong{font-size:14px}
+  .hud-pills span{font-size:8px;padding:5px 7px}
+}
+
+/* Immersive garden practice pass: the typing tutor now lives inside the garden scene. */
+.immersive-topbar{position:absolute;top:22px;right:22px;z-index:20;width:auto;height:auto;margin:0;pointer-events:none}.immersive-topbar .topbar-spacer{display:none}.immersive-topbar .top-stats{pointer-events:auto}.immersive-topbar .top-stats>div{display:none}.immersive-topbar .icon-btn{width:34px;height:34px;background:#17372bd9;border-color:#a2b985;color:#f5efd7;box-shadow:0 4px 10px #06120d66}
+.immersive-garden{height:620px;border-radius:20px}.immersive-garden .garden-vignette{background:linear-gradient(180deg,#07170b12 0%,#07170b00 48%,#07170b42 100%)}
+.garden-practice{position:absolute;z-index:7;left:50%;bottom:18px;transform:translateX(-50%);width:min(86%,850px);display:flex;flex-direction:column;gap:8px}
+.garden-passage{background:linear-gradient(135deg,#f6efd8f5,#e9dfbdF5);color:var(--ink);border:2px solid #647756;border-radius:18px;padding:13px 20px 11px;box-shadow:0 7px 0 #10271ccc,0 12px 28px #07150e66;backdrop-filter:blur(3px)}
+.passage-top{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#526b51;font-size:8px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}.passage-top .leaf-mark,.garden-theme-picker .leaf-mark{color:#658c55;margin-right:4px}.verse-text{font-size:clamp(20px,2.25vw,29px);line-height:1.25;margin:7px 0 5px;text-shadow:0 1px #fff8}.practice-count{font-size:8px;color:#71806a}
+.garden-typing-row{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:8px;align-items:stretch}.garden-typing-row textarea{margin:0;min-height:62px;height:62px;background:#f4eed9f5;color:#294332;border:2px solid #617957;border-radius:16px;padding:14px 17px;box-shadow:0 6px 0 #10271ccc,0 10px 20px #07150e55;font-size:14px;line-height:1.35;outline:none}.garden-typing-row textarea::placeholder{color:#70806f}.garden-typing-row textarea:focus{border-color:#c7d99d;box-shadow:0 6px 0 #10271ccc,0 0 0 3px #d2e8aa55}.garden-live-stats{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:7px;background:#203d2fe8;border:1px solid #82916e;border-radius:14px;box-shadow:0 6px 0 #10271ccc,0 10px 20px #07150e55}.garden-live-stats div{min-width:0;text-align:center;padding:4px 3px;border-radius:7px;background:#142d22aa}.garden-live-stats small{display:block;color:#a9c69b;font-size:6px;letter-spacing:1px}.garden-live-stats strong{display:block;color:#f5efd7;font-size:13px;margin-top:2px}.garden-practice-bottom{display:grid;grid-template-columns:170px 1fr auto;gap:9px;align-items:center}.garden-theme-picker{display:flex;align-items:center;gap:5px;background:#1c392de8;border:1px solid #7b916e;border-radius:999px;padding:6px 10px;box-shadow:0 5px 0 #10271ccc}.garden-theme-picker label{color:#c4d8aa;font-size:7px;letter-spacing:1px;white-space:nowrap}.garden-theme-picker select{width:92px;background:transparent;border:0;color:#f5efd7;outline:none;font-size:8px;padding:2px}.garden-theme-picker option{background:#17372b;color:#f5efd7}.garden-progress-wrap{min-width:0}.garden-progress-wrap .typing-progress{margin:0;gap:6px}.garden-progress-wrap .track{height:6px;background:#10271dcc;border-color:#6b7f60}.garden-progress-wrap .track div{background:linear-gradient(90deg,#9dc77a,#f0dc88)}.garden-progress-wrap .typing-progress span{color:#f5efd7;font-size:7px;width:28px}.garden-progress-wrap .game-message{color:#f4eacb;font-size:8px;margin:3px 0 0;text-shadow:0 1px 3px #08150e}.garden-new{border:1px solid #a7b889;background:#203f30e8;color:#f5efd7;border-radius:999px;padding:7px 11px;font-size:8px;cursor:pointer;white-space:nowrap;box-shadow:0 5px 0 #10271ccc}.garden-new:hover{background:#2c503d}.garden-side-note{position:absolute;display:none}.garden-library-link{position:absolute;right:18px;bottom:17px;z-index:8;display:none}.garden-library-link button{border:1px solid #a4b887;background:#1b382ce8;color:#f5efd7;border-radius:999px;padding:9px 13px;font-size:9px;box-shadow:0 5px 0 #10271ccc;cursor:pointer}
+.immersive-garden .garden-effects{z-index:10}.immersive-garden.full-bloom .garden-image{filter:saturate(1.08) brightness(1.03);transition:filter .6s ease}
+/* The lower information remains available, but no longer competes with the in-garden practice scene. */
+.bloom-card{margin-top:14px}.goals-grid{margin-top:11px}
+
+@media(max-width:760px){
+  .immersive-topbar{top:13px;right:13px}.immersive-garden{height:560px}.garden-hud{right:58px}.garden-practice{width:92%;bottom:12px}.garden-passage{padding:11px 14px 9px}.verse-text{font-size:20px}.garden-typing-row{grid-template-columns:1fr}.garden-live-stats{grid-template-columns:repeat(5,1fr);padding:5px}.garden-live-stats div{padding:3px 1px}.garden-live-stats small{font-size:5px}.garden-live-stats strong{font-size:11px}.garden-practice-bottom{grid-template-columns:1fr 1fr;gap:6px}.garden-theme-picker{min-width:0}.garden-progress-wrap{grid-column:1 / -1;grid-row:2}.garden-new{justify-self:end}
+}
+@media(max-width:500px){
+  .immersive-garden{height:540px}.garden-hud{left:10px;top:10px}.garden-title{max-width:190px}.hud-pills{gap:3px}.hud-pills span{padding:5px 6px;font-size:7px}.hud-pills b{font-size:8px}.garden-practice{width:94%;bottom:9px;gap:6px}.garden-passage{border-radius:14px;padding:9px 11px 8px}.passage-top{font-size:6px;letter-spacing:1px}.verse-text{font-size:17px;line-height:1.25;margin:6px 0 4px}.practice-count{font-size:6px}.garden-typing-row textarea{height:52px;min-height:52px;border-radius:12px;padding:10px 12px;font-size:12px}.garden-live-stats{border-radius:11px}.garden-live-stats small{font-size:4.5px;letter-spacing:.6px}.garden-live-stats strong{font-size:10px}.garden-practice-bottom{grid-template-columns:1fr auto}.garden-theme-picker{padding:5px 7px}.garden-theme-picker label{font-size:6px}.garden-theme-picker select{font-size:7px;width:82px}.garden-progress-wrap{grid-column:1 / -1;grid-row:2}.garden-new{font-size:7px;padding:6px 8px}.immersive-topbar .icon-btn{width:30px;height:30px}.bloom-card,.goals-grid,.library-card{margin-top:9px}
+}
+
+/* Immersive Garden refinement: keep the artwork dominant and turn practice controls into a compact in-world station. */
+.immersive-garden{height:620px}
+.garden-practice{
+  width:min(74%,730px);
+  bottom:20px;
+  gap:6px;
+}
+.garden-passage{
+  padding:10px 16px 8px;
+  border-width:1px;
+  border-radius:14px;
+  box-shadow:0 4px 0 #10271cb8,0 8px 18px #07150e42;
+  background:linear-gradient(135deg,#f6efd8e8,#e9dfbde8);
+}
+.passage-top{font-size:7px;letter-spacing:1.15px}
+.verse-text{
+  font-size:clamp(18px,1.8vw,23px);
+  line-height:1.18;
+  margin:5px 0 3px;
+}
+.practice-count{font-size:7px}
+.garden-typing-row{grid-template-columns:minmax(0,1fr) 150px;gap:6px}
+.garden-typing-row textarea{
+  height:50px;
+  min-height:50px;
+  padding:10px 13px;
+  border-radius:12px;
+  border-width:1px;
+  box-shadow:0 4px 0 #10271cb8,0 7px 14px #07150e3d;
+  font-size:12px;
+}
+.garden-live-stats{
+  grid-template-columns:repeat(5,1fr);
+  gap:2px;
+  padding:4px;
+  border-radius:11px;
+  box-shadow:0 4px 0 #10271cb8,0 7px 14px #07150e3d;
+}
+.garden-live-stats div{padding:3px 1px;border-radius:6px}
+.garden-live-stats small{font-size:5px;letter-spacing:.7px}
+.garden-live-stats strong{font-size:11px;margin-top:1px}
+.garden-practice-bottom{grid-template-columns:145px 1fr auto;gap:6px}
+.garden-theme-picker{padding:5px 8px;box-shadow:0 3px 0 #10271cb8}
+.garden-theme-picker label{font-size:6px;letter-spacing:.8px}
+.garden-theme-picker select{font-size:7px;width:80px}
+.garden-progress-wrap .track{height:5px}
+.garden-progress-wrap .typing-progress span{font-size:6px;width:25px}
+.garden-progress-wrap .game-message{font-size:7px;margin-top:2px}
+.garden-new{padding:6px 9px;font-size:7px;box-shadow:0 3px 0 #10271cb8}
+
+@media(max-width:760px){
+  .immersive-garden{height:560px}
+  .garden-practice{width:84%;bottom:13px}
+  .garden-passage{padding:9px 12px 7px}
+  .verse-text{font-size:18px}
+  .garden-typing-row{grid-template-columns:minmax(0,1fr) 135px}
+}
+@media(max-width:560px){
+  .garden-practice{width:90%;bottom:10px}
+  .garden-typing-row{grid-template-columns:1fr}
+  .garden-live-stats{grid-template-columns:repeat(5,1fr)}
+  .garden-practice-bottom{grid-template-columns:1fr auto}
+  .garden-progress-wrap{grid-column:1 / -1;grid-row:2}
+}
+@media(max-width:430px){
+  .immersive-garden{height:520px}
+  .garden-practice{width:92%;gap:4px}
+  .garden-passage{border-radius:11px;padding:8px 10px 6px}
+  .passage-top{font-size:5.5px}
+  .verse-text{font-size:16px;line-height:1.18;margin:4px 0 2px}
+  .practice-count{font-size:5.5px}
+  .garden-typing-row textarea{height:46px;min-height:46px;font-size:11px;padding:9px 10px}
+  .garden-live-stats{padding:3px}
+  .garden-live-stats small{font-size:4px}
+  .garden-live-stats strong{font-size:9px}
+  .garden-theme-picker{padding:4px 6px}
+  .garden-theme-picker label{font-size:5.5px}
+  .garden-theme-picker select{font-size:6.5px;width:72px}
+  .garden-new{font-size:6.5px;padding:5px 7px}
+}
+
+/* Readability Pass 3 — supporting progression UI should remain comfortably readable. */
+.bloom-card .eyebrow,
+.info-card .eyebrow,
+.library-toggle small{font-size:10px;letter-spacing:1.8px}
+.bloom-card h2{font-size:20px;line-height:1.2}
+.bloom-copy strong{font-size:24px}
+.bloom-message{font-size:11px;line-height:1.45}
+.info-card h2{font-size:18px;line-height:1.2}
+.goal{font-size:11px;line-height:1.35;padding:9px 0 8px}
+.goal b{font-size:10px}
+.records{gap:7px;margin-top:10px}
+.records div{padding:8px 6px}
+.records small{font-size:8px;letter-spacing:.7px;line-height:1.2}
+.records strong{font-size:15px}
+.library-toggle strong{font-size:19px;line-height:1.2}
+.library-toggle span:nth-child(2){font-size:9px}
+.library-toggle>b{font-size:20px}
+.library-panel{margin-top:12px;padding-top:12px}
+.theme-library{gap:9px}
+.theme-card{padding:11px;border-radius:9px}
+.theme-head small{font-size:10px;line-height:1.25}
+.theme-head strong{font-size:9px;line-height:1.25}
+.theme-head>span{font-size:8px}
+.theme-verses{margin-top:8px;gap:4px}
+.theme-verses button{padding:7px 8px;font-size:9px;line-height:1.25}
+.about{font-size:8px;line-height:1.4;margin:16px 0}
+
+@media(max-width:700px){
+  .bloom-card .eyebrow,
+  .info-card .eyebrow,
+  .library-toggle small{font-size:9px}
+  .bloom-card h2{font-size:19px}
+  .bloom-message{font-size:10px}
+  .info-card h2{font-size:17px}
+  .goal{font-size:10px}
+  .records small{font-size:7.5px}
+  .library-toggle strong{font-size:18px}
+  .theme-head small{font-size:9.5px}
+  .theme-head strong{font-size:8.5px}
+  .theme-verses button{font-size:8.5px}
+}
+
+/* Readability Pass 4 — immersive garden controls stay compact, but no longer use micro-text. */
+.immersive-garden .garden-title span{font-size:9px;letter-spacing:1.5px}
+.immersive-garden .garden-title strong{font-size:15px;line-height:1.15}
+.immersive-garden .hud-pills{gap:6px}
+.immersive-garden .hud-pills span{padding:6px 8px;font-size:8px}
+.immersive-garden .hud-pills b{font-size:9px}
+
+.immersive-garden .garden-practice{gap:7px}
+.immersive-garden .passage-top{font-size:8px;letter-spacing:1.1px}
+.immersive-garden .verse-text{font-size:clamp(18px,1.9vw,24px);line-height:1.2}
+.immersive-garden .practice-count{font-size:8px;line-height:1.25}
+.immersive-garden .garden-typing-row{grid-template-columns:minmax(0,1fr) 172px;gap:7px}
+.immersive-garden .garden-typing-row textarea{font-size:13px}
+.immersive-garden .garden-live-stats{padding:5px;gap:3px}
+.immersive-garden .garden-live-stats div{padding:4px 2px}
+.immersive-garden .garden-live-stats small{font-size:7px;letter-spacing:.55px}
+.immersive-garden .garden-live-stats strong{font-size:12px}
+.immersive-garden .garden-practice-bottom{grid-template-columns:180px 1fr auto;gap:8px}
+.immersive-garden .garden-theme-picker{padding:6px 9px}
+.immersive-garden .garden-theme-picker label{font-size:8px;letter-spacing:.8px}
+.immersive-garden .garden-theme-picker select{font-size:9px;width:100px}
+.immersive-garden .garden-progress-wrap .typing-progress span{font-size:8px;width:30px}
+.immersive-garden .garden-progress-wrap .game-message{font-size:8.5px;line-height:1.25}
+.immersive-garden .garden-new{padding:7px 11px;font-size:9px}
+
+@media(max-width:760px){
+  .immersive-garden .garden-title span{font-size:8.5px}
+  .immersive-garden .garden-title strong{font-size:14px}
+  .immersive-garden .hud-pills span{font-size:7.5px}
+  .immersive-garden .garden-live-stats small{font-size:6.5px}
+  .immersive-garden .garden-live-stats strong{font-size:11px}
+  .immersive-garden .garden-practice-bottom{grid-template-columns:180px 1fr auto}
+}
+
+@media(max-width:560px){
+  .immersive-garden .garden-practice-bottom{grid-template-columns:1fr auto}
+  .immersive-garden .garden-theme-picker label{font-size:7.5px}
+  .immersive-garden .garden-theme-picker select{font-size:8.5px;width:96px}
+}
+
+@media(max-width:430px){
+  .immersive-garden .garden-title span{font-size:8px}
+  .immersive-garden .garden-title strong{font-size:13px}
+  .immersive-garden .hud-pills span{font-size:7px;padding:5px 6px}
+  .immersive-garden .hud-pills b{font-size:8px}
+  .immersive-garden .passage-top{font-size:7px}
+  .immersive-garden .practice-count{font-size:7px}
+  .immersive-garden .garden-typing-row textarea{font-size:12px}
+  .immersive-garden .garden-live-stats small{font-size:6px}
+  .immersive-garden .garden-live-stats strong{font-size:10px}
+  .immersive-garden .garden-theme-picker label{font-size:7px}
+  .immersive-garden .garden-theme-picker select{font-size:8px}
+  .immersive-garden .garden-progress-wrap .typing-progress span{font-size:7px}
+  .immersive-garden .garden-progress-wrap .game-message{font-size:7.5px}
+  .immersive-garden .garden-new{font-size:8px}
+}
