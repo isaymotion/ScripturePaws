@@ -15,7 +15,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 
 - Continuous Scripture typing: completing a passage automatically prepares the next one.
 - Verses can be typed repeatedly; practice counts are retained locally.
-- Scripture library organized by spiritual theme, with 107 passages across 15 themes, including a major Psalm expansion with 44 additional Douay-Rheims passages plus 8 prayer-oriented Psalm passages in a dedicated Prayer Psalms deck.
+- Scripture library organized by spiritual theme, with 121 passages across 15 themes, including a major Psalm expansion with 44 additional Douay-Rheims passages plus 22 prayer-oriented Psalm passages in a dedicated Prayer Psalms deck.
 - Live WPM, accuracy, errors, elapsed time, and typing combo.
 - Bloom meter that advances with practice and triggers subtle garden reactions.
 - Daily goals: passages, high accuracy, combo, and at least one complete prayer.
@@ -28,7 +28,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 - **Structured Prayer mode — Holy Rosary:** a complete five-decade Rosary is built automatically from the current day’s Mystery set, with the standard sequence of opening prayers, five Mysteries, 50 decade Hail Marys, Glory Be prayers, the Fátima Prayer after each decade, and the Hail, Holy Queen conclusion.
 - Rosary Mystery schedule follows the contemporary EWTN/John Paul II pattern: Monday & Saturday Joyful; Tuesday & Friday Sorrowful; Wednesday & Sunday Glorious; Thursday Luminous. The app displays the selected Mystery set and individual Mystery before each decade.
 - Every completed Rosary prayer advances the garden scene, while each Mystery creates a dedicated quiet meditation step before its decade.
-- 10-prayer collection: Our Father, Hail Mary, Glory Be, Fátima Prayer, St. Michael, Hail Holy Queen, Apostles’ Creed, Angelus, Memorare to Mary, Memorare to St. Joseph, and Morning Offering.
+- 11-prayer collection: Our Father, Hail Mary, Glory Be, Fátima Prayer, St. Michael, Hail Holy Queen, Apostles’ Creed, Angelus, Memorare to Mary, Memorare to St. Joseph, and Morning Offering.
 - Prayer completion changes the garden background when a new garden scene is available.
 - Reaching Bloom 100% in Scripture mode also advances to the next available garden scene.
 - Garden-scene system prepared for Afternoon, Autumn, Winter, Summer, Scottish, Mushroom, and future scenes; unavailable scenes are skipped until their artwork is added. The Afternoon Garden is bundled in this build and joins Morning and Autumn as an available progression scene.
@@ -100,7 +100,7 @@ The app keeps the selected source wording ordered for typing practice and does n
 
 ## Garden progression
 
-Completing a prayer changes the garden scene. In Scripture mode, reaching Bloom 100% also changes the garden. The current build includes Starter, Morning, Afternoon, Autumn, and Winter Garden artwork; additional scenes are intentionally staged one at a time so each background can be quality-checked before being added.
+Completing a prayer changes the garden scene. In Scripture mode, reaching Bloom 100% also changes the garden. The current build includes Starter, Morning, Afternoon, Autumn, Winter, and Church Garden artwork; additional scenes are intentionally staged one at a time so each background can be quality-checked before being added.
 
 ## Structured Prayer — Holy Rosary
 
@@ -199,7 +199,7 @@ Winter Garden is now bundled as a progression scene with a snow-covered cottage 
 
 ## Latest Scripture expansion
 
-This build expands the Scripture library from 55 to 99 passages. The 44 new Psalm selections are distributed across the existing 15 spiritual themes so the expanded library strengthens the existing progression and mastery system rather than creating a separate Psalm-only progression. Several longer selections, including Psalm 22 (23), Psalm 26 (27), and Psalm 120 (121), provide more substantial typing challenges.
+This build expands the Scripture library from 55 to 99 passages. The 44 additional Psalm selections are distributed across the existing 15 spiritual themes so the expanded library strengthens the existing progression and mastery system rather than creating a separate Psalm-only progression. A dedicated Prayer Psalms deck now adds 22 prayer-oriented Psalm selections for petition, mercy, guidance, protection, peace, trust, hope, and praise. Several longer selections, including Psalm 22 (23), Psalm 26 (27), and Psalm 120 (121), provide more substantial typing challenges.
 
 
 ## Starter Garden

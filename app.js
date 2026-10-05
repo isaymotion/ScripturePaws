@@ -145,7 +145,21 @@ const passages = [
   {ref:'Psalm 85:1-7',theme:'Prayer & Gratitude',prayerPsalm:true,text:'A prayer for David himself. Incline thy ear, O Lord, and hear me: for I am needy and poor. Preserve my soul, for I am holy: save thy servant, O my God, that trusteth in thee. Have mercy on me, O Lord, for I have cried to thee all the day. Give joy to the soul of thy servant, for to thee, O Lord, I have lifted up my soul. For thou, O Lord, art sweet and mild: and plenteous in mercy to all that call upon thee. Give ear, O Lord, to my prayer: and attend to the voice of my petition. I have called upon thee in the day of my trouble: because thou hast heard me.'},
   {ref:'Psalm 101:2-3',theme:'Anxiety & Worry',prayerPsalm:true,text:'Hear, O Lord, my prayer: and let my cry come to thee. Turn not away thy face from me: in the day when I am in trouble, incline thy ear to me. In what day soever I shall call upon thee, hear me speedily.'},
   {ref:'Psalm 129:1-5 (130:1-5)',theme:'Forgiveness & Mercy',prayerPsalm:true,text:'Out of the depths I have cried to thee, O Lord: Lord, hear my voice. Let thy ears be attentive to the voice of my supplication. If thou, O Lord, wilt mark iniquities: Lord, who shall stand it. For with thee there is merciful forgiveness: and by reason of thy law, I have waited for thee, O Lord. My soul hath relied on his word: My soul hath hoped in the Lord.'},
-  {ref:'Psalm 142:8-10 (143:8-10)',theme:'Guidance & Wisdom',prayerPsalm:true,text:'Cause me to hear thy mercy in the morning; for in thee have I hoped. Make the way known to me, wherein I should walk: for I have lifted up my soul to thee. Deliver me from my enemies, O Lord, to thee have I fled: Teach me to do thy will, for thou art my God. Thy good spirit shall lead me into the right land:'}
+  {ref:'Psalm 142:8-10 (143:8-10)',theme:'Guidance & Wisdom',prayerPsalm:true,text:'Cause me to hear thy mercy in the morning; for in thee have I hoped. Make the way known to me, wherein I should walk: for I have lifted up my soul to thee. Deliver me from my enemies, O Lord, to thee have I fled: Teach me to do thy will, for thou art my God. Thy good spirit shall lead me into the right land:'},
+  {ref:'Psalm 3:4-7',theme:'Protection & Refuge',prayerPsalm:true,text:'But thou, O Lord art my protector, my glory, and the lifter up of my head. I have cried to the Lord with my voice: and he hath heard me from his holy hill. I have slept and taken my rest: and I have risen up, because the Lord hath protected me. I will not fear thousands of the people, surrounding me: arise, O Lord; save me, O my God.'},
+  {ref:'Psalm 4:2',theme:'Prayer & Gratitude',prayerPsalm:true,text:'When I called upon him, the God of my justice heard me: when I was in distress, thou hast enlarged me. Have mercy on me: and hear my prayer.'},
+  {ref:'Psalm 4:9-10',theme:'Peace & Stillness',prayerPsalm:true,text:'In peace in the selfsame I will sleep, and I will rest: For thou, O Lord, singularly hast settled me in hope.'},
+  {ref:'Psalm 24:1-2',theme:'Trust & Faith',prayerPsalm:true,text:'To thee, O Lord, have I lifted up my soul. In thee, O my God, I put my trust; let me not be ashamed.'},
+  {ref:'Psalm 24:4-5',theme:'Guidance & Wisdom',prayerPsalm:true,text:'Let all them be confounded that act unjust things without cause. shew, O Lord, thy ways to me, and teach me thy paths. Direct me in thy truth, and teach me; for thou art God my Saviour; and on thee have I waited all the day long.'},
+  {ref:'Psalm 30:2-6',theme:'Protection & Refuge',prayerPsalm:true,text:'In thee, O Lord, have I hoped, let me never be confounded: deliver me in thy justice. Bow down thy ear to me: make haste to deliver me. Be thou unto me a God, a protector, and a house of refuge, to save me. For thou art my strength and my refuge; and for thy name\'s sake thou wilt lead me, and nourish me. Thou wilt bring me out of this snare, which they have hidden for me: for thou art my protector. Into thy hands I commend my spirit: thou hast redeemed me, O Lord, the God of truth.'},
+  {ref:'Psalm 62:2-5',theme:'Trust & Faith',prayerPsalm:true,text:'O God, my God, to thee do I watch at break of day. For thee my soul hath thirsted; for thee my flesh, O how many ways! In a desert land, and where there is no way, and no water: so in the sanctuary have I come before thee, to see thy power and thy glory. For thy mercy is better than lives: thee my lips shall praise. Thus will I bless thee all my life long: and in thy name I will lift up my hands.'},
+  {ref:'Psalm 70:2-5',theme:'Protection & Refuge',prayerPsalm:true,text:'Deliver me in thy justice, and rescue me. Incline thy ear unto me, and save me. Be thou unto me a God, a protector, and a place of strength: that thou mayst make me safe. For thou art my firmament and my refuge. Deliver me, O my God, out of the hand of the sinner, and out of the hand of the transgressor of the law and of the unjust. For thou art my patience, O Lord: my hope, O Lord, from my youth.'},
+  {ref:'Psalm 85:8-10',theme:'Peace & Stillness',prayerPsalm:true,text:'There is none among the gods like unto thee, O Lord: and there is none according to thy works. All the nations thou hast made shall come and adore before thee, O Lord: and they shall glorify thy name. For thou art great and dost wonderful things: thou art God alone.'},
+  {ref:'Psalm 118:5-8',theme:'Guidance & Wisdom',prayerPsalm:true,text:'O! that my ways may be directed to keep thy justifications. Then shall I not be confounded, when I shall look into all thy commandments. I will praise thee with uprightness of heart, when I shall have learned the judgments of thy justice. I will keep thy justifications: O! do not thou utterly forsake me.'},
+  {ref:'Psalm 138:7-10',theme:'Protection & Refuge',prayerPsalm:true,text:'Whither shall I go from thy spirit? or whither shall I flee from thy face? If I ascend into heaven, thou art there: if I descend into hell, thou art present. If I take my wings early in the morning, and dwell in the uttermost parts of the sea: Even there also shall thy hand lead me: and thy right hand shall hold me.'},
+  {ref:'Psalm 141:2-4',theme:'Prayer & Gratitude',prayerPsalm:true,text:'I cried to the Lord with my voice: with my voice I made supplication to the Lord. In his sight I pour out my prayer, and before him I declare my trouble: When my spirit failed me, then thou newest my paths. In this way wherein I walked, they have hidden a snare for me.'},
+  {ref:'Psalm 141:6-8',theme:'Hope',prayerPsalm:true,text:'I cried to thee, O Lord: I said: Thou art my hope, my portion in the land of the living. Attend to my supplication: for I am brought very low. Deliver me from my persecutors; for they are stronger than I. Bring my soul out of prison, that I may praise thy name: the just wait for me, until thou reward me.'},
+  {ref:'Psalm 143:2-4 (144:2-4)',theme:'Strength & Perseverance',prayerPsalm:true,text:'My mercy, and my refuge: my support, and my deliverer: My protector, and I have hoped in him: who subdueth my people under me. Lord, what is man, that thou art made known to him? or the son of man, that thou makest account of him? Man is like to vanity: his days pass away like a shadow.'},
 ];
 const themes = [...new Set(passages.map(p => p.theme))];
 const prayers = [
@@ -460,7 +474,7 @@ const gardenBackgrounds = [
 ];
 const defaultState = {
   bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
-  bloom:0,level:1,streak:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
+  bloom:0,level:1,streak:0,bestStreak:0,lastStreakNotice:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
   sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
   mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0
@@ -550,6 +564,8 @@ function mergeState(saved){
     themeMastery:{...(saved.themeMastery || {})},
     themeMilestones:{...(saved.themeMilestones || {})},
     perfectPassages:Number(saved.perfectPassages)||0,
+    bestStreak:Number(saved.bestStreak)||0,
+    lastStreakNotice:Number(saved.lastStreakNotice)||0,
     perfectBestWpm:Number(saved.perfectBestWpm)||0,
     history:Array.isArray(saved.history) ? saved.history : [],
     prayerPractice:{...(saved.prayerPractice || {})},
@@ -581,6 +597,7 @@ function updateStreak(){
   if(state.lastPracticeDate === today) return;
   state.streak = state.lastPracticeDate === yesterdayKey() ? state.streak + 1 : 1;
   state.lastPracticeDate = today;
+  state.bestStreak = Math.max(Number(state.bestStreak)||0, state.streak);
 }
 
 const gardenStages = [
@@ -1247,7 +1264,9 @@ function completeStructuredStep(s){
   }
   save();renderAll();gardenReact(aggregateAccuracy>=95);playTone('level');
   if(aggregateAccuracy>=95 || state.structuredPlayStyle==='meditation') showGardenMoment();
-  showToast(`✦ ${structuredCurrent.title} completed`);
+  const structuredStreakMilestone=[3,7,14,30,60,100].includes(state.streak) && state.lastStreakNotice!==state.streak;
+  if(structuredStreakMilestone){ state.lastStreakNotice=state.streak; save(); showToast(`✦ ${state.streak}-day quiet streak`); }
+  else showToast(`✦ ${structuredCurrent.title} completed`);
   $('gameMessage').textContent=`${structuredCurrent.title} complete · ${state.structuredPlayStyle==='meditation'?'prayer companion session completed':aggregateAccuracy+'% accuracy'} · the garden has journeyed with you.`;
   transitionTimer=setTimeout(()=>chooseStructured({focus:true}),state.reduceMotion?300:850);
 }
@@ -1320,7 +1339,9 @@ function completePrayer(s){
   save(); renderAll(); gardenReact(s.accuracy>=95); playTone('complete');
 
   advanceGarden('Prayer completed');
-  showToast(`✦ ${prayerCurrent.title} completed · ${gardenBackgrounds[state.gardenIndex].name}`);
+  const prayerStreakMilestone=[3,7,14,30,60,100].includes(state.streak) && state.lastStreakNotice!==state.streak;
+  if(prayerStreakMilestone){ state.lastStreakNotice=state.streak; save(); showToast(`✦ ${state.streak}-day quiet streak`); }
+  else showToast(`✦ ${prayerCurrent.title} completed · ${gardenBackgrounds[state.gardenIndex].name}`);
   $('gameMessage').textContent=`Prayer complete · ${s.accuracy}% accuracy · the garden changes with you.`;
   transitionTimer=setTimeout(()=>choosePrayer({focus:true}),state.reduceMotion?300:850);
 }
@@ -1412,6 +1433,8 @@ function complete(s){
   if(themeComplete && priorMilestone<100){ themeMilestone=100; state.themeMilestones[current.theme]=100; }
   else if(masteredBefore>=Math.ceil(themePool.length*.5) && priorMilestone<50){ themeMilestone=50; state.themeMilestones[current.theme]=50; }
   const stageInfo=updateGardenStage({celebrate:levelUp});
+  const streakMilestone = [3,7,14,30,60,100].includes(state.streak) && state.lastPracticeDate===todayKey() && state.lastStreakNotice!==state.streak;
+  if(streakMilestone) state.lastStreakNotice=state.streak;
   if(levelUp){
     gardenBloom();
     advanceGarden(`Level ${state.level}`);
@@ -1423,7 +1446,8 @@ function complete(s){
   renderAll();
   gardenReact(s.accuracy>=95);
 
-  if(themeMilestone===100) showToast(`✿ ${current.theme} complete · every verse practiced`);
+  if(streakMilestone) showToast(`✦ ${state.streak}-day quiet streak · keep the garden growing`);
+  else if(themeMilestone===100) showToast(`✿ ${current.theme} complete · every verse practiced`);
   else if(themeMilestone===50) showToast(`✦ ${current.theme} · halfway to theme mastery`);
   else if(isPerfect) showToast(`✦ PERFECT PASSAGE · +${bloomGain} Bloom · ${flowMultiplier.toFixed(1)}× flow`);
   else if(s.accuracy>=95) showToast(`Steady practice · +${bloomGain} Bloom · ${flowMultiplier.toFixed(1)}× flow`);
@@ -1472,11 +1496,12 @@ function renderWhatsNew(){
     ['Phase 3 · Mastery','Perfect Passage recognition, accuracy rewards, persistent perfect counts, and theme completion milestones.'],
     ['Comfort polish','Typing and prayer text stay visually steady; the subtle garden scene fade remains.'],
     ['Phase 4 · Garden Moments','Occasional garden moments remain separate from the typing line so the Scripture text stays visually calm. They are gentle moments, not collectibles or inventory.'],
-    ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 99 passages across 15 themes.'],
-    ['Prayer Psalms','Eight additional Psalm passages are marked as prayer Psalms, with a dedicated Prayer Psalms practice deck for quiet petition, mercy, guidance, protection, and hope.'],
+    ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 121 passages across 15 themes.'],
+    ['Prayer Psalms','Twenty-two Psalm passages are marked as prayer Psalms, with a dedicated Prayer Psalms practice deck for quiet petition, mercy, guidance, protection, and hope.'],
     ['Afternoon Garden','A new Afternoon Garden background joins Morning and Autumn, with the same peaceful GBA-inspired garden world and a cat resting in the scene.'],
     ['Starter Garden','A quieter starting scene now opens every session, with a Virgin Mary statue, one cat, and a vine-covered cottage. Use Change garden when you want a different garden.'],
-    ['Scripture + Prayer Meditation','Scripture and Prayer now have their own calm Meditation Mode. Read the full passage or prayer, then tap the words to move to the next shuffled verse or prayer.']
+    ['Scripture + Prayer Meditation','Scripture and Prayer now have their own calm Meditation Mode. Read the full passage or prayer, then tap the words to move to the next shuffled verse or prayer.'],
+    ['Phase 6 · Quiet streaks','Practice streaks now persist as a gentle rhythm rather than a pressure mechanic. Current and best streaks are visible in Personal Records, with only quiet milestone notices.']
   ];
   box.innerHTML=items.map(([title,body])=>`<article><strong>${escapeHtml(title)}</strong><p>${escapeHtml(body)}</p></article>`).join('');
 }
@@ -1532,6 +1557,8 @@ function renderAll(){
   $('recordAccuracy').textContent=state.bestAccuracy?state.bestAccuracy+'%':'—';
   $('recordCombo').textContent=state.bestCombo;
   $('recordPassages').textContent=state.totalPassages;
+  if($('recordStreak')) $('recordStreak').textContent=state.streak ? `${state.streak}d` : '0d';
+  if($('recordBestStreak')) $('recordBestStreak').textContent=state.bestStreak ? `${state.bestStreak}d` : '0d';
   renderMastery();
   $('goalPassages').textContent=Math.min(5,state.today.passages)+' / 5';
   $('goalAccuracy').textContent=(state.today.highAccuracy?'1':'0')+' / 1';
