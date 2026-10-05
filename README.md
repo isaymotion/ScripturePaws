@@ -211,3 +211,11 @@ A **Change garden** control selects a random different bundled garden, excluding
 ## Garden backgrounds
 
 Active bundled scenes include Starter Garden, Morning Garden, Afternoon Garden, Autumn Garden, Winter Garden, and Church Garden.
+## App icon
+
+The GitHub Pages/PWA icon is a GBA-style pixel-art devotional portrait of Mama Mary surrounded by cherry blossoms. The icon is bundled locally so the app remains fully offline-capable.
+
+- `assets/icons/icon-512.png` — PWA icon
+- `assets/icons/icon-192.png` — PWA icon
+- `assets/icons/apple-touch-icon.png` — iOS/iPadOS home-screen icon
+- `assets/icons/favicon.ico` / `favicon-32.png` — browser favicon
