@@ -15,7 +15,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 
 - Continuous Scripture typing: completing a passage automatically prepares the next one.
 - Verses can be typed repeatedly; practice counts are retained locally.
-- Scripture library organized by spiritual theme, with 99 passages across 15 themes, including a major Psalm expansion with 44 additional Douay-Rheims passages.
+- Scripture library organized by spiritual theme, with 107 passages across 15 themes, including a major Psalm expansion with 44 additional Douay-Rheims passages plus 8 prayer-oriented Psalm passages in a dedicated Prayer Psalms deck.
 - Live WPM, accuracy, errors, elapsed time, and typing combo.
 - Bloom meter that advances with practice and triggers subtle garden reactions.
 - Daily goals: passages, high accuracy, combo, and at least one complete prayer.
@@ -31,7 +31,7 @@ Scripture Paws is an offline-first Scripture typing game built around a peaceful
 - 10-prayer collection: Our Father, Hail Mary, Glory Be, Fátima Prayer, St. Michael, Hail Holy Queen, Apostles’ Creed, Angelus, Memorare to Mary, Memorare to St. Joseph, and Morning Offering.
 - Prayer completion changes the garden background when a new garden scene is available.
 - Reaching Bloom 100% in Scripture mode also advances to the next available garden scene.
-- Garden-scene system prepared for Afternoon, Autumn, Winter, Summer, Scottish, Mushroom, and future scenes; unavailable scenes are skipped until their artwork is added. The Afternoon Garden slot is present in this build, but its newly generated image is not bundled yet because the image file was not available in the build workspace.
+- Garden-scene system prepared for Afternoon, Autumn, Winter, Summer, Scottish, Mushroom, and future scenes; unavailable scenes are skipped until their artwork is added. The Afternoon Garden is bundled in this build and joins Morning and Autumn as an available progression scene.
 
 ## Scripture themes
 
@@ -74,6 +74,13 @@ This game was created by Isabella Navarro, MD. Latest version October 2026. isay
 - Unpracticed verses naturally rise earlier in a fresh deck.
 - Theme-filtered practice uses the same no-repeat deck logic within that theme.
 
+
+
+## Meditation Mode
+
+Scripture and Prayer each have a separate **Meditation Mode**, independent of Structured Prayer's Rosary/Chaplet Meditation Mode. In Scripture Meditation, the full verse is displayed for quiet reading; tapping the passage (or pressing Enter/Space while it is focused) moves to the next passage from the shuffled Scripture deck. In Prayer Meditation, the complete prayer is displayed; tapping the prayer moves to the next prayer from the shuffled prayer deck. Meditation Mode does not generate WPM, accuracy, combo, or typing errors.
+
+Returning from Structured Prayer Meditation to Scripture or Prayer restores the normal typing controls when those modes are in Typing Mode.
 
 ## Prayer mode
 
@@ -193,3 +200,9 @@ The Afternoon Garden remains a prepared progression slot but is not bundled unle
 ## Latest Scripture expansion
 
 This build expands the Scripture library from 55 to 99 passages. The 44 new Psalm selections are distributed across the existing 15 spiritual themes so the expanded library strengthens the existing progression and mastery system rather than creating a separate Psalm-only progression. Several longer selections, including Psalm 22 (23), Psalm 26 (27), and Psalm 120 (121), provide more substantial typing challenges.
+
+
+## Starter Garden
+The app now opens in **Starter Garden** every time. It is intentionally the quiet starting scene: a more open garden with a Virgin Mary statue, one cat, and a vine-covered cottage. Persistent practice progress is retained, but the active garden scene resets to Starter Garden on a fresh app opening so changing gardens feels intentional.
+
+A **Change garden** control selects a random different bundled garden, excluding Starter Garden and the garden currently shown.

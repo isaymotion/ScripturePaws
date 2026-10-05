@@ -135,7 +135,17 @@ const passages = [
   {ref:'Psalm 145:8-9 (146:8-9)',theme:'Love & Compassion',text:'The Lord looseth them that are fettered: the Lord enlighteneth the blind. The Lord lifteth up them that are cast down: the Lord loveth the just. The Lord keepeth the strangers, he will support the fatherless and the widow.'},
   {ref:'Psalm 146:3-4 (147:3-4)',theme:'Comfort & Grief',text:'Who healeth the broken of heart, and bindeth up their bruises. Who telleth the number of the stars: and calleth them all by their names.'},
   {ref:'Psalm 147:1 (148:1)',theme:'Light & Creation',text:'Praise ye the Lord from the heavens: praise ye him in the high places.'},
-  {ref:'Psalm 148:13-14 (149:13-14)',theme:'Prayer & Gratitude',text:'Let them praise the name of the Lord: for his name alone is exalted. The praise of him is above heaven and earth: and he hath exalted the horn of his people.'}
+  {ref:'Psalm 148:13-14 (149:13-14)',theme:'Prayer & Gratitude',text:'Let them praise the name of the Lord: for his name alone is exalted. The praise of him is above heaven and earth: and he hath exalted the horn of his people.'},
+
+  // Psalms for prayer · Douay-Rheims 1899 American Edition
+  {ref:'Psalm 5:2-4',theme:'Prayer & Gratitude',prayerPsalm:true,text:'Give ear, O Lord, to my words, understand my cry. Hearken to the voice of my prayer, O my King and my God. For to thee will I pray: O Lord, in the morning thou shalt hear my voice.'},
+  {ref:'Psalm 6:3-5',theme:'Comfort & Grief',prayerPsalm:true,text:'Have mercy on me, O Lord, for I am weak: heal me, O Lord, for my bones are troubled. And my soul is troubled exceedingly: but thou, O Lord, how long? Turn to me, O Lord, and deliver my soul: O save me for thy mercy\'s sake.'},
+  {ref:'Psalm 50:3-4',theme:'Forgiveness & Mercy',prayerPsalm:true,text:'Have mercy on me, O God, according to thy great mercy. And according to the multitude of thy tender mercies blot out my iniquity. Wash me yet more from my iniquity, and cleanse me from my sin.'},
+  {ref:'Psalm 69:2-6',theme:'Protection & Refuge',prayerPsalm:true,text:'O God, come to my assistance; O Lord, make haste to help me. Let them be confounded and ashamed that seek my soul: Let them be turned backward, and blush for shame that desire evils to me: Let them be presently turned away blushing for shame that say to me: Tis well, tis well. Let all that seek thee rejoice and be glad in thee; and let such as love thy salvation say always: The Lord be magnified. But I am needy and poor; O God, help me. Thou art my helper and my deliverer: O Lord, make no delay.'},
+  {ref:'Psalm 85:1-7',theme:'Prayer & Gratitude',prayerPsalm:true,text:'A prayer for David himself. Incline thy ear, O Lord, and hear me: for I am needy and poor. Preserve my soul, for I am holy: save thy servant, O my God, that trusteth in thee. Have mercy on me, O Lord, for I have cried to thee all the day. Give joy to the soul of thy servant, for to thee, O Lord, I have lifted up my soul. For thou, O Lord, art sweet and mild: and plenteous in mercy to all that call upon thee. Give ear, O Lord, to my prayer: and attend to the voice of my petition. I have called upon thee in the day of my trouble: because thou hast heard me.'},
+  {ref:'Psalm 101:2-3',theme:'Anxiety & Worry',prayerPsalm:true,text:'Hear, O Lord, my prayer: and let my cry come to thee. Turn not away thy face from me: in the day when I am in trouble, incline thy ear to me. In what day soever I shall call upon thee, hear me speedily.'},
+  {ref:'Psalm 129:1-5 (130:1-5)',theme:'Forgiveness & Mercy',prayerPsalm:true,text:'Out of the depths I have cried to thee, O Lord: Lord, hear my voice. Let thy ears be attentive to the voice of my supplication. If thou, O Lord, wilt mark iniquities: Lord, who shall stand it. For with thee there is merciful forgiveness: and by reason of thy law, I have waited for thee, O Lord. My soul hath relied on his word: My soul hath hoped in the Lord.'},
+  {ref:'Psalm 142:8-10 (143:8-10)',theme:'Guidance & Wisdom',prayerPsalm:true,text:'Cause me to hear thy mercy in the morning; for in thee have I hoped. Make the way known to me, wherein I should walk: for I have lifted up my soul to thee. Deliver me from my enemies, O Lord, to thee have I fled: Teach me to do thy will, for thou art my God. Thy good spirit shall lead me into the right land:'}
 ];
 const themes = [...new Set(passages.map(p => p.theme))];
 const prayers = [
@@ -438,8 +448,9 @@ function buildStructuredPrayer(id='rosary',date=new Date()){
 }
 
 const gardenBackgrounds = [
+  {id:'starter', name:'Starter Garden', file:'./assets/garden/starter-garden.png'},
   {id:'morning', name:'Morning Garden', file:'./assets/garden/morning-garden.png'},
-  {id:'afternoon', name:'Afternoon Garden', file:null},
+  {id:'afternoon', name:'Afternoon Garden', file:'./assets/garden/afternoon-garden.png'},
   {id:'autumn', name:'Autumn Garden', file:'./assets/garden/autumn-garden.png'},
   {id:'winter', name:'Winter Garden', file:null},
   {id:'summer', name:'Summer Garden', file:null},
@@ -451,10 +462,14 @@ const defaultState = {
   bloom:0,level:1,streak:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
   sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
-  mode:'scripture', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0
+  mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0
 };
 
 let state = load();
+// Every fresh app opening begins in the quiet Starter Garden. Progress is
+// still persistent, but the garden scene itself intentionally starts here
+// so changing gardens feels like a meaningful choice.
+state.gardenIndex = 0;
 let current = null;
 let startedAt = 0;
 let timer = null;
@@ -490,7 +505,7 @@ function recentRefs(limit=8){
   return state.history.slice(0,limit).map(x=>x.ref);
 }
 function refillDeck(key){
-  const pool=key==='all'?passages:passages.filter(p=>p.theme===key);
+  const pool=key==='all' ? passages : key==='prayer-psalms' ? passages.filter(p=>p.prayerPsalm) : passages.filter(p=>p.theme===key);
   if(!pool.length) return [];
   const recent=new Set(recentRefs());
   const fresh=pool.filter(p=>!recent.has(p.ref));
@@ -539,6 +554,7 @@ function mergeState(saved){
     prayerPractice:{...(saved.prayerPractice || {})},
     prayerHistory:Array.isArray(saved.prayerHistory) ? saved.prayerHistory : [],
     structuredPractice:{...defaultState.structuredPractice,...(saved.structuredPractice||{})},
+    practicePlayStyle:['typing','meditation'].includes(saved.practicePlayStyle)?saved.practicePlayStyle:'typing',
     structuredPlayStyle:['typing','meditation'].includes(saved.structuredPlayStyle)?saved.structuredPlayStyle:'typing',
     structuredHistory:Array.isArray(saved.structuredHistory) ? saved.structuredHistory : [],
     mode:['prayer','structured'].includes(saved.mode)?saved.mode:'scripture',
@@ -656,6 +672,14 @@ function advanceGarden(reason){
   const nextIndex=gardenBackgrounds.findIndex(x=>x.id===nextAvailable.id);
   setGardenBackground(nextIndex,reason);
 }
+function randomGarden(){
+  const currentId=gardenBackgrounds[state.gardenIndex]?.id;
+  const choices=gardenBackgrounds.filter(x=>x.file && x.id!=='starter' && x.id!==currentId);
+  if(!choices.length) return;
+  const target=choices[Math.floor(Math.random()*choices.length)];
+  const index=gardenBackgrounds.findIndex(x=>x.id===target.id);
+  setGardenBackground(index,'a change of scenery');
+}
 function resetBloomForGarden(){
   state.bloom=0;
   renderAll();
@@ -678,6 +702,7 @@ function renderModeUI(){
   const prayerMode=state.mode==='prayer';
   const structuredMode=state.mode==='structured';
   document.body.classList.toggle('meditation-active', structuredMode && state.structuredPlayStyle==='meditation');
+  document.body.classList.toggle('practice-meditation-active', !structuredMode && state.practicePlayStyle==='meditation');
   document.body.classList.toggle('structured-mode', structuredMode);
   $('scriptureModeBtn').classList.toggle('active',!prayerMode&&!structuredMode);
   $('prayerModeBtn').classList.toggle('active',prayerMode);
@@ -690,11 +715,16 @@ function renderModeUI(){
   $('structuredPicker').hidden=!structuredMode;
   if($('divineMercyNovenaDayPicker')) $('divineMercyNovenaDayPicker').hidden=!(structuredMode && $('structuredSelect')?.value==='divine-mercy-novena');
   if($('structuredStylePicker')) $('structuredStylePicker').hidden=!structuredMode;
+  if($('practiceStylePicker')) $('practiceStylePicker').hidden=structuredMode;
+  if($('practiceTypingBtn')){ $('practiceTypingBtn').classList.toggle('active',state.practicePlayStyle==='typing'); $('practiceTypingBtn').setAttribute('aria-pressed',String(state.practicePlayStyle==='typing')); }
+  if($('practiceMeditationBtn')){ $('practiceMeditationBtn').classList.toggle('active',state.practicePlayStyle==='meditation'); $('practiceMeditationBtn').setAttribute('aria-pressed',String(state.practicePlayStyle==='meditation')); }
   if($('structuredTypingBtn')){ $('structuredTypingBtn').classList.toggle('active',state.structuredPlayStyle==='typing'); $('structuredTypingBtn').setAttribute('aria-pressed',String(state.structuredPlayStyle==='typing')); }
   if($('structuredMeditationBtn')){ $('structuredMeditationBtn').classList.toggle('active',state.structuredPlayStyle==='meditation'); $('structuredMeditationBtn').setAttribute('aria-pressed',String(state.structuredPlayStyle==='meditation')); }
   $('gardenSideNote').hidden=prayerMode||structuredMode;
   $('practiceLabel').textContent=structuredMode?'STRUCTURED PRAYER':prayerMode?'PRAYER PRACTICE':'SCRIPTURE PRACTICE';
   if(structuredMode && structuredCurrent){
+    $('verseText').classList.remove('practice-meditation-card');
+    $('verseText').removeAttribute('role');$('verseText').removeAttribute('tabindex');$('verseText').removeAttribute('aria-label');
     const step=structuredCurrent.steps[structuredStepIndex];
     $('verseTheme').textContent=structuredCurrent.title.toUpperCase();
     $('verseRef').textContent=`STEP ${structuredStepIndex+1} / ${structuredCurrent.steps.length}`;
@@ -723,6 +753,14 @@ function renderModeUI(){
     $('newPromptBtn').textContent=prayerMode?'↻ Next prayer':'↻ New passage';
     $('typingInput').placeholder=prayerMode?'Type the prayer phrase here…':'Type the words here…';
     $('typingLabel').textContent=prayerMode?'Type the prayer phrase':'Type the Scripture passage';
+    if($('typingInput')) $('typingInput').hidden=false;
+    if($('gardenLiveStats')) $('gardenLiveStats').hidden=false;
+    if($('typingLabel')) $('typingLabel').hidden=false;
+    if(!structuredMode && state.practicePlayStyle==='meditation'){
+      if($('typingInput')) $('typingInput').hidden=true;
+      if($('gardenLiveStats')) $('gardenLiveStats').hidden=true;
+      if($('typingLabel')) $('typingLabel').hidden=true;
+    }
   }
   $('libraryJump').textContent=structuredMode?'☩ Structured Prayer Library ›':prayerMode?'☩ Prayer Library ›':'♧ Scripture Library ›';
   if($('prayerSource')) $('prayerSource').hidden=!(prayerMode||structuredMode);
@@ -731,6 +769,53 @@ function renderModeUI(){
   // This also forces it hidden immediately when returning to Scripture or Prayer.
   renderRosaryProgress();
 }
+function setPracticePlayStyle(style,{restart=true}={}){
+  if(!['typing','meditation'].includes(style))return;
+  state.practicePlayStyle=style;
+  clearTimeout(transitionTimer);
+  finished=false; combo=0; startedAt=0; stopTimer();
+  if(state.mode==='scripture'){
+    if(restart) choosePrompt({focus:false});
+    else { renderModeUI(); renderPrompt(); if(style==='meditation') renderScriptureMeditation(); updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:style==='meditation'?100:0}); }
+  }else if(state.mode==='prayer'){
+    if(restart) choosePrayer({focus:false});
+    else { renderModeUI(); renderPrayerPhrase(); if(style==='meditation') renderPrayerMeditation(); updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:style==='meditation'?100:0}); }
+  }else{
+    renderModeUI();
+  }
+  save();
+}
+
+function renderScriptureMeditation(){
+  if(!current)return;
+  const count=state.practice[current.ref]||0;
+  $('verseText').classList.add('practice-meditation-card');
+  $('verseText').setAttribute('role','button');
+  $('verseText').setAttribute('tabindex','0');
+  $('verseText').setAttribute('aria-label',`Read ${current.ref}, then tap for another Scripture passage`);
+  $('verseText').innerHTML=`<span class="practice-meditation-kicker">READ IN STILLNESS</span><strong>${escapeHtml(current.text)}</strong><small>Tap this passage when you are ready for another verse</small>`;
+  $('verseRef').textContent=current.ref;
+  $('verseTheme').textContent=current.theme.toUpperCase();
+  $('practiceCount').textContent=count ? `Practiced ${count} time${count===1?'':'s'} · meditation is for reading, not speed` : 'Meditation passage · read slowly and receive the words.';
+  $('progressFill').style.width='100%';$('progressLabel').textContent='READ';
+  $('gameMessage').textContent='Read the passage slowly. Tap the words when you are ready for another verse.';
+}
+
+function renderPrayerMeditation(){
+  if(!prayerCurrent)return;
+  $('verseText').classList.add('practice-meditation-card');
+  $('verseText').setAttribute('role','button');
+  $('verseText').setAttribute('tabindex','0');
+  $('verseText').setAttribute('aria-label',`Read ${prayerCurrent.title}, then tap for another prayer`);
+  $('verseText').innerHTML=`<span class="practice-meditation-kicker">PRAY IN STILLNESS</span><strong>${escapeHtml(prayerCurrent.title)}</strong><p>${escapeHtml(prayerText(prayerCurrent.id))}</p><small>Tap this prayer when you are ready for another prayer</small>`;
+  $('verseRef').textContent='Meditation';
+  $('verseTheme').textContent=(prayerCurrent.category||'PRAYER').toUpperCase();
+  $('practiceCount').textContent=`${prayerCurrent.short} · read or pray at your own pace`;
+  if($('prayerSource')) $('prayerSource').textContent=prayerCurrent.source;
+  $('progressFill').style.width='100%';$('progressLabel').textContent='PRAY';
+  $('gameMessage').textContent='Read or pray the passage slowly. Tap the words when you are ready for another prayer.';
+}
+
 function setStructuredPlayStyle(style,{restart=true}={}){
   if(!['typing','meditation'].includes(style))return;
   state.structuredPlayStyle=style;
@@ -906,25 +991,31 @@ function choosePrayer({focus=true}={}){
   finished=false; combo=0; startedAt=0; stopTimer();
   $('typingInput').value='';$('typingInput').disabled=false;
   $('prayerSelect').value=prayerCurrent.id;
-  renderModeUI();renderPrayerPhrase();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  renderModeUI();renderPrayerPhrase();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:state.practicePlayStyle==='meditation'?100:0});
   $('practiceCount').textContent=`${prayerCurrent.short} · ${state.prayerPractice[prayerCurrent.id]||0} completed`;
   if($('prayerSource')) $('prayerSource').textContent=prayerCurrent.source;
   $('gameMessage').textContent=`Phrase 1 of ${prayerCurrent.phrases.length} — stay with the prayer.`;
+  if(state.practicePlayStyle==='meditation') renderPrayerMeditation();
   save();
-  if(focus) $('typingInput').focus({preventScroll:true});
+  if(focus && state.practicePlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function selectPrayer(id){
   const p=prayers.find(x=>x.id===id); if(!p)return;
   prayerDeck.splice(0,prayerDeck.length,...prayerDeck.filter(x=>x.id!==id));
   prayerCurrent=p; prayerPhraseIndex=0; prayerStartedAt=0; prayerSessionCorrect=0; prayerSessionTyped=0; prayerSessionErrors=0; state.mode='prayer'; finished=false; combo=0; startedAt=0; stopTimer();
   $('prayerSelect').value=id;$('typingInput').value='';$('typingInput').disabled=false;
-  renderModeUI();renderPrayerPhrase();updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  renderModeUI();renderPrayerPhrase();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:state.practicePlayStyle==='meditation'?100:0});
   $('practiceCount').textContent=`${p.short} · ${state.prayerPractice[p.id]||0} completed`;
   $('gameMessage').textContent=`Phrase 1 of ${p.phrases.length} — stay with the prayer.`;
-  save();$('typingInput').focus({preventScroll:true});
+  if(state.practicePlayStyle==='meditation') renderPrayerMeditation();
+  save();if(state.practicePlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function renderPrayerPhrase(){
   if(!prayerCurrent)return;
+  $('verseText').classList.remove('practice-meditation-card');
+  $('verseText').removeAttribute('role');$('verseText').removeAttribute('tabindex');$('verseText').removeAttribute('aria-label');
   const text=prayerCurrent.phrases[prayerPhraseIndex];
   const typed=$('typingInput').value; let html='';
   for(let i=0;i<text.length;i++){
@@ -955,10 +1046,12 @@ function choosePrompt({focus=false} = {}){
   $('typingInput').value = '';
   $('typingInput').disabled = false;
   renderPrompt();
-  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
   updateVerseMeta();
+  if(state.practicePlayStyle==='meditation') renderScriptureMeditation();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:state.practicePlayStyle==='meditation'?100:0});
   $('gameMessage').textContent = focus ? 'Next passage — settle in and begin.' : 'Take a breath, then begin.';
-  $('typingInput').focus({preventScroll:true});
+  if(state.practicePlayStyle==='meditation') $('gameMessage').textContent='Read the passage slowly. Tap the words when you are ready for another verse.';
+  if(state.practicePlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function selectPassage(p){
   clearTimeout(transitionTimer);
@@ -972,9 +1065,11 @@ function selectPassage(p){
   $('typingInput').value = '';
   $('typingInput').disabled = false;
   updateVerseMeta(); renderPrompt();
-  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:0});
+  if(state.practicePlayStyle==='meditation') renderScriptureMeditation();
+  updateStats({wpm:0,accuracy:100,seconds:0,errors:0,combo:0,progress:state.practicePlayStyle==='meditation'?100:0});
   $('gameMessage').textContent = 'Practice this verse again — one careful line at a time.';
-  $('typingInput').focus({preventScroll:true});
+  if(state.practicePlayStyle==='meditation') $('gameMessage').textContent='Read the passage slowly. Tap the words when you are ready for another verse.';
+  if(state.practicePlayStyle==='typing') $('typingInput').focus({preventScroll:true});
 }
 function updateVerseMeta(){
   const count = state.practice[current.ref] || 0;
@@ -993,6 +1088,8 @@ function practiceBest(ref){
 }
 function renderPrompt(){
   if(!current) return;
+  $('verseText').classList.remove('practice-meditation-card');
+  $('verseText').removeAttribute('role');$('verseText').removeAttribute('tabindex');$('verseText').removeAttribute('aria-label');
   const typed = $('typingInput').value;
   const text = current.text;
   let html = '';
@@ -1032,27 +1129,10 @@ function updateGardenCombo(value=combo){
   if(hero) hero.dataset.combo=value;
 }
 function gardenComboPulse(value){
-  if(state.reduceMotion || value<5) return;
-  const fx=$('gardenEffects');
-  if(!fx) return;
-  fx.innerHTML='';
-  const count=value>=20?14:10;
-  for(let i=0;i<count;i++){
-    const p=document.createElement('i');
-    p.textContent=i%3===0?'✿':(i%3===1?'✦':'❀');
-    p.style.left=(10+Math.random()*80)+'%';
-    p.style.top=(38+Math.random()*42)+'%';
-    p.style.setProperty('--delay',(Math.random()*.28)+'s');
-    p.className='combo-particle';
-    fx.appendChild(p);
-  }
+  // Intentionally quiet: combo milestones are shown in the HUD/message area
+  // rather than spawning floating particles over the garden.
   const hero=$('gardenHero');
-  if(hero){
-    hero.classList.remove('combo-burst');
-    void hero.offsetWidth;
-    hero.classList.add('combo-burst');
-  }
-  setTimeout(()=>{if(fx)fx.innerHTML='';},1400);
+  if(hero) hero.dataset.combo=value;
 }
 function updateStats(s){
   $('liveWpm').textContent=s.wpm;
@@ -1216,6 +1296,7 @@ function completePrayer(s){
   transitionTimer=setTimeout(()=>choosePrayer({focus:true}),state.reduceMotion?300:850);
 }
 function onInput(){
+  if(state.mode!=='structured' && state.practicePlayStyle==='meditation') return;
   if(state.mode==='structured') return onStructuredInput();
   if(state.mode==='prayer') return onPrayerInput();
   if(finished || !current) return;
@@ -1340,18 +1421,11 @@ function gardenBloom(){
   hero.classList.add('full-bloom');
 }
 function gardenReact(good){
-  const fx=$('gardenEffects');
-  if(state.reduceMotion||!good)return;
-  fx.innerHTML='';
-  for(let i=0;i<9;i++){
-    const p=document.createElement('i');
-    p.textContent=i%2?'✦':'✿';
-    p.style.left=(12+Math.random()*76)+'%';
-    p.style.top=(48+Math.random()*34)+'%';
-    p.style.setProperty('--delay',(Math.random()*.35)+'s');
-    fx.appendChild(p);
-  }
-  setTimeout(()=>fx.innerHTML='',1800);
+  // Garden response is deliberately non-animated during play.
+  // Progression, Bloom, combo, and the garden scene itself provide feedback
+  // without floating symbols competing with the Scripture text.
+  const hero=$('gardenHero');
+  if(hero) hero.dataset.reacted=good?'good':'steady';
 }
 function showToast(text){
   const t=$('toast');
@@ -1363,13 +1437,17 @@ function renderWhatsNew(){
   const box=$('whatsNewList');
   if(!box) return;
   const items=[
-    ['Phase 1 · Core garden feedback','Combos now trigger gentle garden bursts at key milestones.'],
+    ['Phase 1 · Core garden feedback','Combos now give quiet HUD feedback at key milestones, keeping the Scripture text visually calm.'],
     ['Flow multiplier','Sustained combos increase Bloom rewards, up to 2.0×.'],
     ['Phase 2 · Garden progression','Bloom now drives persistent garden stages, level-up celebrations, and visible growth milestones.'],
     ['Phase 3 · Mastery','Perfect Passage recognition, accuracy rewards, persistent perfect counts, and theme completion milestones.'],
     ['Comfort polish','Typing and prayer text stay visually steady; the subtle garden scene fade remains.'],
-    ['Phase 4 · Garden Moments','Occasional butterflies, birds, fireflies, and quiet garden encounters appear during good practice. These are gentle moments, not collectibles or inventory.'],
-    ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 99 passages across 15 themes.']
+    ['Phase 4 · Garden Moments','Occasional garden moments remain separate from the typing line so the Scripture text stays visually calm. They are gentle moments, not collectibles or inventory.'],
+    ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 99 passages across 15 themes.'],
+    ['Prayer Psalms','Eight additional Psalm passages are marked as prayer Psalms, with a dedicated Prayer Psalms practice deck for quiet petition, mercy, guidance, protection, and hope.'],
+    ['Afternoon Garden','A new Afternoon Garden background joins Morning and Autumn, with the same peaceful GBA-inspired garden world and a cat resting in the scene.'],
+    ['Starter Garden','A quieter starting scene now opens every session, with a Virgin Mary statue, one cat, and a vine-covered cottage. Use Change garden when you want a different garden.'],
+    ['Scripture + Prayer Meditation','Scripture and Prayer now have their own calm Meditation Mode. Read the full passage or prayer, then tap the words to move to the next shuffled verse or prayer.']
   ];
   box.innerHTML=items.map(([title,body])=>`<article><strong>${escapeHtml(title)}</strong><p>${escapeHtml(body)}</p></article>`).join('');
 }
@@ -1490,6 +1568,7 @@ $('typingInput').addEventListener('input',onInput);
 $('typingInput').addEventListener('keydown',e=>{
   if(e.key !== ' ') return;
   if(state.mode==='prayer' || state.mode==='structured') return;
+  if(state.practicePlayStyle==='meditation') return;
   if(finished || !current) return;
 
   const el=e.currentTarget;
@@ -1535,6 +1614,15 @@ $('typingInput').addEventListener('keydown',e=>{
 $('scriptureModeBtn').addEventListener('click',()=>enterScriptureMode());
 $('prayerModeBtn').addEventListener('click',()=>choosePrayer({focus:true}));
 $('structuredModeBtn').addEventListener('click',()=>chooseStructured({focus:true}));
+$('practiceTypingBtn').addEventListener('click',()=>setPracticePlayStyle('typing'));
+$('practiceMeditationBtn').addEventListener('click',()=>setPracticePlayStyle('meditation'));
+$('verseText').addEventListener('click',()=>{
+  if(state.mode!=='structured' && state.practicePlayStyle==='meditation') advancePracticeMeditation();
+});
+$('verseText').addEventListener('keydown',e=>{
+  if(state.mode==='structured' || state.practicePlayStyle!=='meditation') return;
+  if(e.key==='Enter' || e.key===' '){e.preventDefault();advancePracticeMeditation();}
+});
 $('structuredSelect').addEventListener('change',()=>chooseStructured({focus:true}));
 $('divineMercyNovenaDay')?.addEventListener('change',()=>{ if($('structuredSelect').value==='divine-mercy-novena') chooseStructured({focus:true}); });
 $('structuredTypingBtn').addEventListener('click',()=>setStructuredPlayStyle('typing'));
@@ -1544,6 +1632,7 @@ $('mysteryContinueBtn').addEventListener('click',continueStructuredMystery);
 $('prayerSelect').addEventListener('change',e=>selectPrayer(e.target.value));
 $('themeSelect').addEventListener('change',()=>{ decks.delete(DECK_KEY()); choosePrompt(); });
 $('newPromptBtn').addEventListener('click',()=>state.mode==='prayer'?choosePrayer({focus:true}):state.mode==='structured'?chooseStructured({focus:true}):choosePrompt());
+$('changeGardenBtn').addEventListener('click',randomGarden);
 $('libraryJump').addEventListener('click',()=>{
   if(state.mode==='structured'){showToast('Rosary · today’s mysteries are selected automatically.'); return;}
   const panel=$('libraryPanel');
@@ -1577,7 +1666,7 @@ $('exportBtn').addEventListener('click',()=>{
 });
 $('clearBtn').addEventListener('click',()=>{
   if(confirm('Reset all Scripture Paws progress on this device?')){
-    state=mergeState({});save();renderAll();choosePrompt();showToast('A fresh garden beginning.');
+    state=mergeState({});state.gardenIndex=0;save();renderAll();choosePrompt();showToast('A fresh garden beginning.');
   }
 });
 

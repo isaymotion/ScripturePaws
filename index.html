@@ -24,7 +24,7 @@
   <div class="garden-growth" aria-hidden="true"><span class="growth-bed bed-a"></span><span class="growth-bed bed-b"></span><span class="growth-bed bed-c"></span><span class="growth-flower flower-a"></span><span class="growth-flower flower-b"></span><span class="growth-flower flower-c"></span></div>
 
   <div class="garden-hud">
-    <div class="garden-title"><span>YOUR QUIET GARDEN</span><strong id="gardenMood">Morning Garden</strong></div>
+    <div class="garden-title"><span>YOUR QUIET GARDEN</span><strong id="gardenMood">Starter Garden</strong></div><button id="changeGardenBtn" class="garden-change" type="button" title="Choose a different garden" aria-label="Choose a different garden">↻ Change garden</button>
     <div class="hud-pills">
       <span>LEVEL <b id="level">1</b></span><span>COMBO <b id="combo">0</b></span><span>BLOOM <b id="bloomPercent">0%</b></span>
     </div>
@@ -41,7 +41,7 @@
         <span class="passage-theme"><span class="leaf-mark">✦</span><span id="practiceLabel">SCRIPTURE PRACTICE</span> · <span id="verseTheme">PEACE & STILLNESS</span></span>
         <span id="verseRef">John 14:27</span>
       </div>
-      <p id="verseText" class="verse-text"></p>
+      <div id="verseText" class="verse-text"></div>
       <div class="practice-count" id="practiceCount">First practice — make this one yours.</div><div class="prayer-source" id="prayerSource" hidden></div>
       <div class="structured-meta" id="structuredMeta" hidden></div>
     </div>
@@ -104,6 +104,10 @@
           <option value="8">Day 8 · Souls in purgatory</option>
           <option value="9">Day 9 · Lukewarm souls</option>
         </select>
+      </div>
+      <div class="practice-style-picker" id="practiceStylePicker" aria-label="Scripture and Prayer play style">
+        <button id="practiceTypingBtn" type="button" class="practice-style-btn active" aria-pressed="true">⌨ Typing</button>
+        <button id="practiceMeditationBtn" type="button" class="practice-style-btn" aria-pressed="false">◉ Meditation Mode</button>
       </div>
       <div class="structured-style-picker" id="structuredStylePicker" hidden aria-label="Structured prayer play style">
         <button id="structuredTypingBtn" type="button" class="structured-style-btn active" aria-pressed="true">⌨ Typing</button>
