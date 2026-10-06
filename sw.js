@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scripture-paws-v2-pass3-phase7-garden-moment-top';
+const CACHE_NAME = 'scripture-paws-v2-phase7-final-qa';
 const APP_SHELL=['./','./index.html','./style.css','./app.js','./manifest.webmanifest','./assets/icons/icon-192.png','./assets/icons/icon-512.png','./assets/icons/apple-touch-icon.png','./assets/icons/favicon.ico','./assets/icons/favicon-32.png','./assets/icons/favicon-48.png','./assets/garden/starter-garden.png','./assets/garden/morning-garden.png','./assets/garden/autumn-garden.png','./assets/garden/afternoon-garden.png','./assets/garden/winter-garden.png','./assets/garden/church-garden.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

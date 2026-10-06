@@ -477,7 +477,7 @@ const defaultState = {
   bloom:0,level:1,streak:0,bestStreak:0,lastStreakNotice:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
   sound:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
-  mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0
+  mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0, gardenMomentLastAt:0
 };
 
 let state = load();
@@ -1059,7 +1059,7 @@ function completeScriptureMeditation(){
   renderAll();
   gardenReact(true);
   advanceGarden('Meditation passage');
-  showGardenMoment();
+  maybeShowGardenMoment({chance:0.28});
   $('gameMessage').textContent=`${ref} received · the garden moves with you. Next passage loading…`;
   transitionTimer=setTimeout(()=>{
     if(finished) choosePrompt({focus:false});
@@ -1083,7 +1083,7 @@ function completePrayerMeditation(){
   renderAll();
   gardenReact(true);
   advanceGarden('Prayer completed');
-  showGardenMoment();
+  maybeShowGardenMoment({chance:0.24});
   $('gameMessage').textContent=`${prayerCurrent.title} completed · the garden changes with you. Next prayer loading…`;
   transitionTimer=setTimeout(()=>{
     if(finished) choosePrayer({focus:false});
@@ -1331,7 +1331,7 @@ function completeStructuredStep(s){
     state.today.bestCombo=Math.max(state.today.bestCombo,combo);
   }
   save();renderAll();gardenReact(aggregateAccuracy>=95);playTone('level');
-  if(aggregateAccuracy>=95 || state.structuredPlayStyle==='meditation') showGardenMoment();
+  if(aggregateAccuracy>=95 || state.structuredPlayStyle==='meditation') maybeShowGardenMoment({chance:0.28});
   const structuredStreakMilestone=[3,7,14,30,60,100].includes(state.streak) && state.lastStreakNotice!==state.streak;
   if(structuredStreakMilestone){ state.lastStreakNotice=state.streak; save(); showToast(`✦ ${state.streak}-day quiet streak`); }
   else showToast(`✦ ${structuredCurrent.title} completed`);
@@ -1523,7 +1523,7 @@ function complete(s){
   if(levelUp){
     levelUpCelebration(state.level,stageInfo.stage);
   } else playTone('complete');
-  if(s.accuracy>=95 && (state.totalPassages % 3 === 0 || levelUp)) showGardenMoment();
+  if(s.accuracy>=95 && (state.totalPassages % 3 === 0 || levelUp)) maybeShowGardenMoment({force:levelUp, chance:0.22});
 
   $('gameMessage').textContent = levelUp
     ? `Garden level ${state.level} · ${stageInfo.stage.name}. ${stageInfo.stage.description}`
@@ -1563,7 +1563,7 @@ function renderWhatsNew(){
     ['Phase 2 · Garden progression','Bloom now drives persistent garden stages, level-up celebrations, and visible growth milestones.'],
     ['Phase 3 · Mastery','Perfect Passage recognition, accuracy rewards, persistent perfect counts, and theme completion milestones.'],
     ['Comfort polish','Typing and prayer text stay visually steady; the subtle garden scene fade remains.'],
-    ['Phase 4 · Garden Moments','Occasional garden moments remain separate from the typing line so the Scripture text stays visually calm. They are gentle moments, not collectibles or inventory.'],
+    ['Phase 4 · Garden Moments','Garden Moments now include a larger set of quiet visitors, light, weather, and garden details. They appear occasionally with a cooldown rather than on every prayer transition.'],
     ['Scripture expansion · Psalms','The Scripture library now includes 44 additional Psalm passages, including several longer Psalm challenges, bringing the library to 121 passages across 15 themes.'],
     ['Prayer Psalms','Twenty-two Psalm passages are marked as prayer Psalms, with a dedicated Prayer Psalms practice deck for quiet petition, mercy, guidance, protection, and hope.'],
     ['Afternoon Garden','A new Afternoon Garden background joins Morning and Autumn, with the same peaceful GBA-inspired garden world and a cat resting in the scene.'],
@@ -1574,16 +1574,41 @@ function renderWhatsNew(){
   box.innerHTML=items.map(([title,body])=>`<article><strong>${escapeHtml(title)}</strong><p>${escapeHtml(body)}</p></article>`).join('');
 }
 
+function maybeShowGardenMoment({force=false, chance=0.24}={}){
+  const moment=$('gardenMoment');
+  if(!moment || state.reduceMotion) return false;
+  // Garden Moments are ambient, not a reward that fires on every prayer.
+  // Keep a generous cooldown and use a light random chance between meaningful events.
+  const now=Date.now();
+  const cooldown=90*1000;
+  if(!force && now-(state.gardenMomentLastAt||0)<cooldown) return false;
+  if(!force && Math.random()>chance) return false;
+  showGardenMoment();
+  return true;
+}
+
 function showGardenMoment(){
   const moment=$('gardenMoment');
   if(!moment || state.reduceMotion) return;
   const moments=[
     ['🦋','A butterfly pauses','A little visitor rests among the flowers.'],
     ['🐦','A quiet visitor','A garden bird settles nearby for a moment.'],
+    ['🐝','A tiny gardener','A bee drifts quietly from flower to flower.'],
+    ['🪶','A feather rests','A small feather has come to rest along the path.'],
     ['✦','A soft glimmer','A few fireflies gather as the garden grows quiet.'],
     ['❀','A flower opens','A small flower has opened in the garden.'],
+    ['🌸','A petal falls','A cherry-blossom petal drifts softly onto the path.'],
     ['🍃','A gentle breeze','The leaves seem to settle into a calmer rhythm.'],
-    ['☀','A warm patch of light','A little sunlight finds its way through the garden.']
+    ['☀','A warm patch of light','A little sunlight finds its way through the garden.'],
+    ['☁','Clouds pass quietly','A soft cloud moves across the distant sky.'],
+    ['🌿','The garden grows still','For a moment, everything seems wonderfully quiet.'],
+    ['💧','A glint of dew','A tiny drop of dew catches the morning light.'],
+    ['🕊️','A peaceful wing','A white bird passes quietly overhead.'],
+    ['🌼','A new bloom','A little bloom catches your attention beside the path.'],
+    ['🌤️','Light through the leaves','Dappled sunlight settles gently across the garden.'],
+    ['🎶','A distant birdsong','A brief birdsong seems to rise from somewhere nearby.'],
+    ['🍂','A leaf comes to rest','A single leaf settles softly beside the path.'],
+    ['🌙','A quiet evening','The garden seems to hold a little more stillness than before.']
   ];
   const [icon,title,text]=moments[Math.floor(Math.random()*moments.length)];
   $('gardenMomentIcon').textContent=icon;
@@ -1594,6 +1619,7 @@ function showGardenMoment(){
   void moment.offsetWidth;
   moment.classList.add('show');
   state.gardenMoments=(state.gardenMoments||0)+1;
+  state.gardenMomentLastAt=Date.now();
   save();
   clearTimeout(window._gardenMomentTimer);
   window._gardenMomentTimer=setTimeout(()=>{ moment.classList.remove('show'); setTimeout(()=>{moment.hidden=true;},350); },3600);

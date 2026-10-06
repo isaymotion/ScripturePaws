@@ -585,17 +585,20 @@ button.divine-mercy-small-bead{cursor:pointer}
 .garden-passage .verse-text.structured-long-prayer::-webkit-scrollbar{width:5px}
 .garden-passage .verse-text.prayer-long-text::-webkit-scrollbar-thumb,
 .garden-passage .verse-text.structured-long-prayer::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
-.garden-passage .practice-meditation-card.prayer-long-text{max-height:190px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
-.garden-passage .practice-meditation-card.prayer-long-text p{max-height:116px;overflow-y:auto;overflow-x:hidden;margin-left:auto;margin-right:auto;padding-right:5px;scrollbar-width:thin}
-.garden-passage .meditation-prayer-card.structured-long-prayer{max-height:200px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
-.garden-passage .meditation-prayer-card.structured-long-prayer p{max-height:120px;overflow-y:auto;overflow-x:hidden;padding-right:5px;scrollbar-width:thin}
+/* Final QA: long meditation cards use ONE scroll container — the prayer text.
+   The surrounding card stays fixed so title/instructions never acquire a
+   competing scrollbar. */
+.garden-passage .practice-meditation-card.prayer-long-text{max-height:190px;overflow:hidden;overflow-x:hidden}
+.garden-passage .practice-meditation-card.prayer-long-text p{max-height:116px;overflow-y:auto;overflow-x:hidden;margin-left:auto;margin-right:auto;padding-right:5px;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
+.garden-passage .meditation-prayer-card.structured-long-prayer{max-height:200px;overflow:hidden;overflow-x:hidden}
+.garden-passage .meditation-prayer-card.structured-long-prayer p{max-height:120px;overflow-y:auto;overflow-x:hidden;padding-right:5px;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
 @media(max-width:600px){
   .garden-passage .verse-text.prayer-long-text,
   .garden-passage .verse-text.structured-long-prayer{font-size:12px;line-height:1.34;max-height:108px;padding-left:5px;padding-right:5px}
-  .garden-passage .practice-meditation-card.prayer-long-text{max-height:170px;padding:9px 10px}
-  .garden-passage .practice-meditation-card.prayer-long-text p{font-size:12px;line-height:1.42;max-height:94px}
-  .garden-passage .meditation-prayer-card.structured-long-prayer{max-height:178px;padding:9px 10px}
-  .garden-passage .meditation-prayer-card.structured-long-prayer p{font-size:12px;line-height:1.42;max-height:98px}
+  .garden-passage .practice-meditation-card.prayer-long-text{max-height:170px;overflow:hidden;padding:9px 10px}
+  .garden-passage .practice-meditation-card.prayer-long-text p{font-size:12px;line-height:1.42;max-height:94px;overflow-y:auto}
+  .garden-passage .meditation-prayer-card.structured-long-prayer{max-height:178px;overflow:hidden;padding:9px 10px}
+  .garden-passage .meditation-prayer-card.structured-long-prayer p{font-size:12px;line-height:1.42;max-height:98px;overflow-y:auto}
 }
 
 /* Structured Prayer Meditation — never show the typing textarea or typing stats.
