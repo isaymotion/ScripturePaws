@@ -7,7 +7,7 @@
 /* Typing area: parchment-like practice desk rather than a dashboard card. */
 .typing-wrap{position:relative;margin:13px 18px 0;padding:20px 21px 18px;background:linear-gradient(145deg,#214536f5,#17372bf5);border:1px solid #668061;border-radius:16px;box-shadow:0 12px 28px #06120db0;z-index:2}.practice-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{margin:0 0 4px;color:#a9c88e;font-size:7px;letter-spacing:2px;font-weight:800}.practice-head h1{margin:0;font-family:Georgia,serif;font-weight:normal;font-size:22px;letter-spacing:-.4px}.theme-row{display:flex;align-items:center;gap:8px;margin:12px 0 9px;color:#9eb29c;font-size:8px}.theme-row select{background:#11291f;color:var(--cream);border:1px solid #496850;padding:7px 9px;border-radius:999px;min-width:185px;font-size:8px}.verse-card{background:var(--paper);color:var(--ink);border:1px solid #718564;border-radius:11px;padding:14px 16px;box-shadow:4px 4px 0 #0b1e15}.verse-meta{display:flex;justify-content:space-between;gap:10px;font-size:7px;font-weight:800;letter-spacing:1px;color:#61745c}.verse-text{font-family:Georgia,serif;font-size:clamp(18px,2.6vw,25px);line-height:1.5;margin:11px 0 7px}.verse-text span.correct{color:#315e38}.verse-text span.wrong{color:#a3463b;text-decoration:underline;text-decoration-thickness:2px}.verse-text span.cursor{border-left:2px solid #557e4e;animation:blink 1s steps(1) infinite}@keyframes blink{50%{border-color:transparent}}.practice-count{font-size:7px;color:#788671}.typing-wrap textarea{width:100%;margin-top:10px;resize:none;background:#0e261d;color:#f6f0d9;border:1px solid #52725a;border-radius:9px;padding:12px 13px;outline:none;min-height:82px;font-size:12px;line-height:1.5}.typing-wrap textarea:focus{border-color:#a3c685;box-shadow:0 0 0 3px #9fd07e18}.typing-progress{display:flex;align-items:center;gap:7px;margin-top:8px}.track,.bloom-track{height:7px;background:#0a1b13;border:1px solid #355543;border-radius:99px;overflow:hidden;flex:1}.track div,.bloom-track div{height:100%;width:0;background:linear-gradient(90deg,#6b9f61,#bddb85);transition:width .18s ease}.typing-progress span{font-size:7px;color:#9daf99;width:30px;text-align:right}.live-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:9px}.live-stats div{background:#11291f99;border:1px solid #355543;border-radius:7px;padding:6px;text-align:center}.live-stats small{display:block;color:#91a58e;font-size:6px;letter-spacing:1px}.live-stats strong{display:block;color:#f2eacc;font-size:13px;margin-top:2px}.game-message{text-align:center;color:#b2cf96;font-size:8px;margin:9px 0 0;min-height:12px}
 /* Supporting information is quieter so the garden remains the focus. */
-.bloom-card,.info-card,.library-card,.settings-panel{background:#122c21cc;border:1px solid #365744;border-radius:12px;padding:14px 17px;margin-top:11px}.bloom-copy{display:flex;justify-content:space-between;align-items:end;gap:10px}.bloom-card h2{margin:0;font-family:Georgia,serif;font-size:17px;font-weight:normal}.bloom-copy strong{font-size:20px;color:var(--gold)}.bloom-track{margin-top:9px;height:9px}.bloom-message{color:#91a68f;font-size:8px;margin:6px 0 0}.goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.info-card h2{margin:0;font-family:Georgia,serif;font-size:15px;font-weight:normal}.goal{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #294a38;padding:8px 0 6px;font-size:8px;color:#b2c0ae}.goal b{color:#a9c88e}.records{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px}.records div{background:#10271e;border:1px solid #294b3a;border-radius:7px;padding:7px;text-align:center}.records small{display:block;font-size:5px;color:#91a58e}.records strong{display:block;font-size:13px;margin-top:2px}.library-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:none;border:0;color:var(--cream);text-align:left;cursor:pointer}.library-toggle small{display:block;color:#a9c88e;font-size:7px;letter-spacing:1.7px}.library-toggle strong{display:block;font-family:Georgia,serif;font-weight:normal;font-size:15px;margin-top:2px}.library-toggle span:nth-child(2){font-size:7px;color:#8ea08c;margin-left:auto}.library-toggle>b{font-size:17px;color:#a9c88e}.library-panel{border-top:1px solid #365744;margin-top:10px;padding-top:10px}.theme-library{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.theme-card{background:#10271e;border:1px solid #2e5140;border-radius:8px;padding:9px}.theme-head{display:flex;justify-content:space-between;gap:8px}.theme-head small{display:block;color:#f1e9ce;font-size:8px}.theme-head strong{display:block;color:#a9c88e;font-size:7px;margin-top:2px}.theme-head>span{font-size:6px;color:#849783}.theme-verses{margin-top:6px;display:grid;gap:3px}.theme-verses button{display:flex;justify-content:space-between;gap:8px;background:#173329;border:1px solid #2e5140;color:var(--cream);padding:6px;border-radius:5px;font-size:7px;text-align:left;cursor:pointer}.theme-verses b{color:var(--gold)}.settings-panel{max-width:680px}.settings-head{display:flex;justify-content:space-between}.settings-head h2{margin:0;font-family:Georgia,serif;font-weight:normal;font-size:16px}.setting{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #294b3a}.setting b{display:block;font-size:9px}.setting small{display:block;color:#8fa18c;font-size:7px;margin-top:3px}.setting input{accent-color:#86b66f;width:18px;height:18px}.setting-actions{display:flex;gap:7px;margin-top:11px}.secondary,.danger{padding:8px 11px;border-radius:999px;border:1px solid #385946;background:#10271e;color:var(--cream);cursor:pointer;font-size:8px}.danger{border-color:#75443b;color:#e8aaa0}.small{color:#879a87;font-size:7px;line-height:1.5}.about{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;color:#728772;font-size:6px;margin:15px 0}.about b{color:#91b47d}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:#f4edcf;color:#173329;border:2px solid #173329;padding:9px 13px;border-radius:999px;box-shadow:3px 3px 0 #08140f;z-index:30;font-size:8px;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.reduce-motion *{animation:none!important;transition:none!important}
+.bloom-card,.info-card,.library-card,.settings-panel{background:#122c21cc;border:1px solid #365744;border-radius:12px;padding:14px 17px;margin-top:11px}.bloom-copy{display:flex;justify-content:space-between;align-items:end;gap:10px}.bloom-card h2{margin:0;font-family:Georgia,serif;font-size:17px;font-weight:normal}.bloom-copy strong{font-size:20px;color:var(--gold)}.bloom-track{margin-top:9px;height:9px}.bloom-message{color:#91a68f;font-size:8px;margin:6px 0 0}.goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.info-card h2{margin:0;font-family:Georgia,serif;font-size:15px;font-weight:normal}.goal{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #294a38;padding:8px 0 6px;font-size:8px;color:#b2c0ae}.goal b{color:#a9c88e}.records{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px}.records div{background:#10271e;border:1px solid #294b3a;border-radius:7px;padding:7px;text-align:center}.records small{display:block;font-size:5px;color:#91a58e}.records strong{display:block;font-size:13px;margin-top:2px}.library-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:none;border:0;color:var(--cream);text-align:left;cursor:pointer}.library-toggle small{display:block;color:#a9c88e;font-size:7px;letter-spacing:1.7px}.library-toggle strong{display:block;font-family:Georgia,serif;font-weight:normal;font-size:15px;margin-top:2px}.library-toggle span:nth-child(2){font-size:7px;color:#8ea08c;margin-left:auto}.library-toggle>b{font-size:17px;color:#a9c88e}.library-panel{border-top:1px solid #365744;margin-top:10px;padding-top:10px}.theme-library{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.theme-card{background:#10271e;border:1px solid #2e5140;border-radius:8px;padding:9px}.theme-head{display:flex;justify-content:space-between;gap:8px}.theme-head small{display:block;color:#f1e9ce;font-size:8px}.theme-head strong{display:block;color:#a9c88e;font-size:7px;margin-top:2px}.theme-head>span{font-size:6px;color:#849783}.theme-verses{margin-top:6px;display:grid;gap:3px}.theme-verses button{display:flex;justify-content:space-between;gap:8px;background:#173329;border:1px solid #2e5140;color:var(--cream);padding:6px;border-radius:5px;font-size:7px;text-align:left;cursor:pointer}.theme-verses b{color:var(--gold)}.settings-panel{max-width:680px}.music-controls{padding:10px 0 2px;border-bottom:1px solid #294b3a}.music-track{display:flex;align-items:center;justify-content:space-between;gap:10px}.music-track b{display:block;font-size:8px}.music-track small{display:block;color:#8fa18c;font-size:6px;margin-top:3px}.music-status{font-size:7px;color:#a9c88e;white-space:nowrap}.music-select{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:9px;margin-top:9px;color:#9caf96;font-size:7px}.music-select select{width:100%;background:#10271e;border:1px solid #365744;color:var(--cream);border-radius:6px;padding:6px 7px;font:inherit;outline:none}.music-select select:focus{border-color:#86b66f}.music-volume{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;margin-top:9px;color:#9caf96;font-size:7px}.music-volume input{width:100%;accent-color:#86b66f}.music-volume b{font-size:7px;color:#d6c98d;min-width:28px;text-align:right}.settings-head{display:flex;justify-content:space-between}.settings-head h2{margin:0;font-family:Georgia,serif;font-weight:normal;font-size:16px}.setting{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #294b3a}.setting b{display:block;font-size:9px}.setting small{display:block;color:#8fa18c;font-size:7px;margin-top:3px}.setting input{accent-color:#86b66f;width:18px;height:18px}.setting-actions{display:flex;gap:7px;margin-top:11px}.secondary,.danger{padding:8px 11px;border-radius:999px;border:1px solid #385946;background:#10271e;color:var(--cream);cursor:pointer;font-size:8px}.danger{border-color:#75443b;color:#e8aaa0}.small{color:#879a87;font-size:7px;line-height:1.5}.about{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;color:#728772;font-size:6px;margin:15px 0}.about b{color:#91b47d}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:#f4edcf;color:#173329;border:2px solid #173329;padding:9px 13px;border-radius:999px;box-shadow:3px 3px 0 #08140f;z-index:30;font-size:8px;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.reduce-motion *{animation:none!important;transition:none!important}
 @media(max-width:700px){.app-shell{padding:9px 10px 27px}.topbar{margin-bottom:8px}.top-stats{gap:8px}.garden-hero{height:345px}.garden-hud{flex-direction:column}.hud-pills{justify-content:flex-start}.typing-wrap{margin:10px 4px 0;padding:16px 14px}.live-stats{grid-template-columns:repeat(3,1fr)}.live-stats div:nth-child(4),.live-stats div:nth-child(5){display:none}.goals-grid,.theme-library{grid-template-columns:1fr}}
 @media(max-width:700px){.records{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:430px){.records{grid-template-columns:repeat(2,1fr)}.brand small{font-size:6px}.brand strong{font-size:13px}.garden-hero{height:290px}.garden-image{background-position:58% 54%}.garden-title{padding:6px 8px}.garden-title strong{font-size:11px}.practice-head h1{font-size:19px}.theme-row{align-items:flex-start;flex-direction:column}.theme-row select{width:100%}.verse-text{font-size:17px}.typing-wrap textarea{min-height:78px}.records{grid-template-columns:repeat(2,1fr)}}
@@ -530,11 +530,6 @@ button.divine-mercy-small-bead{cursor:pointer}
 .mastery-card{margin-top:10px;padding:16px 18px;border:1px solid #71845f;background:#183628e8;border-radius:18px;box-shadow:0 7px 0 #10271ccc,0 12px 25px #07150e44;color:#f5efd7}.mastery-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.mastery-head h2{margin:3px 0 0;font-size:19px}.mastery-head>span{font-size:7px;color:#dbe6c8;border:1px solid #71845f;border-radius:999px;padding:6px 9px;white-space:nowrap}.theme-mastery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.mastery-row{padding:8px 9px;border:1px solid #385842;background:#102a20aa;border-radius:10px}.mastery-row.complete{border-color:#9bbf78;box-shadow:0 0 12px #9bbf7820}.mastery-row-head{display:flex;justify-content:space-between;gap:8px;font-size:8px}.mastery-row-head b{color:#c8d9ae}.mastery-track{height:5px;background:#0b1e17;border:1px solid #38503e;border-radius:99px;overflow:hidden;margin-top:6px}.mastery-track i{display:block;height:100%;background:linear-gradient(90deg,#8eb96d,#e3d486);border-radius:inherit}@media(max-width:700px){.theme-mastery{grid-template-columns:1fr}}
 
 
-/* Structured Prayer — long prayer readability */
-.structured-mode .verse-text.structured-long-prayer{font-size:clamp(14px,1.55vw,18px);line-height:1.42;max-height:118px;overflow:auto;padding-right:5px;scrollbar-width:thin}
-.structured-mode .verse-text.structured-long-prayer::-webkit-scrollbar{width:5px}
-.structured-mode .verse-text.structured-long-prayer::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
-
 /* What's New — compact expandable panel */
 .whats-new-card{background:#10271ed9;border:1px solid #365744;border-radius:14px;padding:0;margin-top:22px;max-width:920px;margin-left:auto;margin-right:auto;overflow:hidden}
 .whats-new-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 17px;background:transparent;border:0;color:#f4eed9;text-align:left;cursor:pointer;font:inherit}
@@ -567,53 +562,15 @@ button.divine-mercy-small-bead{cursor:pointer}
 .garden-typing-row textarea,.garden-passage,.garden-live-stats{transform:none!important}
 
 
-/* Release 2 QA — keep the long Apostles' Creed inside the garden scene.
-   The full prayer remains available through an internal scroll area rather than
-   pushing the practice panel outside the illustrated garden. */
-.garden-passage .verse-text.prayer-long-text,
-.garden-passage .verse-text.structured-long-prayer{
-  font-size:clamp(13px,1.35vw,17px);
-  line-height:1.38;
-  max-height:124px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:2px 7px 4px;
-  scrollbar-width:thin;
-  scrollbar-color:#7c8f70 transparent;
-}
-.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar,
-.garden-passage .verse-text.structured-long-prayer::-webkit-scrollbar{width:5px}
-.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar-thumb,
-.garden-passage .verse-text.structured-long-prayer::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
-/* Final QA: long meditation cards use ONE scroll container — the prayer text.
-   The surrounding card stays fixed so title/instructions never acquire a
-   competing scrollbar. */
-.garden-passage .practice-meditation-card.prayer-long-text{max-height:190px;overflow:hidden;overflow-x:hidden}
-.garden-passage .practice-meditation-card.prayer-long-text p{max-height:116px;overflow-y:auto;overflow-x:hidden;margin-left:auto;margin-right:auto;padding-right:5px;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
-.garden-passage .meditation-prayer-card.structured-long-prayer{max-height:200px;overflow:hidden;overflow-x:hidden}
-.garden-passage .meditation-prayer-card.structured-long-prayer p{max-height:120px;overflow-y:auto;overflow-x:hidden;padding-right:5px;scrollbar-width:thin;scrollbar-color:#7c8f70 transparent}
-@media(max-width:600px){
-  .garden-passage .verse-text.prayer-long-text,
-  .garden-passage .verse-text.structured-long-prayer{font-size:12px;line-height:1.34;max-height:108px;padding-left:5px;padding-right:5px}
-  .garden-passage .practice-meditation-card.prayer-long-text{max-height:170px;overflow:hidden;padding:9px 10px}
-  .garden-passage .practice-meditation-card.prayer-long-text p{font-size:12px;line-height:1.42;max-height:94px;overflow-y:auto}
-  .garden-passage .meditation-prayer-card.structured-long-prayer{max-height:178px;overflow:hidden;padding:9px 10px}
-  .garden-passage .meditation-prayer-card.structured-long-prayer p{font-size:12px;line-height:1.42;max-height:98px;overflow-y:auto}
-}
+/* Phase 7 — consolidated long-prayer / meditation reading system.
+   One authoritative set of rules lives here. Long typing passages use one
+   scroll surface; long meditation cards never scroll themselves — only the
+   prayer text does. This prevents nested/double scrollbars and keeps every
+   prayer inside the illustrated garden. */
 
-/* Structured Prayer Meditation — never show the typing textarea or typing stats.
-   The meditation bead / continuation controls remain inside the same row. */
-.structured-mode.meditation-active #typingInput,
-.structured-mode.meditation-active #typingLabel,
-.structured-mode.meditation-active #gardenLiveStats{
-  display:none!important;
-}
-
-/* Phase 7 QA — Prayer Mode long-text containment.
-   Long prayer phrases must scroll inside the garden passage instead of
-   increasing the card beyond the illustrated garden. This applies to every
-   unusually long Prayer-mode phrase, not only the Apostles' Creed. */
-.garden-passage .verse-text.prayer-long-text{
+/* Long prayer in normal typing mode: the passage is the single scroll surface. */
+.garden-passage:not(.meditation-active) .verse-text.prayer-long-text,
+.garden-passage:not(.meditation-active) .verse-text.structured-long-prayer{
   display:block;
   box-sizing:border-box;
   width:100%;
@@ -627,21 +584,111 @@ button.divine-mercy-small-bead{cursor:pointer}
   scrollbar-width:thin;
   scrollbar-color:#7c8f70 transparent;
 }
-.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar{width:5px}
-.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
-@media(max-width:600px){
-  .garden-passage .verse-text.prayer-long-text{
-    max-height:106px;
+
+.garden-passage:not(.meditation-active) .verse-text.prayer-long-text::-webkit-scrollbar,
+.garden-passage:not(.meditation-active) .verse-text.structured-long-prayer::-webkit-scrollbar{width:5px}
+.garden-passage:not(.meditation-active) .verse-text.prayer-long-text::-webkit-scrollbar-thumb,
+.garden-passage:not(.meditation-active) .verse-text.structured-long-prayer::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
+
+/* Prayer Mode — Meditation: the outer card is fixed/non-scrollable and the
+   prayer paragraph is the only scroll surface. */
+.garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text{
+  box-sizing:border-box;
+  max-height:clamp(150px,32vh,205px);
+  min-height:0;
+  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+}
+.garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text p{
+  box-sizing:border-box;
+  max-height:clamp(82px,18vh,128px)!important;
+  min-height:0;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:2px 7px 3px;
+  margin-left:auto;
+  margin-right:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#8da375 transparent;
+}
+.garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text::-webkit-scrollbar{width:0;height:0}
+.garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text p::-webkit-scrollbar{width:5px}
+.garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text p::-webkit-scrollbar-thumb{background:#8da375;border-radius:99px}
+
+/* Structured Prayer — Meditation: the outer verse container and inner card
+   are both fixed; only the prayer paragraph can scroll when necessary. */
+.garden-passage.meditation-active .verse-text.structured-long-prayer{
+  box-sizing:border-box;
+  max-height:clamp(165px,34vh,210px);
+  min-height:0;
+  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+}
+.garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card{
+  box-sizing:border-box;
+  max-height:100%;
+  min-height:0;
+  overflow:hidden!important;
+}
+.garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card p{
+  box-sizing:border-box;
+  max-height:clamp(86px,19vh,124px);
+  min-height:0;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding-right:5px;
+  scrollbar-width:thin;
+  scrollbar-color:#8da375 transparent;
+}
+.garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card p::-webkit-scrollbar{width:5px}
+.garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card p::-webkit-scrollbar-thumb{background:#8da375;border-radius:99px}
+
+/* Mobile: reserve less vertical space while keeping the same single-scroll
+   architecture. */
+@media(max-width:760px){
+  .garden-passage:not(.meditation-active) .verse-text.prayer-long-text,
+  .garden-passage:not(.meditation-active) .verse-text.structured-long-prayer{
+    max-height:108px;
     font-size:12px;
     line-height:1.34;
     padding:2px 6px 4px;
   }
-  .garden-passage .practice-meditation-card.prayer-long-text{
-    max-height:168px;
+  .garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text{
+    max-height:clamp(142px,31vh,178px);
+    padding:9px 10px;
   }
-  .garden-passage .practice-meditation-card.prayer-long-text p{
-    max-height:94px;
+  .garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text p{
+    max-height:clamp(74px,17vh,108px)!important;
     font-size:12px;
     line-height:1.4;
   }
+  .garden-passage.meditation-active .verse-text.structured-long-prayer{
+    max-height:178px;
+  }
+  .garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card{
+    padding:9px 10px;
+  }
+  .garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card p{
+    max-height:98px;
+    font-size:12px;
+    line-height:1.42;
+  }
 }
+
+@media(max-width:430px){
+  .garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text{
+    max-height:150px;
+  }
+  .garden-passage.meditation-active .verse-text.practice-meditation-card.prayer-long-text p{
+    max-height:82px!important;
+  }
+  .garden-passage.meditation-active .verse-text.structured-long-prayer{
+    max-height:154px;
+  }
+  .garden-passage.meditation-active .verse-text.structured-long-prayer .meditation-prayer-card p{
+    max-height:82px;
+  }
+}
+

@@ -235,3 +235,39 @@ In Scripture, Prayer, and Structured Prayer Meditation Mode, the meditation text
 - Strengthened contrast for Rosary and Divine Mercy contemplative/mystery meditation cards.
 - Added an opaque dark reading surface, high-contrast text, internal scrolling, and mobile sizing so meditation text remains readable over all garden backgrounds.
 - Service-worker cache bumped for deployment.
+
+
+## Phase 7 Cleanup Pass
+
+Consolidated the accumulated long-prayer and meditation CSS into one authoritative responsive system. Long typing passages use one scroll surface; long meditation cards do not scroll themselves, and only the prayer text scrolls. This removes competing historical overrides and reduces the risk of future double-scroll or overflow regressions.
+
+
+## Release 3 · Audio Pass 3
+- Added **Garden Prayer**, an original soft instrumental soundtrack designed to sit quietly beneath Scripture and prayer.
+- Background music now has a local track selector with **Gregorian Dawn** and **Garden Prayer**.
+- Track choice persists locally and switching tracks does not restart the whole app.
+- Both tracks are bundled locally in MP3 and OGG/Opus formats and cached for offline use.
+- Music remains **off by default** and volume remains persistent.
+- No YouTube, streaming service, external audio dependency, or third-party recording is used.
+
+### Original soundtrack
+The Scripture Paws soundtrack is being created as original music for this app rather than redistributing recordings from YouTube or other copyrighted releases. Garden Prayer is a gentle instrumental piece; Gregorian Dawn is a sparse chant-inspired ambient piece.
+
+
+## Release 3 · Audio Pass 4
+
+This release adds two original, locally bundled devotional soundscapes:
+
+- **Rosary** — gentle repeating instrumental accompaniment designed to support the bead-by-bead rhythm of the Rosary.
+- **Divine Mercy** — slower, contemplative instrumental accompaniment designed for the Divine Mercy Chaplet and Novena.
+
+These are original Scripture Paws compositions and are not recordings taken from YouTube or another commercial music source. Both MP3 and OGG/Opus files are cached by the service worker for offline use.
+
+
+## Audio soundtrack
+
+Scripture Paws includes an original offline soundtrack. Pass 5A adds **Morning Garden**, a 150-second looping dawn atmosphere with soft sacred instrumental tones and very subtle stylized birdsong. The track is bundled locally in MP3 and OGG/Opus formats; no external audio service is required.
+
+
+### Original soundtrack — Release 3 Pass 5B
+- **Evening Garden** — an original ~150-second seamless twilight loop with warm sustained tones, sparse natural ambience, and restrained devotional atmosphere. No external streaming or runtime music dependency is required.

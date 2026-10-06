@@ -173,6 +173,12 @@
 <section class="settings-panel" id="settingsPanel" hidden>
  <div class="settings-head"><div><p class="eyebrow">SETTINGS</p><h2>Make the garden yours</h2></div><button id="closeSettings" class="icon-btn">×</button></div>
  <label class="setting"><span><b>Sound effects</b><small>Gentle milestone sounds</small></span><input id="soundToggle" type="checkbox"></label>
+ <label class="setting"><span><b>Background music</b><small>Optional · Scripture Paws original soundtrack</small></span><input id="musicToggle" type="checkbox"></label>
+ <div class="music-controls" id="musicControls">
+   <div class="music-track"><span><b>Soundtrack</b><small id="musicTrackDescription">Sparse chant-inspired morning atmosphere</small></span><span class="music-status" id="musicStatus">Off</span></div>
+   <label class="music-select" for="musicTrack"><span>Track</span><select id="musicTrack"><option value="gregorian-dawn">Gregorian Dawn</option><option value="garden-prayer">Garden Prayer</option><option value="rosary">Rosary</option><option value="divine-mercy">Divine Mercy</option><option value="morning-garden">Morning Garden</option><option value="evening-garden">Evening Garden</option></select></label>
+   <label class="music-volume" for="musicVolume"><span>Volume</span><input id="musicVolume" type="range" min="0" max="100" step="1" value="25"><b id="musicVolumeValue">25%</b></label>
+ </div>
  <label class="setting"><span><b>Reduce motion</b><small>Keep garden movement subtle</small></span><input id="motionToggle" type="checkbox"></label>
  <div class="setting-actions"><button id="exportBtn" class="secondary" type="button">Export progress</button><button id="clearBtn" class="danger" type="button">Reset progress</button></div>
  <p class="small">Everything is stored locally in this browser. No account or leaderboard is required.</p>
