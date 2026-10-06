@@ -1,3 +1,9 @@
+
+### Phase 7 QA — Prayer Mode long-text containment
+- Long Prayer-mode phrases are automatically given an internal scroll region when they exceed 220 characters.
+- This applies beyond the Apostles’ Creed, including long Angelus, Memorare, and other extended prayer phrases.
+- Mobile limits are tighter so the prayer card remains inside the illustrated garden.
+- Meditation Prayer cards use the same long-text detection for the complete prayer.
 # Scripture Paws — Core Loop Rebuild
 
 Scripture Paws is an offline-first Scripture typing game built around a peaceful pixel-art garden. This version removes the old collectible-object and garden-placement loop. The garden is a persistent visual world; the player's progression comes from Scripture practice, typing performance, Bloom progression, daily goals, personal records, and thematic verse practice.

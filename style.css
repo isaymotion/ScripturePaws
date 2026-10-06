@@ -551,14 +551,14 @@ button.divine-mercy-small-bead{cursor:pointer}
 .whats-new-list article:last-child{border-bottom:0}
 .whats-new-list strong{display:block;color:#cfe0b9;font-size:10px;line-height:1.3}
 .whats-new-list p{margin:4px 0 0;color:#c0cdbd;font-size:9px;line-height:1.55}
-.garden-moment{position:absolute;left:50%;bottom:25%;transform:translateX(-50%);z-index:12;display:flex;align-items:center;gap:8px;width:min(310px,76%);padding:8px 11px;background:#10271eeb;border:1px solid #93a875;border-radius:12px;box-shadow:0 7px 18px #06120d55;color:#f4eed9;opacity:0;transition:opacity .35s ease}
+.garden-moment{position:absolute;left:50%;top:68px;bottom:auto;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:8px;width:min(285px,72%);padding:7px 10px;background:#10271edc;border:1px solid #93a875;border-radius:12px;box-shadow:0 7px 18px #06120d55;color:#f4eed9;opacity:0;transition:opacity .35s ease;pointer-events:none}
 .garden-moment[hidden]{display:none!important}
 .garden-moment.show{opacity:1}
 .garden-moment>span:first-child{font-size:18px;line-height:1}
 .garden-moment>span:last-child{display:grid;gap:2px}
 .garden-moment b{font-size:9px;color:#e9edcf}
 .garden-moment small{font-size:7px;line-height:1.4;color:#c4d3bd}
-@media(max-width:700px){.whats-new-toggle{padding:13px 14px}.whats-new-toggle strong{font-size:15px}.whats-new-version{display:none}.whats-new-panel{padding:0 14px 7px}.whats-new-list strong{font-size:9px}.whats-new-list p{font-size:8px}.garden-moment{bottom:28%;width:min(300px,84%)}}
+@media(max-width:700px){.whats-new-toggle{padding:13px 14px}.whats-new-toggle strong{font-size:15px}.whats-new-version{display:none}.whats-new-panel{padding:0 14px 7px}.whats-new-list strong{font-size:9px}.whats-new-list p{font-size:8px}.garden-moment{top:96px;width:min(270px,78%);padding:7px 9px}}
 
 /* Accessibility / comfort: keep the typing interface visually steady.
    No moving text panels, scene zooms, or backdrop blur in the practice area. */
@@ -596,4 +596,49 @@ button.divine-mercy-small-bead{cursor:pointer}
   .garden-passage .practice-meditation-card.prayer-long-text p{font-size:12px;line-height:1.42;max-height:94px}
   .garden-passage .meditation-prayer-card.structured-long-prayer{max-height:178px;padding:9px 10px}
   .garden-passage .meditation-prayer-card.structured-long-prayer p{font-size:12px;line-height:1.42;max-height:98px}
+}
+
+/* Structured Prayer Meditation — never show the typing textarea or typing stats.
+   The meditation bead / continuation controls remain inside the same row. */
+.structured-mode.meditation-active #typingInput,
+.structured-mode.meditation-active #typingLabel,
+.structured-mode.meditation-active #gardenLiveStats{
+  display:none!important;
+}
+
+/* Phase 7 QA — Prayer Mode long-text containment.
+   Long prayer phrases must scroll inside the garden passage instead of
+   increasing the card beyond the illustrated garden. This applies to every
+   unusually long Prayer-mode phrase, not only the Apostles' Creed. */
+.garden-passage .verse-text.prayer-long-text{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  max-height:124px;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px 8px 5px;
+  font-size:clamp(12px,1.25vw,16px);
+  line-height:1.38;
+  scrollbar-width:thin;
+  scrollbar-color:#7c8f70 transparent;
+}
+.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar{width:5px}
+.garden-passage .verse-text.prayer-long-text::-webkit-scrollbar-thumb{background:#7c8f70;border-radius:99px}
+@media(max-width:600px){
+  .garden-passage .verse-text.prayer-long-text{
+    max-height:106px;
+    font-size:12px;
+    line-height:1.34;
+    padding:2px 6px 4px;
+  }
+  .garden-passage .practice-meditation-card.prayer-long-text{
+    max-height:168px;
+  }
+  .garden-passage .practice-meditation-card.prayer-long-text p{
+    max-height:94px;
+    font-size:12px;
+    line-height:1.4;
+  }
 }

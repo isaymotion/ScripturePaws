@@ -852,7 +852,8 @@ function renderPrayerMeditation(){
   if(!prayerCurrent)return;
   $('verseText').classList.remove('prayer-long-text','structured-long-prayer');
   $('verseText').classList.add('practice-meditation-card');
-  $('verseText').classList.toggle('prayer-long-text', prayerCurrent.id==='apostles-creed');
+  const meditationText = prayerText(prayerCurrent.id);
+  $('verseText').classList.toggle('prayer-long-text', meditationText.length > 220);
   $('verseText').setAttribute('role','button');
   $('verseText').setAttribute('tabindex','0');
   $('verseText').setAttribute('aria-label',`Read ${prayerCurrent.title}, then tap for another prayer`);
@@ -1127,9 +1128,9 @@ function selectPrayer(id){
 function renderPrayerPhrase(){
   if(!prayerCurrent)return;
   $('verseText').classList.remove('practice-meditation-card','structured-long-prayer');
-  $('verseText').classList.toggle('prayer-long-text', prayerCurrent.id==='apostles-creed');
+  const text=prayerCurrent.phrases[prayerPhraseIndex] || '';
+  $('verseText').classList.toggle('prayer-long-text', text.length > 220);
   $('verseText').removeAttribute('role');$('verseText').removeAttribute('tabindex');$('verseText').removeAttribute('aria-label');
-  const text=prayerCurrent.phrases[prayerPhraseIndex];
   const typed=$('typingInput').value; let html='';
   for(let i=0;i<text.length;i++){
     const c=text[i]; let cls='';
