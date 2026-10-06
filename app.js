@@ -476,7 +476,7 @@ const defaultState = {
   bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
   bloom:0,level:1,streak:0,bestStreak:0,lastStreakNotice:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
-  sound:false,music:true,musicVolume:0.25,musicTrack:'gregorian-dawn',reduceMotion:false,practice:{},themeCounts:{},history:[],
+  sound:false,music:true,musicVolume:0.25,musicTrack:'garden-prayer',musicTrackUserSelected:false,reduceMotion:false,practice:{},themeCounts:{},history:[],
   mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0, gardenMomentLastAt:0
 };
 
@@ -584,7 +584,8 @@ function mergeState(saved){
     music:(saved.musicPreferenceInitialized ? Boolean(saved.music) : true),
     musicPreferenceInitialized:true,
     musicVolume:Math.min(1,Math.max(0,Number(saved.musicVolume ?? 0.25))),
-    musicTrack:['gregorian-dawn','garden-prayer','rosary','divine-mercy','morning-garden','evening-garden'].includes(saved.musicTrack)?saved.musicTrack:'gregorian-dawn'
+    musicTrack:['gregorian-dawn','garden-prayer','rosary','divine-mercy','morning-garden','evening-garden'].includes(saved.musicTrack)?(saved.musicTrack==='gregorian-dawn' && saved.musicTrackUserSelected!==true ? 'garden-prayer' : saved.musicTrack):'garden-prayer',
+    musicTrackUserSelected:Boolean(saved.musicTrackUserSelected)
   };
 }
 function save(){localStorage.setItem(STORE, JSON.stringify(state));}
@@ -1718,9 +1719,23 @@ function syncGardenMusicToggle(){
   btn.classList.toggle('is-playing',playing);
   btn.setAttribute('aria-pressed',String(!!state.music));
   btn.querySelector('.garden-music-label').textContent=playing?'Music On':state.music?'Music On':'Music Off';
-  btn.querySelector('.garden-music-sub').textContent=playing?currentMusicTrack().name:(state.music?'Tap to start':'Tap to turn on');
+  btn.querySelector('.garden-music-sub').textContent=playing?currentMusicTrack().name:(state.music?currentMusicTrack().name:'Tap to turn on');
+  updateGardenMusicChoices();
 }
-function currentMusicTrack(){ return musicTracks[state.musicTrack] || musicTracks['gregorian-dawn']; }
+function currentMusicTrack(){ return musicTracks[state.musicTrack] || musicTracks['garden-prayer']; }
+function syncGardenMusicMenu(){
+  const menu=$('gardenMusicMenu');
+  if(!menu) return;
+  menu.hidden=!menu.hidden;
+}
+function closeGardenMusicMenu(){ const menu=$('gardenMusicMenu'); if(menu){ menu.hidden=true; const toggle=$('gardenMusicMenuToggle'); if(toggle) toggle.setAttribute('aria-expanded','false'); } }
+function updateGardenMusicChoices(){
+  document.querySelectorAll('[data-music-track]').forEach(btn=>{
+    const active=btn.dataset.musicTrack===state.musicTrack;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-checked',String(active));
+  });
+}
 function initBackgroundMusic(){
   if(musicAudio) return musicAudio;
   musicAudio = new Audio();
@@ -1755,6 +1770,7 @@ function loadMusicTrack(autoplay=false){
 function setBackgroundMusicTrack(id){
   if(!musicTracks[id]) return;
   state.musicTrack=id;
+  state.musicTrackUserSelected=true;
   save();
   if(musicAudio) loadMusicTrack(!!state.music);
   updateMusicUI();
@@ -1962,6 +1978,14 @@ $('closeSettings').addEventListener('click',()=>{$('settingsPanel').hidden=true}
 $('soundToggle').addEventListener('change',e=>{state.sound=e.target.checked;save();if(state.sound)playTone('complete');});
 $('musicToggle').addEventListener('change',e=>setBackgroundMusicEnabled(e.target.checked));
 $('gardenMusicToggle')?.addEventListener('click',()=>setBackgroundMusicEnabled(!state.music));
+$('gardenMusicToggle')?.addEventListener('contextmenu',e=>e.preventDefault());
+$('gardenMusicControl')?.addEventListener('click',e=>{
+  const choice=e.target.closest('[data-music-track]');
+  if(choice){ setBackgroundMusicTrack(choice.dataset.musicTrack); closeGardenMusicMenu(); e.stopPropagation(); return; }
+  if(e.target.closest('#gardenMusicClose')){ closeGardenMusicMenu(); return; }
+});
+$('gardenMusicMenuToggle')?.addEventListener('click',e=>{ e.stopPropagation(); const menu=$('gardenMusicMenu'); if(menu){ menu.hidden=!menu.hidden; $('gardenMusicMenuToggle').setAttribute('aria-expanded',String(!menu.hidden)); } });
+document.addEventListener('click',e=>{ const c=$('gardenMusicControl'); if(c && !c.contains(e.target)) closeGardenMusicMenu(); });
 $('musicVolume').addEventListener('input',e=>setBackgroundMusicVolume(e.target.value));
 $('musicTrack').addEventListener('change',e=>setBackgroundMusicTrack(e.target.value));
 $('motionToggle').addEventListener('change',e=>{state.reduceMotion=e.target.checked;document.body.classList.toggle('reduce-motion',state.reduceMotion);save();});
