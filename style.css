@@ -427,6 +427,11 @@ body{font-size:13px}
 .structured-style-btn.active{background:#f3ecd4;color:#18382e;box-shadow:0 2px 5px #06120d44}
 .meditation-prayer-card{display:grid;gap:8px;max-width:760px;margin:0 auto;text-align:center;padding:12px 16px;background:#10271ee8;border:1px solid #82966f;border-radius:12px;box-shadow:0 5px 14px #06120d55}.meditation-prayer-kicker{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#e8f0d6;text-shadow:0 1px 3px #000}.meditation-prayer-card strong{font-size:clamp(18px,2vw,25px);line-height:1.15;color:#fff8df;text-shadow:0 2px 6px #000}.meditation-prayer-card p{margin:0 auto;max-width:700px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(14px,1.55vw,19px);line-height:1.55;color:#fff8e8;text-shadow:0 2px 5px #000}.meditation-prayer-card small{display:block;max-width:620px;margin:3px auto 0;padding:0;font-size:10px;line-height:1.5;color:#eef5df;text-shadow:0 1px 3px #000;font-style:italic}.meditation-active .garden-progress-wrap .game-message{display:inline-block;max-width:92%;padding:4px 9px;background:#081b13e8;border:1px solid #6f8661;border-radius:8px;color:#f4f8e8;font-size:9px;line-height:1.35;text-shadow:0 1px 3px #000}
 .meditation-bead-action[hidden]{display:none!important}
+/* Structured Prayer Meditation: keep the row for Continue/bead controls, but
+   never expose the typing textarea, label, or live typing stats. */
+body.meditation-active .garden-typing-row #typingInput,
+body.meditation-active .garden-typing-row #typingLabel,
+body.meditation-active .garden-typing-row #gardenLiveStats{display:none!important}
 .meditation-bead-action{grid-column:1 / -1;display:flex;align-items:center;justify-content:center;gap:10px;width:min(560px,92%);margin:0 auto;border:1px solid #c7bd8e;background:#f3ecd4;color:#18382e;border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer;box-shadow:0 4px 12px #06120d33}
 .meditation-bead-action:hover{transform:translateY(-1px);box-shadow:0 6px 14px #06120d44}
 .meditation-bead-action:active{transform:translateY(1px) scale(.99)}
@@ -693,15 +698,15 @@ button.divine-mercy-small-bead{cursor:pointer}
 }
 
 
-@media (max-width:720px){.garden-music-toggle{left:12px;bottom:12px;min-width:128px;padding:7px 9px}.garden-music-toggle b{font-size:8px}.garden-music-toggle small{font-size:5.5px}}
+@media (max-width:720px){.garden-music-control{right:12px;left:auto;bottom:12px}.garden-music-toggle{left:auto;bottom:auto;min-width:128px;padding:7px 9px}.garden-music-toggle b{font-size:8px}.garden-music-toggle small{font-size:5.5px}.garden-music-menu{right:0;left:auto;max-width:calc(100vw - 24px)}}
 
 /* Garden music menu: one obvious control with an adjacent song picker. */
-.garden-music-control{position:absolute;left:18px;bottom:17px;z-index:12;display:flex;align-items:stretch;filter:drop-shadow(0 8px 18px #07150e55)}
+.garden-music-control{position:absolute;right:18px;left:auto;bottom:17px;z-index:12;display:flex;align-items:stretch;filter:drop-shadow(0 8px 18px #07150e55)}
 .garden-music-control .garden-music-toggle{position:relative;left:auto;bottom:auto;z-index:1;min-width:142px;border-radius:999px 0 0 999px;box-shadow:0 5px 0 #10271ccc;background:#102a20f2}
 .garden-music-menu-toggle{width:34px;border:1px solid #d2d9a4;border-left:0;border-radius:0 999px 999px 0;background:#102a20f2;color:#f5efd7;font-size:15px;cursor:pointer;box-shadow:0 5px 0 #10271ccc}
 .garden-music-menu-toggle:hover,.garden-music-menu-toggle:focus-visible{background:#1d4131}
 .garden-music-menu-toggle:focus-visible{outline:2px solid #e7e4ad;outline-offset:2px}
-.garden-music-menu{position:absolute;left:0;bottom:52px;width:235px;padding:9px;border:1px solid #d2d9a4;border-radius:14px;background:#102a20f5;box-shadow:0 8px 24px #07150e88;color:#f5efd7}
+.garden-music-menu{position:absolute;right:0;left:auto;bottom:52px;width:235px;padding:9px;border:1px solid #d2d9a4;border-radius:14px;background:#102a20f5;box-shadow:0 8px 24px #07150e88;color:#f5efd7}
 .garden-music-menu-head{display:flex;align-items:center;justify-content:space-between;padding:2px 3px 7px;font-size:8px;text-transform:uppercase;letter-spacing:1px}
 .garden-music-menu-head button{border:0;background:transparent;color:#d8d89b;font-size:17px;line-height:1;cursor:pointer}
 .garden-music-choices{display:grid;gap:4px}
@@ -709,4 +714,4 @@ button.divine-mercy-small-bead{cursor:pointer}
 .garden-music-choices button:hover,.garden-music-choices button:focus-visible{background:#26503b;border-color:#d2d9a4;outline:none}
 .garden-music-choices button.active{background:#385a40;border-color:#d8d89b;color:#fff7d5}
 .garden-music-choices button.active::after{content:'✓';font-weight:bold;color:#d8d89b}
-@media(max-width:720px){.garden-music-control{left:12px;bottom:12px}.garden-music-control .garden-music-toggle{min-width:128px;padding:7px 9px}.garden-music-menu{width:210px;bottom:47px}.garden-music-choices button{padding:9px 8px;font-size:7px}}
+@media(max-width:720px){.garden-music-control{right:12px;left:auto;bottom:12px}.garden-music-control .garden-music-toggle{min-width:128px;padding:7px 9px}.garden-music-menu{right:0;left:auto;width:210px;bottom:47px}.garden-music-choices button{padding:9px 8px;font-size:7px}}

@@ -729,6 +729,19 @@ function nextPrayer(){
   }
   return p || prayers[0];
 }
+function syncStructuredTypingUI(){
+  // Structured Prayer owns the play-style UI. Meditation keeps the shared
+  // typing row available for the bead/continue action, but never shows the
+  // textarea, typing label, or live typing statistics.
+  const structuredMeditation = state.mode==='structured' && state.structuredPlayStyle==='meditation';
+  const input=$('typingInput');
+  const label=$('typingLabel');
+  const stats=$('gardenLiveStats');
+  if(input) input.hidden=structuredMeditation;
+  if(label) label.hidden=structuredMeditation;
+  if(stats) stats.hidden=structuredMeditation;
+}
+
 function renderModeUI(){
   const prayerMode=state.mode==='prayer';
   const structuredMode=state.mode==='structured';
@@ -768,10 +781,8 @@ function renderModeUI(){
     $('newPromptBtn').textContent=isRosary?'↻ Restart Rosary':isDivine?'↻ Restart Chaplet':'↻ Restart Structured Prayer';
     $('typingInput').placeholder=step?.kind==='mystery'?'Meditate quietly on this mystery…':'Type the prayer here…';
     $('typingLabel').textContent=step?.kind==='mystery'?'Quiet meditation':'Type the prayer';
-    if($('typingInput')) $('typingInput').hidden=state.structuredPlayStyle==='meditation';
-    if($('gardenLiveStats')) $('gardenLiveStats').hidden=state.structuredPlayStyle==='meditation';
     if($('meditationAction')) $('meditationAction').hidden=state.structuredPlayStyle!=='meditation';
-    if($('typingLabel')) $('typingLabel').hidden=state.structuredPlayStyle==='meditation';
+    syncStructuredTypingUI();
   }else{
     // Structured Prayer controls must never leak into Scripture or regular Prayer mode.
     // This is especially important for Meditation Mode, whose bead action lives
@@ -799,6 +810,7 @@ function renderModeUI(){
   // Keep the structured-prayer bead tracker synchronized with the mode.
   // This also forces it hidden immediately when returning to Scripture or Prayer.
   renderRosaryProgress();
+  syncStructuredTypingUI();
   syncPracticePlayStyleUI();
 }
 function syncPracticePlayStyleUI(){
@@ -991,6 +1003,7 @@ function renderStructuredStep(){
   if(!structuredCurrent)return;
   renderRosaryProgress();
   const step=structuredCurrent.steps[structuredStepIndex];
+  syncStructuredTypingUI();
   if(step.kind==='novena-intention'){
     $('verseText').innerHTML=`<div class="structured-mystery-card divine-mercy-novena-card"><span class="structured-mystery-kicker">DIVINE MERCY NOVENA · DAY ${step.novenaDay} OF 9</span><span class="structured-mystery-title">${escapeHtml(step.title)}</span><span class="structured-mystery-scripture">Pray this intention, then continue with the Divine Mercy Chaplet.</span><span class="structured-mystery-prompt">${escapeHtml(step.prompt)}</span><span class="structured-mystery-note">Pause here. Bring these people and needs to God before beginning the Chaplet.</span></div>`;
     $('typingInput').value='';$('typingInput').disabled=true;$('mysteryContinueBtn').hidden=false;$('meditationAction').hidden=true;$('progressFill').style.width='0%';$('progressLabel').textContent='PRAY';$('practiceCount').textContent=`Divine Mercy Novena · Day ${step.novenaDay}`;$('gameMessage').textContent='Pause with the intention, then continue to the Chaplet.';if($('prayerSource')) $('prayerSource').textContent='EWTN · Divine Mercy Novena';return;
