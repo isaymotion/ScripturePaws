@@ -476,7 +476,7 @@ const defaultState = {
   bestWpm:0,bestAccuracy:0,bestCombo:0,totalPassages:0,totalChars:0,
   bloom:0,level:1,streak:0,bestStreak:0,lastStreakNotice:0,lastPracticeDate:'',perfectPassages:0,perfectBestWpm:0,themeMastery:{},themeMilestones:{},
   today:{date:'',passages:0,prayers:0,highAccuracy:false,bestCombo:0},
-  sound:false,music:false,musicVolume:0.25,musicTrack:'gregorian-dawn',reduceMotion:false,practice:{},themeCounts:{},history:[],
+  sound:false,music:true,musicVolume:0.25,musicTrack:'gregorian-dawn',reduceMotion:false,practice:{},themeCounts:{},history:[],
   mode:'scripture', practicePlayStyle:'typing', structuredPlayStyle:'typing', prayerPractice:{}, prayerHistory:[], totalPrayers:0, structuredPractice:{rosary:0,'divine-mercy':0}, structuredHistory:[], totalStructuredPrayers:0, gardenIndex:0, gardenStage:'seedling', gardenLevelCelebration:0, gardenMoments:0, gardenMomentLastAt:0
 };
 
@@ -581,9 +581,10 @@ function mergeState(saved){
     gardenIndex:Number.isInteger(saved.gardenIndex) ? saved.gardenIndex : 0,
     gardenStage:['seedling','growing','flowering','flourishing','sanctuary'].includes(saved.gardenStage)?saved.gardenStage:'seedling',
     gardenLevelCelebration:Number(saved.gardenLevelCelebration)||0,
-    music:Boolean(saved.music),
+    music:(saved.musicPreferenceInitialized ? Boolean(saved.music) : true),
+    musicPreferenceInitialized:true,
     musicVolume:Math.min(1,Math.max(0,Number(saved.musicVolume ?? 0.25))),
-    musicTrack:['gregorian-dawn','garden-prayer','rosary','divine-mercy','morning-garden'].includes(saved.musicTrack)?saved.musicTrack:'gregorian-dawn'
+    musicTrack:['gregorian-dawn','garden-prayer','rosary','divine-mercy','morning-garden','evening-garden'].includes(saved.musicTrack)?saved.musicTrack:'gregorian-dawn'
   };
 }
 function save(){localStorage.setItem(STORE, JSON.stringify(state));}
@@ -1709,6 +1710,16 @@ const musicTracks = {
   'morning-garden': {name:'Morning Garden', mp3:'./assets/audio/morning-garden.mp3', ogg:'./assets/audio/morning-garden.ogg', description:'Fresh dawn garden ambience with soft sacred tones'},
   'evening-garden': {name:'Evening Garden', mp3:'./assets/audio/evening-garden.mp3', ogg:'./assets/audio/evening-garden.ogg', description:'Quiet twilight atmosphere with warm sustained tones'}
 };
+function syncGardenMusicToggle(){
+  const btn=$('gardenMusicToggle');
+  if(!btn) return;
+  const playing=!!state.music && !!musicAudio && !musicAudio.paused;
+  btn.classList.toggle('is-on',!!state.music);
+  btn.classList.toggle('is-playing',playing);
+  btn.setAttribute('aria-pressed',String(!!state.music));
+  btn.querySelector('.garden-music-label').textContent=playing?'Music On':state.music?'Music On':'Music Off';
+  btn.querySelector('.garden-music-sub').textContent=playing?currentMusicTrack().name:(state.music?'Tap to start':'Tap to turn on');
+}
 function currentMusicTrack(){ return musicTracks[state.musicTrack] || musicTracks['gregorian-dawn']; }
 function initBackgroundMusic(){
   if(musicAudio) return musicAudio;
@@ -1763,6 +1774,7 @@ function updateMusicUI(){
   if(value) value.textContent=Math.round((state.musicVolume||0)*100)+'%';
   const status=$('musicStatus');
   if(status) status.textContent=enabled && musicAudio && !musicAudio.paused ? 'Playing' : enabled ? 'Ready' : 'Off';
+  syncGardenMusicToggle();
 }
 function clearMusicFade(){
   if(musicFadeTimer){clearInterval(musicFadeTimer);musicFadeTimer=null;}
@@ -1949,6 +1961,7 @@ $('settingsBtn').addEventListener('click',()=>{$('settingsPanel').hidden=false})
 $('closeSettings').addEventListener('click',()=>{$('settingsPanel').hidden=true});
 $('soundToggle').addEventListener('change',e=>{state.sound=e.target.checked;save();if(state.sound)playTone('complete');});
 $('musicToggle').addEventListener('change',e=>setBackgroundMusicEnabled(e.target.checked));
+$('gardenMusicToggle')?.addEventListener('click',()=>setBackgroundMusicEnabled(!state.music));
 $('musicVolume').addEventListener('input',e=>setBackgroundMusicVolume(e.target.value));
 $('musicTrack').addEventListener('change',e=>setBackgroundMusicTrack(e.target.value));
 $('motionToggle').addEventListener('change',e=>{state.reduceMotion=e.target.checked;document.body.classList.toggle('reduce-motion',state.reduceMotion);save();});
@@ -1984,7 +1997,14 @@ $('soundToggle').checked=state.sound;
 $('musicToggle').checked=state.music;
 $('musicVolume').value=Math.round(state.musicVolume*100);
 $('musicTrack').value=state.musicTrack;
+save();
 updateMusicUI();
+if(state.music){
+  startBackgroundMusic();
+  const unlockMusic=()=>{ if(state.music && musicAudio?.paused) startBackgroundMusic(); document.removeEventListener('pointerdown',unlockMusic); document.removeEventListener('keydown',unlockMusic); };
+  document.addEventListener('pointerdown',unlockMusic,{once:true,passive:true});
+  document.addEventListener('keydown',unlockMusic,{once:true});
+}
 $('motionToggle').checked=state.reduceMotion;
 document.body.classList.toggle('reduce-motion',state.reduceMotion);
 renderAll();

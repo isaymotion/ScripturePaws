@@ -271,3 +271,7 @@ Scripture Paws includes an original offline soundtrack. Pass 5A adds **Morning G
 
 ### Original soundtrack — Release 3 Pass 5B
 - **Evening Garden** — an original ~150-second seamless twilight loop with warm sustained tones, sparse natural ambience, and restrained devotional atmosphere. No external streaming or runtime music dependency is required.
+
+
+## Audio startup & garden control
+Background music defaults to ON for new/updated installs. Browsers may block autoplay until the first tap/click; the first user interaction now starts the selected local soundtrack. A prominent Music On/Off control is available directly in the garden.
