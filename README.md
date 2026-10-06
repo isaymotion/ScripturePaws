@@ -219,3 +219,13 @@ The GitHub Pages/PWA icon is a GBA-style pixel-art devotional portrait of Mama M
 - `assets/icons/icon-192.png` — PWA icon
 - `assets/icons/apple-touch-icon.png` — iOS/iPadOS home-screen icon
 - `assets/icons/favicon.ico` / `favicon-32.png` — browser favicon
+
+
+### Meditation interaction
+In Scripture, Prayer, and Structured Prayer Meditation Mode, the meditation text is actionable: tap/click the prayer or passage text to advance. Structured Prayer also retains the dedicated bead action.
+
+
+## Phase 7 QA — Meditation contrast fix
+- Strengthened contrast for Rosary and Divine Mercy contemplative/mystery meditation cards.
+- Added an opaque dark reading surface, high-contrast text, internal scrolling, and mobile sizing so meditation text remains readable over all garden backgrounds.
+- Service-worker cache bumped for deployment.

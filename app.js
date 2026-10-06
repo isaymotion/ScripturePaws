@@ -835,6 +835,7 @@ function setPracticePlayStyle(style,{restart=true}={}){
 function renderScriptureMeditation(){
   if(!current)return;
   const count=state.practice[current.ref]||0;
+  $('verseText').classList.remove('prayer-long-text','structured-long-prayer');
   $('verseText').classList.add('practice-meditation-card');
   $('verseText').setAttribute('role','button');
   $('verseText').setAttribute('tabindex','0');
@@ -849,7 +850,9 @@ function renderScriptureMeditation(){
 
 function renderPrayerMeditation(){
   if(!prayerCurrent)return;
+  $('verseText').classList.remove('prayer-long-text','structured-long-prayer');
   $('verseText').classList.add('practice-meditation-card');
+  $('verseText').classList.toggle('prayer-long-text', prayerCurrent.id==='apostles-creed');
   $('verseText').setAttribute('role','button');
   $('verseText').setAttribute('tabindex','0');
   $('verseText').setAttribute('aria-label',`Read ${prayerCurrent.title}, then tap for another prayer`);
@@ -1004,9 +1007,14 @@ function renderStructuredStep(){
   }
   $('mysteryContinueBtn').hidden=true;
   if(state.structuredPlayStyle==='meditation'){
+    $('verseText').classList.remove('structured-long-prayer','prayer-long-text');
+    $('verseText').classList.toggle('structured-long-prayer', /apostles.? creed/i.test(step.label||''));
     $('typingInput').value='';
     $('typingInput').disabled=true;
-    $('verseText').innerHTML=`<div class="meditation-prayer-card"><span class="meditation-prayer-kicker">PRAY ALOUD</span><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.text)}</p><small>When you finish praying this aloud, press the rosary bead to continue.</small></div>`;
+    $('verseText').setAttribute('role','button');
+    $('verseText').setAttribute('tabindex','0');
+    $('verseText').setAttribute('aria-label',`Pray ${step.label}, then tap the prayer text to continue`);
+    $('verseText').innerHTML=`<div class="meditation-prayer-card"><span class="meditation-prayer-kicker">PRAY ALOUD</span><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.text)}</p><small>When you finish praying this aloud, tap the prayer text or press the bead to continue.</small></div>`;
     $('meditationAction').hidden=false;
     $('meditationActionLabel').textContent=step.label;
     $('progressFill').style.width='100%';$('progressLabel').textContent='PRAY';
@@ -1016,6 +1024,7 @@ function renderStructuredStep(){
     return;
   }
   $('meditationAction').hidden=true;
+  $('verseText').classList.remove('prayer-long-text');
   $('verseText').classList.toggle('structured-long-prayer', structuredMode && /apostles.? creed/i.test(step.label||''));
   $('verseText').innerHTML='';
   const text=step.text, typed=$('typingInput').value;
@@ -1028,6 +1037,63 @@ function renderStructuredStep(){
   if($('prayerSource')) $('prayerSource').textContent='EWTN · Rosary Prayers · Vatican · Rosarium Virginis Mariae';
 }
 function enterStructuredFromCurrent(){chooseStructured({focus:true});}
+function completeScriptureMeditation(){
+  if(finished || !current)return;
+  finished=true;
+  clearTimeout(transitionTimer);
+  stopTimer();
+  const ref=current.ref;
+  state.totalPassages++;
+  state.practice[ref]=(state.practice[ref]||0)+1;
+  state.themeCounts[current.theme]=(state.themeCounts[current.theme]||0)+1;
+  const themePool=passages.filter(p=>p.theme===current.theme);
+  const practiced=themePool.filter(p=>state.practice[p.ref]).length;
+  state.themeMastery[current.theme]=practiced;
+  prepToday();
+  state.today.passages=(state.today.passages||0)+1;
+  updateStreak();
+  state.history.unshift({ref,wpm:null,accuracy:null,combo:0,mode:'meditation',date:new Date().toISOString()});
+  state.history=state.history.slice(0,60);
+  save();
+  renderAll();
+  gardenReact(true);
+  advanceGarden('Meditation passage');
+  showGardenMoment();
+  $('gameMessage').textContent=`${ref} received · the garden moves with you. Next passage loading…`;
+  transitionTimer=setTimeout(()=>{
+    if(finished) choosePrompt({focus:false});
+  },state.reduceMotion?220:500);
+}
+
+function completePrayerMeditation(){
+  if(finished || !prayerCurrent)return;
+  finished=true;
+  clearTimeout(transitionTimer);
+  stopTimer();
+  const id=prayerCurrent.id;
+  state.prayerPractice[id]=(state.prayerPractice[id]||0)+1;
+  state.prayerHistory.unshift({id,mode:'meditation',date:new Date().toISOString()});
+  state.prayerHistory=state.prayerHistory.slice(0,60);
+  state.totalPrayers++;
+  prepToday();
+  state.today.prayers=(state.today.prayers||0)+1;
+  updateStreak();
+  save();
+  renderAll();
+  gardenReact(true);
+  advanceGarden('Prayer completed');
+  showGardenMoment();
+  $('gameMessage').textContent=`${prayerCurrent.title} completed · the garden changes with you. Next prayer loading…`;
+  transitionTimer=setTimeout(()=>{
+    if(finished) choosePrayer({focus:false});
+  },state.reduceMotion?250:650);
+}
+
+function advancePracticeMeditation(){
+  if(state.mode==='scripture' && state.practicePlayStyle==='meditation') return completeScriptureMeditation();
+  if(state.mode==='prayer' && state.practicePlayStyle==='meditation') return completePrayerMeditation();
+}
+
 function choosePrayer({focus=true}={}){
   clearTimeout(transitionTimer);
   state.mode='prayer';
@@ -1060,7 +1126,8 @@ function selectPrayer(id){
 }
 function renderPrayerPhrase(){
   if(!prayerCurrent)return;
-  $('verseText').classList.remove('practice-meditation-card');
+  $('verseText').classList.remove('practice-meditation-card','structured-long-prayer');
+  $('verseText').classList.toggle('prayer-long-text', prayerCurrent.id==='apostles-creed');
   $('verseText').removeAttribute('role');$('verseText').removeAttribute('tabindex');$('verseText').removeAttribute('aria-label');
   const text=prayerCurrent.phrases[prayerPhraseIndex];
   const typed=$('typingInput').value; let html='';
@@ -1673,11 +1740,27 @@ $('structuredModeBtn').addEventListener('click',()=>chooseStructured({focus:true
 $('practiceTypingBtn').addEventListener('click',()=>setPracticePlayStyle('typing'));
 $('practiceMeditationBtn').addEventListener('click',()=>setPracticePlayStyle('meditation'));
 $('verseText').addEventListener('click',()=>{
-  if(state.mode!=='structured' && state.practicePlayStyle==='meditation') advancePracticeMeditation();
+  if(state.mode!=='structured' && state.practicePlayStyle==='meditation') {
+    advancePracticeMeditation();
+    return;
+  }
+  if(state.mode==='structured' && state.structuredPlayStyle==='meditation') {
+    const step=structuredCurrent?.steps?.[structuredStepIndex];
+    if(step?.kind==='prayer') completeStructuredMeditationStep();
+    else if(step?.kind==='mystery' || step?.kind==='novena-intention') continueStructuredMystery();
+  }
 });
 $('verseText').addEventListener('keydown',e=>{
-  if(state.mode==='structured' || state.practicePlayStyle!=='meditation') return;
-  if(e.key==='Enter' || e.key===' '){e.preventDefault();advancePracticeMeditation();}
+  if(state.practicePlayStyle!=='meditation') return;
+  if(e.key!=='Enter' && e.key!==' ') return;
+  e.preventDefault();
+  if(state.mode!=='structured') {
+    advancePracticeMeditation();
+    return;
+  }
+  const step=structuredCurrent?.steps?.[structuredStepIndex];
+  if(step?.kind==='prayer') completeStructuredMeditationStep();
+  else if(step?.kind==='mystery' || step?.kind==='novena-intention') continueStructuredMystery();
 });
 $('structuredSelect').addEventListener('change',()=>chooseStructured({focus:true}));
 $('divineMercyNovenaDay')?.addEventListener('change',()=>{ if($('structuredSelect').value==='divine-mercy-novena') chooseStructured({focus:true}); });
